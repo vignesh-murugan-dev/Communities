@@ -9,10 +9,17 @@ type EventCardProps = {
     date: string;
     location: string;
     venue: string;
+    link: string;
 };
 
 const Events = () => {
-    const EventCard: React.FC<EventCardProps> = ({ communityname, title, date, location, venue }) => (
+    const EventCard: React.FC<EventCardProps> = ({ communityname, title, date, location, venue, link }) => (
+        <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="cursor-pointer hover:shadow-md transition-shadow border rounded-lg"
+    >
         <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
             <div className="inline-block bg-black text-white text-xs px-2 py-1 rounded">
                 {communityname}
@@ -36,6 +43,7 @@ const Events = () => {
                 </span>
             </div>
         </div>
+        </a>
     );
 
     const monthlyEvents = events.filter(event => {
@@ -46,14 +54,22 @@ const Events = () => {
 
     const upcomingEvents = events.filter(event => {
         const eventDate = new Date(event.eventDate);
-        return eventDate > new Date();
+        const currentDate = new Date();
+    
+        const eventYear = eventDate.getFullYear();
+        const currentYear = currentDate.getFullYear();
+        const eventMonth = eventDate.getMonth();
+        const currentMonth = currentDate.getMonth();
+
+        return (eventYear === currentYear && eventMonth > currentMonth) || (eventYear > currentYear);
     });
+    
 
     return (
         <main className="p-4 mx-4 md:mx-8 lg:mx-16 bg-white rounded-xl">
             <section>
-                <h2 className="text-lg font-normal mb-3">
-                    <span className='text-black font-black text-[30px]'>this month</span>
+                <h2 className="text-lg font-normal mb-3 ">
+                    <span className='text-black font-semibold text-[30px]'>this month</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {monthlyEvents.map((event, index) => (
@@ -64,14 +80,15 @@ const Events = () => {
                             title={event.eventName}
                             date={event.eventDate}
                             venue={event.eventVenue}
+                            link={event.eventLink}
                         />
                     ))}
                 </div>
             </section>
 
             <section className="mt-12">
-                <h2 className="text-lg font-normal mb-3">
-                    <span className='text-black font-black text-[30px]'>upcoming</span>
+                <h2 className="text-lg font-normal mb-3 ">
+                    <span className='text-black font-semibold text-[30px]'>upcoming</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {upcomingEvents.map((event, index) => (
@@ -82,6 +99,7 @@ const Events = () => {
                             location={event.location}
                             date={event.eventDate}
                             venue={event.eventVenue}
+                            link={event.eventLink}
                         />
                     ))}
                 </div>
