@@ -53,9 +53,17 @@ const Events = () => {
     });
 
     const upcomingEvents = events.filter(event => {
-        const eventMonth = new Date(event.eventDate).getMonth();
-        return eventMonth > new Date().getMonth();
+        const eventDate = new Date(event.eventDate);
+        const currentDate = new Date();
+    
+        const eventYear = eventDate.getFullYear();
+        const currentYear = currentDate.getFullYear();
+        const eventMonth = eventDate.getMonth();
+        const currentMonth = currentDate.getMonth();
+
+        return (eventYear === currentYear && eventMonth > currentMonth) || (eventYear > currentYear);
     });
+    
 
     return (
         <main className="p-4 mx-4 md:mx-8 lg:mx-16 bg-white rounded-xl">
