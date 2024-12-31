@@ -12,8 +12,8 @@ const Hero = () => {
       <div className="bg-[#fafafa] px-4 md:px-8 lg:px-16 mb-48 flex my-16 items-start z-10">
       <div className="container mx-auto text-center md:text-left px-4 flex flex-col md:flex-row items-center justify-between">
         <div className="max-w-2xl z-10">
-        <h1 className="text-4xl text-black md:text-6xl lg:text-7xl font-semibold leading-tight">
-          Dont miss your
+        <h1 className="text-5xl text-black md:text-[68px] lg:text-[74px] font-semibold leading-tight">
+          Dont miss your <br />
           next community
           <br />
           <span className="text-[#03b051] italic">meetup</span>

@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 
 const CallToAction = () => {
@@ -10,11 +11,11 @@ const CallToAction = () => {
               Know a tech event? Share it to help others find and join by adding yours to the list!
             </h3>
             <div className="flex justify-center md:justify-start flex-wrap gap-4">
-              <button className="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors">
+              <button className="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors" onClick={() => window.open("https://github.com/FOSSUChennai/Communities")}>
                 Contribute
               </button>
-              <button className="px-6 py-2 bg-transparent border-2 border-white text-white rounded-md hover:bg-white/10 transition-colors">
-                Visit Site
+              <button className="px-6 py-2 bg-transparent border-2 border-white text-white rounded-md hover:bg-white/10 transition-colors" onClick={() => window.open("https://fossunited.org/c/chennai")}>
+                Visit Us
               </button>
             </div>
           </div>
@@ -22,7 +23,7 @@ const CallToAction = () => {
         </div>
       </div>
       
-      <p className="text-center mt-16 mb-4 text-gray-600">
+      <p className="text-center mt-16 mb-2 text-gray-600">
         Made with luv from Hari and Justin 💚 FOSS United Chennai
       </p>
     </div>
