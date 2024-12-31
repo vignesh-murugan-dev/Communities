@@ -21,7 +21,7 @@ const Events = () => {
         className="cursor-pointer hover:shadow-md transition-shadow border rounded-lg"
     >
         <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
-            <div className="inline-block bg-black text-white text-xs px-2 py-1 rounded">
+            <div className="inline-block bg-white border-2 border-black text-black text-xs px-2 py-1 rounded-md">
                 {communityname}
             </div>
 
