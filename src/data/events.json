@@ -1,4 +1,5 @@
 [
+
   {
     "eventName": "Tech Meetup 2024",
     "eventDescription": "Join us for an evening of tech talks and networking",
@@ -6,6 +7,7 @@
     "eventTime": "18:00",
     "eventVenue": "Tech Hub Downtown",
     "eventLink": "https://techmeetup2024.com",
+    "location": "Coimbatore",
     "communityName": "Tech Community"
   },
   {
@@ -15,6 +17,87 @@
     "eventTime": "14:00",
     "eventVenue": "Digital Learning Center",
     "eventLink": "https://webdevworkshop.com",
+    "location": "Chennai",
     "communityName": "Web Developers Guild"
+  },
+  {
+    "eventName": "Flutter Hackathon",
+    "eventDescription": "A 4 hour Hackathon",
+    "eventDate": "2024-12-21",
+    "eventTime": "10:00",
+    "eventVenue": "Thiran Technologies",
+    "eventLink": "https://meetup.com/nammaflutter",
+    "location": "Chennai",
+    "communityName": "NammaFlutter"
+  },
+  {
+    "eventName": "Flutter Hackathon",
+    "eventDescription": "A 4 hour Hackathon",
+    "eventDate": "2024-12-21",
+    "eventTime": "10:00",
+    "eventVenue": "Thiran Technologies",
+    "eventLink": "https://meetup.com/nammaflutter",
+    "location": "Chennai",
+    "communityName": "NammaFlutter"
+  },
+  {
+    "eventName": "Flutter Hackathon",
+    "eventDescription": "A 4 hour Hackathon",
+    "eventDate": "2024-12-21",
+    "eventTime": "10:00",
+    "eventVenue": "Thiran Technologies",
+    "eventLink": "https://meetup.com/nammaflutter",
+    "location": "Chennai",
+    "communityName": "NammaFlutter"
+  },
+  {
+    "eventName": "Flutter Hackathon",
+    "eventDescription": "A 4 hour Hackathon",
+    "eventDate": "2024-12-21",
+    "eventTime": "10:00",
+    "eventVenue": "Thiran Technologies",
+    "eventLink": "https://meetup.com/nammaflutter",
+    "location": "Chennai",
+    "communityName": "NammaFlutter"
+  },
+  {
+    "eventName": "Flutter Hackathon",
+    "eventDescription": "A 4 hour Hackathon",
+    "eventDate": "2024-12-21",
+    "eventTime": "10:00",
+    "eventVenue": "Thiran Technologies",
+    "eventLink": "https://meetup.com/nammaflutter",
+    "location": "Chennai",
+    "communityName": "NammaFlutter"
+  },
+  {
+    "eventName": "Flutter Hackathon",
+    "eventDescription": "A 4 hour Hackathon",
+    "eventDate": "2024-12-21",
+    "eventTime": "10:00",
+    "eventVenue": "Thiran Technologies",
+    "eventLink": "https://meetup.com/nammaflutter",
+    "location": "Chennai",
+    "communityName": "NammaFlutter"
+  },
+  {
+    "eventName": "Flutter Hackathon",
+    "eventDescription": "A 4 hour Hackathon",
+    "eventDate": "2024-12-21",
+    "eventTime": "10:00",
+    "eventVenue": "Thiran Technologies",
+    "eventLink": "https://meetup.com/nammaflutter",
+    "location": "Chennai",
+    "communityName": "NammaFlutter"
+  },
+  {
+    "eventName": "Flutter Hackathon",
+    "eventDescription": "A 4 hour Hackathon",
+    "eventDate": "2024-12-21",
+    "eventTime": "10:00",
+    "eventVenue": "Thiran Technologies",
+    "eventLink": "https://meetup.com/nammaflutter",
+    "location": "Chennai",
+    "communityName": "NammaFlutter"
   }
 ]

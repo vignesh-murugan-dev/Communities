@@ -5,12 +5,10 @@ const NavBar = () => {
       >
         <a href="#" className="text-xl font-bold">tamilnadu.dev</a>
         <div className="space-x-4">
-          <button className="px-4 py-2 border-2 border-black rounded-md">
-            Join Us
-          </button>
-          <button className="px-4 py-2 border bg-black text-white rounded-md">
+
+          <a className="px-4 py-2 text-[#667085] underline rounded-md" href="https://github.com/FOSSUChennai/Communities">
             Contribute
-          </button>
+          </a>
         </div>
       </nav>
     );
