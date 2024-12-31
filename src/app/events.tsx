@@ -18,7 +18,7 @@ const Events = () => {
                 {communityname}
             </div>
 
-            <h3 className="text-xl font-medium mt-3 mb-2">{title}</h3>
+            <h3 className="text-xl text-black font-medium mt-3 mb-2">{title}</h3>
 
             <div className="flex-row items-center text-sm text-gray-600 space-y-2">
                 <div className='flex items-center space-x-2'>
