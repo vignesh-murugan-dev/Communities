@@ -53,8 +53,8 @@ const Events = () => {
     });
 
     const upcomingEvents = events.filter(event => {
-        const eventDate = new Date(event.eventDate);
-        return eventDate > new Date();
+        const eventMonth = new Date(event.eventDate).getMonth();
+        return eventMonth > new Date().getMonth();
     });
 
     return (
