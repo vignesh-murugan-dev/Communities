@@ -78,6 +78,34 @@ We love your input! We want to make Communities better for everyone. If you have
    - Any possible implementation details
    - Why this feature would be useful
 
+## 🎨 Adding Events
+
+You can add your community events to our website by submitting them through the `src/data/events.json` file. Please follow these guidelines:
+
+1. Add your event to the JSON array following this schema:
+   ```json
+   {
+     "eventName": "Your Event Name",
+     "eventDescription": "Brief description of the event",
+     "eventDate": "YYYY-MM-DD",
+     "eventTime": "HH:MM",
+     "eventVenue": "Full venue address",
+     "eventLink": "https://your-event-registration-link.com",
+     "location": "City Name",
+     "communityName": "Your Community Name",
+     "communityLogo": "https://url-to-your-community-logo.svg"
+   }
+   ```
+
+2. Ensure strict adherence to the field names and data types:
+   - All field names must match exactly as shown above (case-sensitive)
+   - `eventDate` must be in YYYY-MM-DD format
+   - `eventTime` must be in 24-hour HH:MM format
+   - All URLs must be valid and accessible
+   - All fields are required
+
+3. Submit your event addition through a pull request following our PR guidelines
+
 ## 🎨 Style Guide
 
 - Use meaningful variable and function names
