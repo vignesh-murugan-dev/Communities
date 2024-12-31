@@ -2,6 +2,7 @@
 import React from 'react';
 import events from '../data/events.json';
 import { MapPin } from 'phosphor-react';
+import EmptyEventCard from '../components/EmptyEventCard'
 
 type EventCardProps = {
     communityname: string;
@@ -10,17 +11,27 @@ type EventCardProps = {
     location: string;
     venue: string;
     link: string;
+    logo?: string;
 };
 
 const Events = () => {
-    const EventCard: React.FC<EventCardProps> = ({ communityname, title, date, location, venue, link }) => (
+    const EventCard: React.FC<EventCardProps> = ({ communityname, title, date, location, venue, link, logo }) => (
         <a
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="cursor-pointer hover:shadow-md transition-shadow border rounded-lg"
+        className="cursor-pointer hover:shadow-md transition-shadow border rounded-lg group"
     >
-        <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm relative">
+            {logo && (
+                <div className="absolute top-3 right-3">
+                    <img 
+                        src={logo} 
+                        alt={`${communityname} logo`} 
+                        className="w-6 h-6 rounded-full filter grayscale group-hover:filter-none transition-all duration-300 object-cover"
+                    />
+                </div>
+            )}
             <div className="inline-block bg-white border-2 border-black text-black text-xs px-2 py-1 rounded-md">
                 {communityname}
             </div>
@@ -72,17 +83,22 @@ const Events = () => {
                     <span className='text-black font-semibold text-[30px]'>this month</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {monthlyEvents.map((event, index) => (
-                        <EventCard
-                            key={index}
-                            communityname={event.communityName}
-                            location={event.location}
-                            title={event.eventName}
-                            date={event.eventDate}
-                            venue={event.eventVenue}
-                            link={event.eventLink}
-                        />
-                    ))}
+                    {monthlyEvents.length > 0 ? (
+                        monthlyEvents.map((event, index) => (
+                            <EventCard
+                                key={index}
+                                communityname={event.communityName}
+                                location={event.location}
+                                title={event.eventName}
+                                date={event.eventDate}
+                                venue={event.eventVenue}
+                                link={event.eventLink}
+                                logo={event.communityLogo}
+                            />
+                        ))
+                    ) : (
+                        <EmptyEventCard message="No events scheduled for this month" />
+                    )}
                 </div>
             </section>
 
@@ -91,17 +107,22 @@ const Events = () => {
                     <span className='text-black font-semibold text-[30px]'>upcoming</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {upcomingEvents.map((event, index) => (
-                        <EventCard
-                            key={index}
-                            communityname={event.communityName}
-                            title={event.eventName}
-                            location={event.location}
-                            date={event.eventDate}
-                            venue={event.eventVenue}
-                            link={event.eventLink}
-                        />
-                    ))}
+                    {upcomingEvents.length > 0 ? (
+                        upcomingEvents.map((event, index) => (
+                            <EventCard
+                                key={index}
+                                communityname={event.communityName}
+                                title={event.eventName}
+                                location={event.location}
+                                date={event.eventDate}
+                                venue={event.eventVenue}
+                                link={event.eventLink}
+                                logo={event.communityLogo}
+                            />
+                        ))
+                    ) : (
+                        <EmptyEventCard message="No upcoming events scheduled" />
+                    )}
                 </div>
             </section>
         </main>
