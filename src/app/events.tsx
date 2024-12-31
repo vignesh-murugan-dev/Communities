@@ -1,5 +1,6 @@
 "use client"
 import React from 'react';
+import Image from "next/image";
 import events from '../data/events.json';
 import { MapPin } from 'phosphor-react';
 import EmptyEventCard from '../components/EmptyEventCard'
@@ -25,7 +26,7 @@ const Events = () => {
         <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm relative">
             {logo && (
                 <div className="absolute top-3 right-3">
-                    <img 
+                    <Image 
                         src={logo} 
                         alt={`${communityname} logo`} 
                         className="w-6 h-6 rounded-full filter grayscale group-hover:filter-none transition-all duration-300 object-cover"
