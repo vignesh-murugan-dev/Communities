@@ -8,7 +8,6 @@ const Hero = () => {
 
   return (
     <>
-      <div className={`absolute inset-0 z-0 w-[406px] h-[406px] bg-[#7eff5f]/75 rounded-full blur-[200px] md:translate-x-[440px] md:translate-y-[120px]`} />
 
       <div className="bg-[#fafafa] px-4 md:px-8 lg:px-16 mb-48 flex my-16 items-start z-10">
       <div className="container mx-auto text-center md:text-left px-4 flex flex-col md:flex-row items-center justify-between">
@@ -23,7 +22,7 @@ const Hero = () => {
           meet. network. share
         </p>
         </div>
-        <div className="">
+        <div className="z-10">
         <Image
           src={rocket}
           alt="Rocket illustration"
@@ -33,6 +32,10 @@ const Hero = () => {
         </div>
       </div>
       </div>
+
+
+      <div className={`absolute inset-0 z-0 w-[350px] h-[350px] md:w-[406px] md:h-[406px] bg-[#7eff5f]/75 rounded-full blur-[140px] md:blur-[200px] translate-x-[40px] translate-y-[120px] md:translate-x-[440px] md:translate-y-[120px]`} />
+
     </>
   );
 };
