@@ -29,7 +29,9 @@ const Events = () => {
                     <Image 
                         src={logo} 
                         alt={`${communityname} logo`} 
-                        className="w-6 h-6 rounded-full filter grayscale group-hover:filter-none transition-all duration-300 object-cover"
+                        className="rounded-full filter grayscale group-hover:filter-none transition-all duration-300 object-cover"
+                        width={24}
+                        height={24}
                     />
                 </div>
             )}
