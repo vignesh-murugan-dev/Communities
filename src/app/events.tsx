@@ -40,8 +40,7 @@ const Events = () => {
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
             >
-                {/* Uncomment this to add the glow effect outline (Experimental) */}
-                {/* <div 
+                <div 
                     className="absolute inset-0 rounded-lg transition-opacity duration-300 opacity-0 group-hover:opacity-100"
                     style={{
                         background: mousePosition
@@ -51,9 +50,9 @@ const Events = () => {
                         maskComposite: 'exclude',
                         WebkitMaskComposite: 'xor',
                     }}
-                /> */}
+                />
                 <div 
-                    className="hover:shadow-md transition-shadow bg-white rounded-lg p-4 shadow-sm relative overflow-hidden h-full border-2 border-[rgb(229,231,235)]"
+                    className="hover:shadow-md transition-shadow bg-white rounded-lg p-4 shadow-sm relative overflow-hidden h-full border-2 border-[rgb(229,231,235)] hover:border-[rgb(255,255,255,0.5)]"
                 >
                     <div 
                         className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-50 transition-opacity duration-300"
