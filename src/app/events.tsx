@@ -6,7 +6,7 @@ import EmptyEventCard from '../components/EmptyEventCard'
 import Image from 'next/image';
 
 type EventCardProps = {
-    communityname: string;
+    communityName: string;
     title: string;
     date: string;
     location: string;
@@ -16,7 +16,7 @@ type EventCardProps = {
 };
 
 const Events = () => {
-    const EventCard: React.FC<EventCardProps> = ({ communityname, title, date, location, venue, link, logo }) => {
+    const EventCard: React.FC<EventCardProps> = ({ communityName, title, date, location, venue, link, logo }) => {
         const [mousePosition, setMousePosition] = React.useState<{ x: number; y: number } | null>(null);
 
         const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -66,7 +66,7 @@ const Events = () => {
                         <div className="absolute top-3 right-3">
                             <Image 
                                 src={logo} 
-                                alt={`${communityname} logo`} 
+                                alt={`${communityName} logo`} 
                                 width={24}
                                 height={24}
                                 className="rounded-full filter grayscale group-hover:filter-none transition-all duration-300 object-cover"
@@ -74,7 +74,7 @@ const Events = () => {
                         </div>
                     )}
                     <div className="inline-block bg-white border-2 border-black text-black text-xs px-2 py-1 rounded-md">
-                        {communityname}
+                        {communityName}
                     </div>
 
                     <h3 className="text-xl text-black font-medium mt-3 mb-2 line-clamp-2 group-hover:line-clamp-none transition-all duration-300" 
@@ -125,14 +125,14 @@ const Events = () => {
         <main className="p-4 mx-4 md:mx-8 lg:mx-16 bg-white rounded-xl">
             <section>
                 <h2 className="text-lg font-normal mb-3 ">
-                    <span className='text-black font-semibold text-[30px]'>this month</span>
+                    <span className='text-black font-semibold text-[30px]'>This month</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {monthlyEvents.length > 0 ? (
                         monthlyEvents.map((event, index) => (
                             <EventCard
                                 key={index}
-                                communityname={event.communityName}
+                                communityName={event.communityName}
                                 location={event.location}
                                 title={event.eventName}
                                 date={event.eventDate}
@@ -149,14 +149,14 @@ const Events = () => {
 
             <section className="mt-12">
                 <h2 className="text-lg font-normal mb-3 ">
-                    <span className='text-black font-semibold text-[30px]'>upcoming</span>
+                    <span className='text-black font-semibold text-[30px]'>Upcoming</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {upcomingEvents.length > 0 ? (
                         upcomingEvents.map((event, index) => (
                             <EventCard
                                 key={index}
-                                communityname={event.communityName}
+                                communityName={event.communityName}
                                 title={event.eventName}
                                 location={event.location}
                                 date={event.eventDate}
