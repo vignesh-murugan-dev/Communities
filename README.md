@@ -70,4 +70,4 @@ We welcome contributions from everyone! Check out our [Contributing Guide](CONTR
 
 ## 📝 License
 
-This project is licensed under the terms of the MIT license.
+This project is licensed under the terms of the GPL 3.0 license.

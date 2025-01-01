@@ -91,4 +91,4 @@ Have ideas to make the platform better? Create an issue with:
 
 ## 📝 License
 
-By contributing, you agree that your contributions will be licensed under the MIT License. 
+By contributing, you agree that your contributions will be licensed under the GPL 3.0 License. 
