@@ -6,6 +6,18 @@ const config: NextConfig = {
       {
         protocol: 'https',
         hostname: 'makerstribe.in'
+      },
+      {
+        protocol: 'https',
+        hostname: 'geekcoders-community.pages.dev'
+      },
+      {
+        protocol: "https",
+        hostname: "globalazure.in"
+      },
+      {
+        protocol: "https",
+        hostname: "secure.meetupstatic.com"
       }
     ]
   }

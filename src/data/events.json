@@ -1,13 +1,37 @@
 [
+
   {
-    "eventName": "Global Freelancers Festival",
-    "eventDescription": "Summit | EXPO | Workshops | Awards",
-    "eventDate": "2025-01-25",
-    "eventTime": "10:00",
-    "eventVenue": "IIT Madras Research Park, Chennai",
-    "eventLink": "https://makerstribe.in/summit/",
+    "eventName": "InnovAite",
+    "eventDescription": "Unlock the Future with Machine Learning!",
+    "eventDate": "2025-01-11",
+    "eventTime": "09:00",
+    "eventVenue": "YuniQ, 4th Floor, TICEL BIOPARK, Tharamani, Chennai ",
+    "eventLink": "https://geekcoders-community.pages.dev/register",
     "location": "Chennai",
-    "communityName": "Makers Tribe",
-    "communityLogo": "https://makerstribe.in/wp-content/uploads/2023/10/MakersTribeLogo.svg"
+    "communityName": "Geek Coders",
+    "communityLogo": "https://geekcoders-community.pages.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.5594d213.png&w=3840&q=75"
+  },
+  {
+    "eventName": "Unlocking the Power of Satellite Data with Deep Learning",
+    "eventDescription": "Unlocking the Power of Satellite Data with Deep Learning",
+    "eventDate": "2025-01-11",
+    "eventTime": "09:30",
+    "eventVenue": "IITM RESEARCH PARK",
+    "eventLink": "https://www.meetup.com/chennai-microsoft-azure-user-group/events/304826160/?eventOrigin=group_upcoming_events",
+    "location": "Chennai",
+    "communityName": "Microsoft Azure User Group-Chennai",
+    "communityLogo": "https://globalazure.in/assets/img/community/chennai-aug.png"
+  },
+  {
+    "eventName": "Microsoft Azure Skillup Tamilnadu Session 1",
+    "eventDescription": "Dive into what's next and discover the capabilities of advanced language models like GPT-4o. Experience AI Studio, a user-friendly platform that simplifies building your own AI applications using insights from Microsoft’s Copilots. Learn how vector search, with techniques like retrieval-augmented generation (RAG), is revolutionizing information retrieval for precise results. Explore the Assistants API, which enables developers to create intuitive applications that can analyze data, recommend solutions, and automate tasks with ease. This session is your starting point to understand AI technologies' potential and integrate them into your projects.",
+    "eventDate": "2025-01-11",
+    "eventTime": "09:30",
+    "eventVenue": "Microsoft Corporation India Pvt. Ltd.",
+    "eventLink": "https://www.meetup.com/chennai-microsoft-azure-user-group/events/304826160/?eventOrigin=group_upcoming_events",
+    "location": "Chennai",
+    "communityName": "Azure Developer Community TamilNadu",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/c/d/2/clean_496503282.webp"
   }
+
 ]
