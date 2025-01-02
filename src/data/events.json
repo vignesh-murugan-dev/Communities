@@ -32,6 +32,16 @@
     "location": "Chennai",
     "communityName": "Azure Developer Community TamilNadu",
     "communityLogo": "https://secure.meetupstatic.com/photos/event/c/d/2/clean_496503282.webp"
+  },
+{
+    "eventName": "Apache Kafka® x Grafana Meetup",
+    "eventDescription": "Join us for our first IN PERSON Apache Kafka® meetup on Feb 1st from 10:00 am, hosted by Humbletree Cloud Private Limited in Coimbatore!",
+    "eventDate": "2025-02-01",
+    "eventTime": "10:00",
+    "eventVenue": "Humbletree Cloud, 6, Ground Floor, DVT Towers, nehru nagar west, Coimbatore ",
+    "eventLink": "https://meetu.ps/e/NLPSk/kmD4l/i",
+    "location": "Coimbatore",
+    "communityName": "Confluent",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/d/1/3/3/clean_525293555.webp"
   }
-
 ]
