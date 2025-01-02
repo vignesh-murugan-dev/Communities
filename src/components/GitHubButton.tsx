@@ -30,7 +30,7 @@ const GitHubButton = () => {
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex items-center px-4 py-2 text-black rounded-lg shadow transition duration-200"
-      style={{ background: "#D9D9D9" }}
+      style={{ background: "#d9d9d980" }}
     >
       <Image
           src={githubIcon}
