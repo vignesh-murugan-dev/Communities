@@ -37,7 +37,7 @@ const GitHubButton = () => {
           alt="Github star icon"
           className="w-5 h-5"
         />
-      <span className="font-medium ml-2">Stars</span>
+      <span className="font-medium ml-2">Contribute</span>
       {starCount !== null && <span className="ml-2">⭐ {starCount}</span>}
     </a>
   );
