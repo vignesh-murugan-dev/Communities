@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { SITE_URL } from '../lib/constants';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -13,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Tamilnadu Tech Events & Developer Conferences at One Place | TN Tech Community',
+  title: 'TamilNadu Tech Community',
   description:
     'Never miss an event from your favourite Tech Commnuity in Tamil Nadu. Discover upcoming developer conferences, tech meetups, and community events across Tamil Nadu. Stay updated with the latest technology events, workshops, and hackathons in Chennai, Coimbatore, Madurai and more.',
   keywords:
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
       'Discover upcoming developer conferences, tech meetups, and community events across Tamil Nadu.'
   },
   alternates: {
-    canonical: 'https://tamilnadu.tech/'
+    canonical: SITE_URL
   },
   robots: {
     index: true,
@@ -45,7 +46,8 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1
     }
-  }
+  },
+  metadataBase: new URL(SITE_URL)
 };
 
 export default function RootLayout({
