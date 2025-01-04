@@ -1,9 +1,19 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import events from '../../../data/events.json';
 import { MapPin } from 'phosphor-react';
-import EmptyEventCard from '../../EmptyEventCard';
+import EmptyEventCard from '../../no-events-card';
 import Image from 'next/image';
+
+type Event = {
+  communityName: string;
+  communityLogo: string;
+  eventName: string;
+  eventDate: string;
+  eventVenue: string;
+  eventLink: string;
+  location: string;
+};
 
 type EventCardProps = {
   communityName: string;
@@ -13,17 +23,45 @@ type EventCardProps = {
   venue: string;
   link: string;
   logo?: string;
-};
-
-const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const year = date.getFullYear();
-  return `${day}-${month}-${year}`;
+  isMonthly: boolean;
 };
 
 const Events = () => {
+  const [monthlyCardHeight, setMonthlyCardHeight] = useState<number>(0);
+  const [upcomingCardHeight, setUpcomingCardHeight] = useState<number>(0);
+
+  const monthlyEvents = events.filter((event) => {
+    const currentDate = new Date();
+    const eventDate = new Date(event.eventDate);
+    return eventDate.getMonth() === currentDate.getMonth();
+  });
+
+  const upcomingEvents = events.filter((event) => {
+    const eventDate = new Date(event.eventDate);
+    const currentDate = new Date();
+    const eventYear = eventDate.getFullYear();
+    const currentYear = currentDate.getFullYear();
+    const eventMonth = eventDate.getMonth();
+    const currentMonth = currentDate.getMonth();
+    return (eventYear === currentYear && eventMonth > currentMonth) || eventYear > currentYear;
+  });
+
+  const calculateMaxHeight = (events: Event[]) => {
+    if (events.length === 0) return 100;
+    const longestTitle = events.reduce((max, event) => {
+      return event.eventName.length > max.length ? event.eventName : max;
+    }, '');
+    const baseHeight = 24;
+    const charsPerLine = 35;
+    const lines = Math.ceil(longestTitle.length / charsPerLine);
+    return Math.max(100, lines * baseHeight);
+  };
+
+  useEffect(() => {
+    setMonthlyCardHeight(calculateMaxHeight(monthlyEvents));
+    setUpcomingCardHeight(calculateMaxHeight(upcomingEvents));
+  }, [monthlyEvents, upcomingEvents]);
+
   const EventCard: React.FC<EventCardProps> = ({
     communityName,
     title,
@@ -31,9 +69,13 @@ const Events = () => {
     location,
     venue,
     link,
-    logo
+    logo,
+    isMonthly
   }) => {
-    const [mousePosition, setMousePosition] = React.useState<{ x: number; y: number } | null>(null);
+    const [mousePosition, setMousePosition] = React.useState<{
+      x: number;
+      y: number;
+    } | null>(null);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -92,49 +134,34 @@ const Events = () => {
           </div>
 
           <h3
-            className='mb-2 mt-3 line-clamp-2 text-xl font-medium text-black transition-all duration-300 group-hover:line-clamp-none'
+            className='mb-2 mt-3 text-xl font-medium text-black transition-all duration-300'
+            style={{
+              height: `${isMonthly ? monthlyCardHeight : upcomingCardHeight}px`,
+              overflow: 'hidden'
+            }}
             title={title}
           >
             {title}
           </h3>
 
-          <div className='flex-row items-center space-y-2 text-sm text-gray-600'>
+          <div className='flex-row items-center text-sm text-gray-600'>
             <div className='flex items-center space-x-2'>
               <span className='rounded bg-green-100 px-2 py-0.5 text-xs text-green-800'>
                 {location}
               </span>
-              <span className='rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-800'>
-                {formatDate(date)}
+              <span className='rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-800'>{date}</span>
+            </div>
+            <div className='mt-auto flex flex-grow flex-col justify-end'>
+              <span className='mt-4 flex items-start gap-1 text-xs'>
+                <MapPin size={16} className='mt-0.5 min-w-[16px]' />{' '}
+                <span className='break-words'>{venue}</span>{' '}
               </span>
             </div>
-
-            <span className='mb-2 flex items-start pt-8 text-xs'>
-              <MapPin size={16} />
-              {venue}
-            </span>
           </div>
         </div>
       </a>
     );
   };
-
-  const monthlyEvents = events.filter((event) => {
-    const currentDate = new Date();
-    const eventDate = new Date(event.eventDate);
-    return eventDate.getMonth() === currentDate.getMonth();
-  });
-
-  const upcomingEvents = events.filter((event) => {
-    const eventDate = new Date(event.eventDate);
-    const currentDate = new Date();
-
-    const eventYear = eventDate.getFullYear();
-    const currentYear = currentDate.getFullYear();
-    const eventMonth = eventDate.getMonth();
-    const currentMonth = currentDate.getMonth();
-
-    return (eventYear === currentYear && eventMonth > currentMonth) || eventYear > currentYear;
-  });
 
   return (
     <main className='mx-4 rounded-xl bg-white p-4 md:mx-8 lg:mx-16'>
@@ -154,6 +181,7 @@ const Events = () => {
                 venue={event.eventVenue}
                 link={event.eventLink}
                 logo={event.communityLogo}
+                isMonthly={true}
               />
             ))
           ) : (
@@ -178,6 +206,7 @@ const Events = () => {
                 venue={event.eventVenue}
                 link={event.eventLink}
                 logo={event.communityLogo}
+                isMonthly={false}
               />
             ))
           ) : (
