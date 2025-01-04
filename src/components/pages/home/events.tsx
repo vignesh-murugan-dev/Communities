@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import events from '../../../data/events.json';
 import { MapPin } from 'phosphor-react';
 import EmptyEventCard from '../../no-events-card';
@@ -76,6 +76,22 @@ const Events = () => {
       x: number;
       y: number;
     } | null>(null);
+    const [isOverflowing, setIsOverflowing] = useState(false);
+    const communityNameRef = useRef<HTMLSpanElement>(null);
+
+    useEffect(() => {
+      const checkOverflow = () => {
+        if (communityNameRef.current) {
+          setIsOverflowing(
+            communityNameRef.current.scrollWidth > communityNameRef.current.clientWidth
+          );
+        }
+      };
+
+      checkOverflow();
+      window.addEventListener('resize', checkOverflow);
+      return () => window.removeEventListener('resize', checkOverflow);
+    }, [communityName]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -109,7 +125,7 @@ const Events = () => {
             WebkitMaskComposite: 'xor'
           }}
         />
-        <div className='relative h-full overflow-hidden rounded-lg border-2 border-[rgb(229,231,235)] bg-white p-4 shadow-sm transition-shadow hover:border-[rgb(255,255,255,0.5)] hover:shadow-md'>
+        <div className='relative h-full rounded-lg border-2 border-[rgb(229,231,235)] bg-white p-4 shadow-sm transition-shadow hover:border-[rgb(255,255,255,0.5)] hover:shadow-md'>
           <div
             className='pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover:opacity-50'
             style={{
@@ -118,19 +134,31 @@ const Events = () => {
                 : 'none'
             }}
           />
-          {logo && (
-            <div className='absolute right-3 top-3'>
+          <div className='relative flex items-center justify-between gap-2'>
+            {isOverflowing ? (
+              <Tooltip content={communityName}>
+                <div className='rounded-md border-2 border-black bg-white px-2 py-1 text-xs text-black'>
+                  <span ref={communityNameRef} className='block max-w-[200px] truncate'>
+                    {communityName}
+                  </span>
+                </div>
+              </Tooltip>
+            ) : (
+              <div className='rounded-md border-2 border-black bg-white px-2 py-1 text-xs text-black'>
+                <span ref={communityNameRef} className='block max-w-[200px] truncate'>
+                  {communityName}
+                </span>
+              </div>
+            )}
+            {logo && (
               <Image
                 src={logo}
-                alt={`${communityName} logo`}
+                alt={`${title} logo`}
                 width={24}
                 height={24}
-                className='rounded-full object-cover grayscale filter transition-all duration-300 group-hover:filter-none'
+                className='rounded-full object-cover grayscale filter transition-all duration-300 hover:filter-none'
               />
-            </div>
-          )}
-          <div className='inline-block rounded-md border-2 border-black bg-white px-2 py-1 text-xs text-black'>
-            {communityName}
+            )}
           </div>
 
           <h3
@@ -219,3 +247,26 @@ const Events = () => {
 };
 
 export default Events;
+
+interface TooltipProps {
+  content: string;
+  children: React.ReactNode;
+}
+
+function Tooltip({ content, children }: TooltipProps) {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  return (
+    <div className='relative inline-block'>
+      <div onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
+        {children}
+      </div>
+      {showTooltip && (
+        <div className='absolute -top-12 left-1/2 z-50 -translate-x-1/2 transform whitespace-nowrap rounded-md border-2 border-black bg-gray-100 px-2 py-1 text-xs text-gray-800 shadow-lg'>
+          {content}
+          <div className='absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 transform bg-gray-100' />
+        </div>
+      )}
+    </div>
+  );
+}
