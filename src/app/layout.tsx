@@ -58,6 +58,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const webId = process.env.UMAMI_ANALYTICS_ID;
   return (
     <html lang='en'>
       <head>
@@ -69,7 +70,7 @@ export default function RootLayout({
         {children}
         <Footer />
       </body>
-      {IS_PROD && <UmamiProvider websiteId='7d4b5f4b-8c8d-4b8c-8d4b-5f4b8c8d4b' />}
+      {IS_PROD && <UmamiProvider websiteId={webId} />}
     </html>
   );
 }
