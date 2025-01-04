@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import events from '../../../data/events.json';
 import { MapPin } from 'phosphor-react';
 import EmptyEventCard from '../../no-events-card';
+import Image from 'next/image';
 
 type Event = {
   communityName: string;
@@ -150,10 +151,12 @@ const Events = () => {
               </div>
             )}
             {logo && (
-              <img
+              <Image
                 src={logo}
                 alt={`${title} logo`}
-                className='h-6 w-6 rounded-full object-cover grayscale filter transition-all duration-300 hover:filter-none'
+                width={24}
+                height={24}
+                className='rounded-full object-cover grayscale filter transition-all duration-300 hover:filter-none'
               />
             )}
           </div>
