@@ -4,6 +4,7 @@ import events from '../../../data/events.json';
 import { MapPin } from 'phosphor-react';
 import EmptyEventCard from '../../no-events-card';
 import Image from 'next/image';
+import AddToCalendar from '@/components/AddToCalendar';
 
 type Event = {
   communityName: string;
@@ -150,6 +151,12 @@ const Events = () => {
                 {location}
               </span>
               <span className='rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-800'>{date}</span>
+              <AddToCalendar
+                eventTitle={title}
+                eventVenue={venue}
+                eventDate={date}
+                eventLink={link}
+              />
             </div>
             <div className='mt-auto flex flex-grow flex-col justify-end'>
               <span className='mt-4 flex items-start gap-1 text-xs'>
