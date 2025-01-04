@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
-import events from '../data/events.json';
+import events from '../../../data/events.json';
 import { MapPin } from 'phosphor-react';
-import EmptyEventCard from '../components/EmptyEventCard';
+import EmptyEventCard from '../../EmptyEventCard';
 import Image from 'next/image';
 
 type EventCardProps = {

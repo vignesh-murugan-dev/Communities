@@ -31,10 +31,6 @@ const CallToAction = () => {
           </div>
         </div>
       </div>
-
-      <p className='mb-2 mt-16 text-center text-gray-600'>
-        Made with luv from Hari and Justin 💚 FOSS United Chennai
-      </p>
     </div>
   );
 };

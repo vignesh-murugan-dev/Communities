@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import { SITE_URL } from '../lib/constants';
+import { IS_PROD, SITE_URL } from '../lib/constants';
+import UmamiProvider from 'next-umami';
+import Header from '../components/shared/header';
+import Footer from '../components/shared/footer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -61,7 +64,12 @@ export default function RootLayout({
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} bg-[#fafafa] antialiased`}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
+      {IS_PROD && <UmamiProvider websiteId='7d4b5f4b-8c8d-4b8c-8d4b-5f4b8c8d4b' />}
     </html>
   );
 }
