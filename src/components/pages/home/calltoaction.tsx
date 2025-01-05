@@ -8,7 +8,8 @@ const CallToAction = () => {
         <div className='flex items-center justify-between p-8'>
           <div className='max-w-2xl'>
             <h3 className='mb-6 text-center text-2xl font-normal text-white md:text-left md:text-3xl'>
-              Know a tech event? Share it to help others find and join by adding yours to the list!
+              Know a tech event? <br /> Share it to help others find and join by adding yours to the
+              list!
             </h3>
             <div className='flex flex-wrap justify-center gap-4 md:justify-start'>
               <button
