@@ -33,10 +33,10 @@ const GitHubButton = () => {
     >
       <Image src={githubIcon} alt='Github star icon' className='mr-2 h-5 w-5' />
       <span className='hidden text-sm font-medium sm:inline'>
-        {stars !== null ? `Contribute ${stars} ★` : 'Loading...'}
+        {stars !== null ? `Contribute ${stars} ⭐` : 'Loading...'}
       </span>
       <span className='text-sm font-medium sm:hidden'>
-        {stars !== null ? `${stars} ★` : 'Loading...'}
+        {stars !== null ? `${stars} ⭐` : 'Loading...'}
       </span>
     </a>
   );
