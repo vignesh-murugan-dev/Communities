@@ -4,7 +4,7 @@ import Image from 'next/image';
 import githubIcon from '../../public/githubIcon.svg';
 
 const GitHubButton = () => {
-  const [starCount, setStarCount] = useState(null);
+  const [stars, setStarCount] = useState<number | null>(null);
   const repoUrl = `https://github.com/FOSSUChennai/Communities`;
 
   useEffect(() => {
@@ -30,11 +30,14 @@ const GitHubButton = () => {
       target='_blank'
       rel='noopener noreferrer'
       className='inline-flex items-center rounded-lg px-4 py-2 text-black shadow transition duration-200'
-      style={{ background: '#d9d9d980' }}
     >
-      <Image src={githubIcon} alt='Github star icon' className='h-5 w-5' />
-      <span className='ml-2 font-medium'>Contribute</span>
-      {starCount !== null && <span className='ml-2'>⭐ {starCount}</span>}
+      <Image src={githubIcon} alt='Github star icon' className='mr-2 h-5 w-5' />
+      <span className='hidden text-sm font-medium sm:inline'>
+        {stars !== null ? `Contribute ${stars} ⭐` : 'Loading...'}
+      </span>
+      <span className='text-sm font-medium sm:hidden'>
+        {stars !== null ? `${stars} ⭐` : 'Loading...'}
+      </span>
     </a>
   );
 };
