@@ -102,6 +102,15 @@ const Events = () => {
       });
     };
 
+    const validateAndFormatVenue = (venue: string): string => {
+      // Trim extra spaces and convert to Proper Case
+      return venue
+        .trim()
+        .split(' ')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ');
+    };
+
     const handleMouseLeave = () => {
       setMousePosition(null);
     };
@@ -189,7 +198,7 @@ const Events = () => {
             <div className='mt-auto flex flex-grow flex-col justify-end'>
               <span className='mt-4 flex items-start gap-1 text-xs'>
                 <MapPin size={16} className='mt-0.5 min-w-[16px]' />{' '}
-                <span className='break-words'>{venue}</span>{' '}
+                <span className='break-words'>{validateAndFormatVenue(venue)}</span>{' '}
               </span>
             </div>
           </div>
