@@ -31,21 +31,31 @@ const Events = () => {
   const [monthlyCardHeight, setMonthlyCardHeight] = useState<number>(0);
   const [upcomingCardHeight, setUpcomingCardHeight] = useState<number>(0);
 
-  const monthlyEvents = events.filter((event) => {
-    const currentDate = new Date();
-    const eventDate = new Date(event.eventDate);
-    return eventDate.getMonth() === currentDate.getMonth();
-  });
+  const monthlyEvents = events
+    .filter((event) => {
+      const currentDate = new Date();
+      const eventDate = new Date(event.eventDate);
+      return eventDate.getMonth() === currentDate.getMonth();
+    })
+    .sort(
+      (currentEvent, nextEvent) =>
+        new Date(currentEvent.eventDate).getDate() - new Date(nextEvent.eventDate).getDate()
+    );
 
-  const upcomingEvents = events.filter((event) => {
-    const eventDate = new Date(event.eventDate);
-    const currentDate = new Date();
-    const eventYear = eventDate.getFullYear();
-    const currentYear = currentDate.getFullYear();
-    const eventMonth = eventDate.getMonth();
-    const currentMonth = currentDate.getMonth();
-    return (eventYear === currentYear && eventMonth > currentMonth) || eventYear > currentYear;
-  });
+  const upcomingEvents = events
+    .filter((event) => {
+      const eventDate = new Date(event.eventDate);
+      const currentDate = new Date();
+      const eventYear = eventDate.getFullYear();
+      const currentYear = currentDate.getFullYear();
+      const eventMonth = eventDate.getMonth();
+      const currentMonth = currentDate.getMonth();
+      return (eventYear === currentYear && eventMonth > currentMonth) || eventYear > currentYear;
+    })
+    .sort(
+      (currentEvent, nextEvent) =>
+        new Date(currentEvent.eventDate).getDate() - new Date(nextEvent.eventDate).getDate()
+    );
 
   const calculateMaxHeight = (events: Event[]) => {
     if (events.length === 0) return 100;
