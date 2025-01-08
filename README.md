@@ -79,6 +79,12 @@ Pointers to keep in mind is:
 - if its a feature request, please provide a detailed description and if UI feature, please do provide a mockup.
 - if updating events.json, please make sure you add the hostname for the image to next.config.ts file in the root directory.
 
+## 🥰 Contributors
+
+<a href="https://github.com/FOSSUChennai/Communities/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=FOSSUChennai/Communities" />
+</a>
+
 ## 📝 License
 
 This project is licensed under the terms of the GPL 3.0 license.
