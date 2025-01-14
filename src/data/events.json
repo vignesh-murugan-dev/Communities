@@ -53,5 +53,16 @@
     "location": "Chennai",
     "communityName": "build2learn",
     "communityLogo": "https://i.ibb.co/CBsgh43/bxOxo5O.png"
+  },
+  {
+    "eventName": "Microsoft Azure Skillup Tamilnadu Session 2",
+    "eventDescription": "Join us in this knowledge-sharing journey and become an active member of the Azure Developer Community today! Together, let's learn, grow, and make a positive impact on the tech world.",
+    "eventDate": "2025-02-15",
+    "eventTime": "09:30",
+    "eventVenue": "Microsoft Corporation India Pvt. Ltd, 2nd Floor, Prestige Polygon, Anna Salai, Ratna Nagar, Teynampet, Chennai – 600018",
+    "eventLink": "https://www.meetup.com/azure-developer-community-chennai/events/305016541/?eventOrigin=group_upcoming_events",
+    "location": "Chennai",
+    "communityName": "Azure Developer Community TamilNadu",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/c/d/2/clean_496503282.webp"
   }
 ]
