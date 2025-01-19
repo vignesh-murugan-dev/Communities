@@ -64,5 +64,16 @@
     "location": "Chennai",
     "communityName": "Azure Developer Community TamilNadu",
     "communityLogo": "https://secure.meetupstatic.com/photos/event/c/d/2/clean_496503282.webp"
+  },
+  {
+    "eventName": "January FOSS Meetup",
+    "eventDescription": "FOSS Meetup - January 2025.",
+    "eventDate": "2025-01-25",
+    "eventTime": "02:00",
+    "eventVenue": "YuniQ ,4th Floor, TICEL BIOPARK, 5, CSIR Rd, Phase II, Tharamani, Chennai, Tamil Nadu 600113 ",
+    "eventLink": "https://fossunited.org/c/chennai/2025/Jan",
+    "location": "Chennai",
+    "communityName": "FOSS United Chennai",
+    "communityLogo": "https://fossunited.org/files/Foss%20United%20Logo%20Black.svg"
   }
 ]
