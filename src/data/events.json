@@ -76,6 +76,7 @@
     "communityName": "KCD Chennai",
     "communityLogo": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_500,h_500,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-cncf/events/Logo_White_Background_eSFH3vi.png"
   },
+  
   {
     "eventName": "Chennaipy January Meetup",
     "eventDescription": "This is a group for anyone who loves Python. Meet and discuss with other Pythonistas in Chennai. Contribute to promoting Python in and around Chennai.",
@@ -97,5 +98,27 @@
     "location": "Chennai",
     "communityName": "Cloud Native Chennai",
     "communityLogo": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/CNC%2520-%2520Event%2520Thumbnail%2520-%2520Manikandan%2520Krishnamurthy_9i4xfUX.png"
+  },
+    {
+    "eventName": "build2learn",
+    "eventDescription": "Welcome to build2learn - Where Innovation Meets Community! Imagine a hackathon, but with a twist!🤔 It's not just about building incredible micro products; it's about forging lifelong connections with like-minded individuals who share your passion for innovation! 🤝💡At build2learn, we believe that magic happens when engineers come together to do what they love - BUILD!, Are you someone with a side project that you've been dreaming of bringing to life? build2learn is your chance to turn that dream into reality! ⏰🌟 Are you a student eager to create something extraordinary but in need of mentors to guide you? build2learn is the launchpad you've been waiting for! 🎓🚀 Or maybe you're someone who thrives on helping others unleash their full potential? build2learn is the perfect platform to make a lasting impact! 🤗 Join us at build2learn and embark on a journey of creation, collaboration, and camaraderie! 🌟 See you there!🌆 ",
+    "eventDate": "2025-01-25",
+    "eventTime": "09:30",
+    "eventVenue": "IBM INDIA PRIVATE LIMITED, 5th Floor, Unit 3, Pinnacle Building, Ascendas IT Park, Taramani, Chennai",
+    "eventLink": "https://docs.google.com/forms/d/e/1FAIpQLScsui1r6e6PsgDyOycPiIAY_rz9i8vQ02MnmikPw2ESVG830g/viewform",
+    "location": "Chennai",
+    "communityName": "build2learn",
+    "communityLogo": "https://i.ibb.co/CBsgh43/bxOxo5O.png"
+  },
+  {
+    "eventName": "January FOSS Meetup",
+    "eventDescription": "FOSS Meetup - January 2025.",
+    "eventDate": "2025-01-25",
+    "eventTime": "02:00",
+    "eventVenue": "YuniQ ,4th Floor, TICEL BIOPARK, 5, CSIR Rd, Phase II, Tharamani, Chennai, Tamil Nadu 600113 ",
+    "eventLink": "https://fossunited.org/c/chennai/2025/Jan",
+    "location": "Chennai",
+    "communityName": "FOSS United Chennai",
+    "communityLogo": "https://fossunited.org/files/Foss%20United%20Logo%20Black.svg"
   }
 ]
