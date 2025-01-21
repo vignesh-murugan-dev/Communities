@@ -86,5 +86,16 @@
     "location": "Chennai",
     "communityName": "Chennaipy",
     "communityLogo": "https://res.cloudinary.com/dwir71gi2/image/upload/v1737382622/chennaipy_ovbthm.png"
+  },
+  {
+    "eventName": "Cloud Native Chennai - Jan 2025 Meetup",
+    "eventDescription": "Join us for an in-person event to learn about Cloud Native projects and concepts. You will also have the opportunity to network with your peers, exchange best practices, and learn from real-world use cases. Whether you are just starting your cloud journey or you are already using Cloud Native, this event is a must-attend for anyone interested in unlocking the power of Cloud Native.",
+    "eventDate": "2025-01-25",
+    "eventTime": "05:00",
+    "eventVenue": "Tekclan Software Solutions PVT LTD, 4th Floor, Phase 2, Ticel Bio Park, 5, CSIR Rd, Tharamani, Chennai, Tamil Nadu 600113",
+    "eventLink": "https://community.cncf.io/events/details/cncf-cloud-native-chennai-presents-cloud-native-chennai-jan-2025-meetup/",
+    "location": "Chennai",
+    "communityName": "Cloud Native Chennai",
+    "communityLogo": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/CNC%2520-%2520Event%2520Thumbnail%2520-%2520Manikandan%2520Krishnamurthy_9i4xfUX.png"
   }
 ]
