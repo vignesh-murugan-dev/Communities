@@ -27,6 +27,10 @@ const config: NextConfig = {
         protocol: 'https',
         hostname: 'i.ibb.co',
       },
+      {
+        protocol: 'https',
+        hostname: 'fossunited.org',
+      },
     ]
   }
 };
