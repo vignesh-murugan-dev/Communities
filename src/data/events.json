@@ -120,5 +120,16 @@
     "location": "Chennai",
     "communityName": "FOSS United Chennai",
     "communityLogo": "https://fossunited.org/files/Foss%20United%20Logo%20Black.svg"
+  },
+  {
+    "eventName": "JSLovers Chennai Meetup 4",
+    "eventDescription": "First Meetup of 2025 from JSLovers Chennai Chapter.",
+    "eventDate": "2025-02-08",
+    "eventTime": "02:00",
+    "eventVenue": "YuniQ, 4th Floor, Ticel Bio Park, Tharamani",
+    "eventLink": "https://www.linkedin.com/posts/thejslovers_jslovers-jsloverschennai-javascript-activity-7286978254719143936-gjse?utm_source=share&utm_medium=member_desktop",
+    "location": "Chennai",
+    "communityName": "JSLovers",
+    "communityLogo": "https://i.ibb.co/89fw9p0/1718639979394.jpg"
   }
 ]
