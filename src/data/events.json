@@ -131,5 +131,27 @@
     "location": "Chennai",
     "communityName": "JSLovers",
     "communityLogo": "https://i.ibb.co/89fw9p0/1718639979394.jpg"
+  },
+  {
+    "eventName": "The Global AI Bootcamp",
+    "eventDescription": "The Global AI Bootcamp is an annual event that occurs worldwide, where developers and AI enthusiasts can learn about AI through workshops, sessions, and discussions. Local chapters of the Global AI Community host the events in various locations across the globe.",
+    "eventDate": "2025-03-01",
+    "eventTime": "10:00",
+    "eventVenue": "St Joseph's College Of Engineering Off, Old Mahabalipuram Road, Kamaraj Nagar, Semmancheri, Chennai, Tamil Nadu 600119 · Chennai",
+    "eventLink": "https://www.meetup.com/innovationai-chennai/events/304777565/",
+    "location": "Chennai",
+    "communityName": "Azure Development Community Tamilnadu",
+    "communityLogo": "https://i.ibb.co/PWB3xkp/1731223560054.jpg"
+  },
+  {
+    "eventName": "Data Science Before and After GenAI, a Ford Fibonacci Event!",
+    "eventDescription": "This insightful event, conducted by Ford Business Solutions - India, will feature a panel discussion with Top Leaders, Professionals and Decision-makers in the Data Science world.",
+    "eventDate": "2025-01-25",
+    "eventTime": "10:00",
+    "eventVenue": "Ford GTBC, Elcot SEZ, Chennai",
+    "eventLink": "https://www.meetup.com/ford-fibonacci-tech-tete/events/305663546/",
+    "location": "Chennai",
+    "communityName": "Chennai Data Circle",
+    "communityLogo": "https://i.ibb.co/s1jqsKF/chennai-data-circle-logo.jpg"
   }
 ]
