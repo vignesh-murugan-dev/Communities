@@ -25,37 +25,35 @@ type EventCardProps = {
   link: string;
   logo?: string;
   isMonthly: boolean;
+  hasEnded?: boolean;
 };
 
 const Events = () => {
   const [monthlyCardHeight, setMonthlyCardHeight] = useState<number>(0);
   const [upcomingCardHeight, setUpcomingCardHeight] = useState<number>(0);
+  const today = new Date();
+  // sorts all events first rather than grouping into two types and then sorting
+  const sortedEvents = events.sort(
+    (a,b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+  );
 
-  const monthlyEvents = events
-    .filter((event) => {
-      const currentDate = new Date();
-      const eventDate = new Date(event.eventDate);
-      return eventDate.getMonth() === currentDate.getMonth();
-    })
-    .sort(
-      (currentEvent, nextEvent) =>
-        new Date(currentEvent.eventDate).getDate() - new Date(nextEvent.eventDate).getDate()
-    );
+  //first we will seperate the ended events by filtering w.r.t today
+  const pastEvents = sortedEvents.filter( (event) => new Date(event.eventDate) < today );
 
-  const upcomingEvents = events
-    .filter((event) => {
-      const eventDate = new Date(event.eventDate);
-      const currentDate = new Date();
-      const eventYear = eventDate.getFullYear();
-      const currentYear = currentDate.getFullYear();
-      const eventMonth = eventDate.getMonth();
-      const currentMonth = currentDate.getMonth();
-      return (eventYear === currentYear && eventMonth > currentMonth) || eventYear > currentYear;
-    })
-    .sort(
-      (currentEvent, nextEvent) =>
-        new Date(currentEvent.eventDate).getDate() - new Date(nextEvent.eventDate).getDate()
+  const monthlyEvents = sortedEvents.filter((event) => {
+    const eventDate = new Date(event.eventDate);
+    return (
+      eventDate.getMonth() === today.getMonth() &&                /* we first check for same month*/
+       eventDate.getFullYear() === today.getFullYear() &&         /* then we check for same year*/
+       eventDate >= today         /* and then we check if it happens in the future and not already ended*/
     );
+  });
+
+  const upcomingEvents = sortedEvents.filter((event) => {
+    const eventDate = new Date(event.eventDate);
+    // filter the future events and then filter evets that doesn't happen in the same month
+    return eventDate > today && eventDate.getMonth() !== today.getMonth();
+  });
 
   const calculateMaxHeight = (events: Event[]) => {
     if (events.length === 0) return 100;
@@ -81,7 +79,8 @@ const Events = () => {
     venue,
     link,
     logo,
-    isMonthly
+    isMonthly,
+    hasEnded=false
   }) => {
     const [mousePosition, setMousePosition] = React.useState<{
       x: number;
@@ -134,7 +133,7 @@ const Events = () => {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        <div
+        { !hasEnded && <div
           className='absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100'
           style={{
             background: mousePosition
@@ -144,27 +143,27 @@ const Events = () => {
             maskComposite: 'exclude',
             WebkitMaskComposite: 'xor'
           }}
-        />
-        <div className='relative h-full rounded-lg border-2 border-[rgb(229,231,235)] bg-white p-4 shadow-sm transition-shadow hover:border-[rgb(255,255,255,0.5)] hover:shadow-md'>
-          <div
+        /> }
+        <div className={`relative h-full rounded-lg border-2 ${hasEnded ? 'bg-gray-100 text-gray-500 border-gray-300' : 'border-[rgb(229,231,235)] bg-white hover:border-[rgb(255,255,255,0.5)]'} p-4 shadow-sm transition-shadow hover:shadow-md`}>
+          { !hasEnded && <div
             className='pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover:opacity-50'
             style={{
               background: mousePosition
-                ? `radial-gradient(300px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(74, 222, 128, 0.2), transparent 40%)`
+                ? 'radial-gradient(300px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(74, 222, 128, 0.2), transparent 40%)'
                 : 'none'
             }}
-          />
+          />}
           <div className='relative flex items-center justify-between gap-2'>
             {isOverflowing ? (
               <Tooltip content={communityName}>
-                <div className='rounded-md border-2 border-black bg-white px-2 py-1 text-xs text-black'>
+                <div className={`rounded-md border-2 ${ hasEnded ? 'border-gray-600 bg-transparent' : 'border-black bg-white'} px-2 py-1 text-xs text-black`}>
                   <span ref={communityNameRef} className='block max-w-[200px] truncate'>
                     {communityName}
                   </span>
                 </div>
               </Tooltip>
             ) : (
-              <div className='rounded-md border-2 border-black bg-white px-2 py-1 text-xs text-black'>
+              <div className={`rounded-md border-2 ${ hasEnded ? 'border-gray-600 bg-transparent' : 'border-black bg-white'} px-2 py-1 text-xs text-black`}>
                 <span ref={communityNameRef} className='block max-w-[200px] truncate'>
                   {communityName}
                 </span>
@@ -176,13 +175,13 @@ const Events = () => {
                 alt={`${title} logo`}
                 width={24}
                 height={24}
-                className='rounded-full object-cover grayscale filter transition-all duration-300 hover:filter-none'
+                className='rounded-sm object-cover grayscale filter transition-all duration-300 hover:filter-none'
               />
             )}
           </div>
 
           <h3
-            className='mb-2 mt-3 text-xl font-medium text-black transition-all duration-300'
+            className={`mb-2 mt-3 text-xl font-medium ${ hasEnded ? 'text-red-500' : 'text-black' } transition-all duration-300`}
             style={{
               height: `${isMonthly ? monthlyCardHeight : upcomingCardHeight}px`,
               overflow: 'hidden'
@@ -194,16 +193,16 @@ const Events = () => {
 
           <div className='flex-row items-center text-sm text-gray-600'>
             <div className='flex items-center space-x-2'>
-              <span className='rounded bg-green-100 px-2 py-0.5 text-xs text-green-800'>
+              <span className={`rounded ${ hasEnded ? 'bg-gray-300 text-gray-800' : 'bg-green-100 text-green-800' } px-2 py-0.5 text-xs`}>
                 {location}
               </span>
-              <span className='rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-800'>{date}</span>
-              <AddToCalendar
+              <span className={`rounded ${hasEnded ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800'} px-2 py-0.5 text-xs `}>{date}</span>
+              { !hasEnded && <AddToCalendar
                 eventTitle={title}
                 eventVenue={venue}
                 eventDate={date}
                 eventLink={link}
-              />
+              />}
             </div>
             <div className='mt-auto flex flex-grow flex-col justify-end'>
               <span className='mt-4 flex items-start gap-1 text-xs'>
@@ -268,6 +267,34 @@ const Events = () => {
           )}
         </div>
       </section>
+
+      {/* Displays past events if exists*/}
+      { pastEvents.length >0 && 
+        <section className='mt-12'>
+          {/* this div is to seperate past events from upcoming and this month events */}
+          <div className='mb-12 h-[1px] w-full bg-gray-400'/>
+
+          <h2 className='mb-3 text-lg font-normal'>
+            <span className='text-[30px] font-semibold text-black'>past events</span>
+          </h2>
+          <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
+            { pastEvents.map((event, index) => (
+              <EventCard
+                key={index}
+                communityName={event.communityName}
+                title={event.eventName}
+                location={event.location}
+                date={event.eventDate}
+                venue={event.eventVenue}
+                link={event.eventLink}
+                logo={event.communityLogo}
+                isMonthly={false}
+                hasEnded={true}
+              />
+            ))}
+          </div>
+      </section>
+      }
     </main>
   );
 };
@@ -288,7 +315,7 @@ function Tooltip({ content, children }: TooltipProps) {
         {children}
       </div>
       {showTooltip && (
-        <div className='absolute -top-12 left-1/2 z-50 -translate-x-1/2 transform whitespace-nowrap rounded-md border-2 border-black bg-gray-100 px-2 py-1 text-xs text-gray-800 shadow-lg'>
+        <div className='absolute -top-12 left-1/2 z-50 -translate-x-1/2 transform whitespace-nowrap rounded-md border-2 border-gray-800 bg-gray-100 px-2 py-1 text-xs text-gray-800 shadow-lg'>
           {content}
           <div className='absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 transform bg-gray-100' />
         </div>
