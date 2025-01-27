@@ -38,7 +38,7 @@ const Events = () => {
   );
 
   //first we will seperate the ended events by filtering w.r.t today
-  const pastEvents = sortedEvents.filter( (event) => new Date(event.eventDate) < today );
+  const pastEvents = sortedEvents.filter( (event) => new Date(event.eventDate) < today ).reverse();
 
   const monthlyEvents = sortedEvents.filter((event) => {
     const eventDate = new Date(event.eventDate);
@@ -52,7 +52,7 @@ const Events = () => {
   const upcomingEvents = sortedEvents.filter((event) => {
     const eventDate = new Date(event.eventDate);
     // filter the future events and then filter evets that doesn't happen in the same month
-    return eventDate > today && eventDate.getMonth() !== today.getMonth();
+    return eventDate > today && (eventDate.getMonth() !== today.getMonth() || eventDate.getFullYear() !== today.getFullYear());
   });
 
   const calculateMaxHeight = (events: Event[]) => {
