@@ -42,5 +42,16 @@
     "location": "Chennai",
     "communityName": "Azure Development Community Tamilnadu",
     "communityLogo": "https://i.ibb.co/PWB3xkp/1731223560054.jpg"
+  },
+  {
+    "eventName": "FOSS meetup Pondicherry",
+    "eventDescription": "First FOSS meetup of the FOSS United Pondicherry community!",
+    "eventDate": "2025-02-15",
+    "eventTime": "14:00",
+    "eventVenue": "Zemuria Inc., 3rd Floor, Pulsebay Coworking HQ",
+    "eventLink": "https://fossunited.org/c/pondicherry/2025-feb",
+    "location": "Pondicherry",
+    "communityName": "FOSS United Pondicherry",
+    "communityLogo": "https://i.ibb.co/vm4vm6g/fosspondy.jpg"
   }
 ]
