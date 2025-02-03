@@ -53,5 +53,16 @@
     "location": "Pondicherry",
     "communityName": "FOSS United Pondicherry",
     "communityLogo": "https://i.ibb.co/vm4vm6g/fosspondy.jpg"
+  },
+  {
+    "eventName": "Hackers Thiruvizha",
+    "eventDescription": "The ultimate offline hackathon where creativity meets technology! Get ready for an electrifying day filled with brainstorming, building, and bonding with like-minded tech enthusiasts.  ",
+    "eventDate": "2025-02-08",
+    "eventTime": "09:00",
+    "eventVenue": "St Joseph's College Of Engineering, Chennai",
+    "eventLink": "https://event.tixon.app/HackersThiruvizha",
+    "location": "Chennai",
+    "communityName": "Code on JVM",
+    "communityLogo": "https://i.ibb.co/j9GsWdGk/codeonjvm.jpg"
   }
 ]
