@@ -75,5 +75,16 @@
     "location": "Chennai",
     "communityName": "Chennai React",
     "communityLogo": "https://avatars.githubusercontent.com/u/175532518"
+  },
+  {
+    "eventName": "FOSS Hack SSN",
+    "eventDescription": "FOSS Hack local host at SSN College of Engineering.",
+    "eventDate": "2025-02-22",
+    "eventTime": "08:00",
+    "eventVenue": "SSN College of Engineering, SH 49A, Kalavakkam, Tamil Nadu 603110",
+    "eventLink": "https://fossunited.org/hack/fosshack25/host/chennai-ssn",
+    "location": "Chennai",
+    "communityName": "FOSS United",
+    "communityLogo": "https://i.ibb.co/23TrwMyH/1738389876909.jpg"
   }
 ]
