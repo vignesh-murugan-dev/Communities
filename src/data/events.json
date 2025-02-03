@@ -64,5 +64,16 @@
     "location": "Chennai",
     "communityName": "Code on JVM",
     "communityLogo": "https://i.ibb.co/j9GsWdGk/codeonjvm.jpg"
+  },
+  {
+    "eventName": "Chennai React Anniversary Mega Meetup",
+    "eventDescription": "Chennai React is Turning 1 and we are celebrating our 1-year anniversary with a mega meetup",
+    "eventDate": "2025-03-01",
+    "eventTime": "10:00",
+    "eventVenue": "Comcast, Chennai One SEZ, 5th Floor, North Block in Phase II, Thoraipakkam, Chennai",
+    "eventLink": "https://lu.ma/nn29gvkj",
+    "location": "Chennai",
+    "communityName": "Chennai React",
+    "communityLogo": "https://avatars.githubusercontent.com/u/175532518"
   }
 ]
