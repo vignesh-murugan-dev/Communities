@@ -97,5 +97,16 @@
     "location": "Guindy, Chennai",
     "communityName": "The AI Connect (TAI)",
     "communityLogo": "https://tai-events.s3.eu-central-1.amazonaws.com/01_Tai+4+(2).svg"
+  },
+  {
+    "eventName": "KCD Chennai Konnekt",
+    "eventDescription": "We're kicking off the excitement for KCD Chennai with Konnekt #1, an exclusive in-person session designed to bring the Kubernetes & cloud-native community together!",
+    "eventDate": "2025-02-08",
+    "eventTime": "09:30",
+    "eventVenue": "Excelencia",
+    "eventLink": "https://docs.google.com/forms/d/e/1FAIpQLSdj9-R-45x1YGQ8OhUyJ35vovWF25lg8BkjqRVQPcADbi5ZSA/viewform",
+    "location": "Chennai",
+    "communityName": "KCD Chennai",
+    "communityLogo": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_500,h_500,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-cncf/events/Logo_White_Background_eSFH3vi.png"
   }
 ]
