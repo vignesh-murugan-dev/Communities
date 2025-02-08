@@ -30,7 +30,14 @@ type EventCardProps = {
 const Events = () => {
   const [monthlyCardHeight, setMonthlyCardHeight] = useState<number>(0);
   const [upcomingCardHeight, setUpcomingCardHeight] = useState<number>(0);
+   // Create a date object for start of today
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Create a date object for end of today
+  const endOfToday = new Date();
+  endOfToday.setHours(23, 59, 59, 999);
+
   // sorts all events first rather than grouping into two types and then sorting
   const sortedEvents = events.sort(
     (a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
@@ -39,17 +46,16 @@ const Events = () => {
   const monthlyEvents = sortedEvents.filter((event) => {
     const eventDate = new Date(event.eventDate);
     return (
-      eventDate.getMonth() === today.getMonth() /* we first check for same month*/ &&
-      eventDate.getFullYear() === today.getFullYear() /* then we check for same year*/ &&
-      eventDate >= today /* and then we check if it happens in the future and not already ended*/
+      eventDate.getMonth() === today.getMonth() &&
+      eventDate.getFullYear() === today.getFullYear() &&
+      eventDate >= today
     );
   });
 
   const upcomingEvents = sortedEvents.filter((event) => {
     const eventDate = new Date(event.eventDate);
-    // filter the future events and then filter evets that doesn't happen in the same month
     return (
-      eventDate > today &&
+      eventDate > endOfToday && // Compare with end of today
       (eventDate.getMonth() !== today.getMonth() || eventDate.getFullYear() !== today.getFullYear())
     );
   });
