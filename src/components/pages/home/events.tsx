@@ -30,25 +30,34 @@ type EventCardProps = {
 const Events = () => {
   const [monthlyCardHeight, setMonthlyCardHeight] = useState<number>(0);
   const [upcomingCardHeight, setUpcomingCardHeight] = useState<number>(0);
+   // Create a date object for start of today
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Create a date object for end of today
+  const endOfToday = new Date();
+  endOfToday.setHours(23, 59, 59, 999);
+
   // sorts all events first rather than grouping into two types and then sorting
   const sortedEvents = events.sort(
-    (a,b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+    (a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
   );
 
   const monthlyEvents = sortedEvents.filter((event) => {
     const eventDate = new Date(event.eventDate);
     return (
-      eventDate.getMonth() === today.getMonth() &&                /* we first check for same month*/
-       eventDate.getFullYear() === today.getFullYear() &&         /* then we check for same year*/
-       eventDate >= today         /* and then we check if it happens in the future and not already ended*/
+      eventDate.getMonth() === today.getMonth() &&
+      eventDate.getFullYear() === today.getFullYear() &&
+      eventDate >= today
     );
   });
 
   const upcomingEvents = sortedEvents.filter((event) => {
     const eventDate = new Date(event.eventDate);
-    // filter the future events and then filter evets that doesn't happen in the same month
-    return eventDate > today && (eventDate.getMonth() !== today.getMonth() || eventDate.getFullYear() !== today.getFullYear());
+    return (
+      eventDate > endOfToday && // Compare with end of today
+      (eventDate.getMonth() !== today.getMonth() || eventDate.getFullYear() !== today.getFullYear())
+    );
   });
 
   const calculateMaxHeight = (events: Event[]) => {
@@ -75,7 +84,7 @@ const Events = () => {
     venue,
     link,
     logo,
-    isMonthly,
+    isMonthly
   }) => {
     const [mousePosition, setMousePosition] = React.useState<{
       x: number;
@@ -138,8 +147,8 @@ const Events = () => {
             maskComposite: 'exclude',
             WebkitMaskComposite: 'xor'
           }}
-        /> 
-        <div className='relative h-full rounded-lg border-2 border-[rgb(229,231,235)] bg-white hover:border-[rgb(255,255,255,0.5)] p-4 shadow-sm transition-shadow hover:shadow-md'>
+        />
+        <div className='relative h-full rounded-lg border-2 border-[rgb(229,231,235)] bg-white p-4 shadow-sm transition-shadow hover:border-[rgb(255,255,255,0.5)] hover:shadow-md'>
           <div
             className='pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover:opacity-50'
             style={{
@@ -148,7 +157,7 @@ const Events = () => {
                 : 'none'
             }}
           />
-          <div className='relative flex items-center justify-between gap-2'>
+          <div className='relative flex flex-wrap items-center justify-between gap-2'>
             {isOverflowing ? (
               <Tooltip content={communityName}>
                 <div className='rounded-md border-2 border-black bg-white px-2 py-1 text-xs text-black'>
@@ -188,10 +197,12 @@ const Events = () => {
 
           <div className='flex-row items-center text-sm text-gray-600'>
             <div className='flex items-center space-x-2'>
-              <span className={`rounded bg-green-100 text-green-800 px-2 py-0.5 text-xs`}>
+              <span className={`rounded bg-green-100 px-2 py-0.5 text-xs text-green-800`}>
                 {location}
               </span>
-              <span className={`rounded bg-blue-100 text-blue-800 px-2 py-0.5 text-xs `}>{date}</span>
+              <span className={`rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-800`}>
+                {date}
+              </span>
               <AddToCalendar
                 eventTitle={title}
                 eventVenue={venue}
@@ -212,12 +223,12 @@ const Events = () => {
   };
 
   return (
-    <main className='mx-4 rounded-xl bg-white p-4 md:mx-8 lg:mx-16'>
+    <main className='mx-4 rounded-xl bg-white p-6 md:mx-8 lg:mx-16'>
       <section>
         <h2 className='mb-3 text-lg font-normal'>
           <span className='text-[30px] font-semibold text-black'>this month</span>
         </h2>
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3'>
           {monthlyEvents.length > 0 ? (
             monthlyEvents.map((event, index) => (
               <EventCard
@@ -242,7 +253,7 @@ const Events = () => {
         <h2 className='mb-3 text-lg font-normal'>
           <span className='text-[30px] font-semibold text-black'>upcoming</span>
         </h2>
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3'>
           {upcomingEvents.length > 0 ? (
             upcomingEvents.map((event, index) => (
               <EventCard
