@@ -99,6 +99,17 @@
     "communityLogo": "https://tai-events.s3.eu-central-1.amazonaws.com/01_Tai+4+(2).svg"
   },
   {
+    "eventName": "Mastering Fabric Analytics with Power BI",
+    "eventDescription": "Dive into Fabric Analytics with Power BI—insights from 4 industry experts, live demos, an interactive hands-on session, and network with the Chennai Data Circle (CDC) community.",
+    "eventDate": "2025-02-22",
+    "eventTime": "10:00",
+    "eventVenue": "Presidio Solutions, Indiqube Alphine, Ekkatuthangal, Guindy, Chennai, Tamil Nadu",
+    "eventLink": "https://lu.ma/o35x7jqh",
+    "location": "Chennai",
+    "communityName": "Chennai Data Circle",
+    "communityLogo": "https://i.ibb.co/vCwTKt4w/Chennai-Data-Circle-CDC-Logo.png"
+  },
+  {
     "eventName": "KCD Chennai Konnekt",
     "eventDescription": "We're kicking off the excitement for KCD Chennai with Konnekt #1, an exclusive in-person session designed to bring the Kubernetes & cloud-native community together!",
     "eventDate": "2025-02-08",
