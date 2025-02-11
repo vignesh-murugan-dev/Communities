@@ -130,5 +130,16 @@
     "location": "Chennai",
     "communityName": "Azure Developer Community Tamilnadu",
     "communityLogo": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fglobalai.community%2Fcommunities%2Finnovation-ai-chennai%2Fmicrosoft-azure-skillup-tamilnadu-session-4%2F&psig=AOvVaw0cFXYO5IwB2i5svtEjjLLA&ust=1739166225936000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOiCwJrxtYsDFQAAAAAdAAAAABAE"
+  },
+  {
+    "eventName": "FOSS Hack CIT",
+    "eventDescription": "FOSS Hack local host at Chennai Institute of Technology.",
+    "eventDate": "2025-02-22",
+    "eventTime": "08:00",
+    "eventVenue": "Chennai Institute of Technology, Sarathy Nagar, Kundrathur, Chennai, Malayambakkam, Tamil Nadu 600069",
+    "eventLink": "https://fossunited.org/hack/fosshack25/host/chennai-sit",
+    "location": "Chennai",
+    "communityName": "FOSS United",
+    "communityLogo": "https://i.ibb.co/RpGsRvjJ/foss-hack-cit.png"
   }
 ]
