@@ -87,7 +87,7 @@
     "communityName": "FOSS United",
     "communityLogo": "https://i.ibb.co/23TrwMyH/1738389876909.jpg"
   },
-   {
+  {
     "eventName": "The AI Connect (TAI) hosted by TSI Technologies",
     "eventDescription": "​This full-day event is designed to immerse you in the latest AI trends, hands-on workshops, and insightful tech sessions led by industry experts. With interactive discussions, real-world applications, and networking opportunities, this is your chance to learn, connect, and innovate with fellow AI enthusiasts.",
     "eventDate": "2025-02-22",
@@ -152,5 +152,16 @@
     "location": "Chennai",
     "communityName": "build2learn",
     "communityLogo": "https://i.ibb.co/CBsgh43/bxOxo5O.png"
+  },
+  {
+    "eventName": "Grafana Meetup",
+    "eventDescription": "Join us for IN PERSON Grafana labs x Vivriti Capital meetup on Mar 8 from 2:00 pm, hosted by Vivriti Capital in Chennai!",
+    "eventDate": "2025-03-08",
+    "eventTime": "2:00",
+    "eventVenue": "Vivriti Capital, Prestige Zackria Metropolitan, No.200/1-8, 2nd Floor, Block 1, Anna Salai, Chennai",
+    "eventLink": "https://www.meetup.com/grafana-and-friends-chennai/events/306395257/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link",
+    "location": "Chennai",
+    "communityName": "Grafana and Friends Chennai",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/7/b/2/a/event_525511530.webp"
   }
 ]
