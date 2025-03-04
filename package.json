@@ -5,9 +5,9 @@
   "description": "A community hub for discovering and engaging with technology conferences, tech meetups and events across Tamil Nadu.",
   "private": true,
   "scripts": {
-    "dev": "npm run dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "npm start",
+    "start": "next start",
     "prepare": "husky",
     "format:check": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "format:write": "prettier --cache --write --list-different --ignore-path .gitignore --ignore-path .prettierignore .",
