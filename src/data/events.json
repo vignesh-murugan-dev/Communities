@@ -87,7 +87,7 @@
     "communityName": "FOSS United",
     "communityLogo": "https://i.ibb.co/23TrwMyH/1738389876909.jpg"
   },
-   {
+  {
     "eventName": "The AI Connect (TAI) hosted by TSI Technologies",
     "eventDescription": "​This full-day event is designed to immerse you in the latest AI trends, hands-on workshops, and insightful tech sessions led by industry experts. With interactive discussions, real-world applications, and networking opportunities, this is your chance to learn, connect, and innovate with fellow AI enthusiasts.",
     "eventDate": "2025-02-22",
@@ -154,14 +154,14 @@
     "communityLogo": "https://i.ibb.co/CBsgh43/bxOxo5O.png"
   },
   {
-    "eventName": "Coimbatore JavaScript Group - Meetup (February 2025)",
-    "eventDescription": "Join us for a Power-Packed Tech Meetup 🚀",
-    "eventDate": "2025-02-22",
-    "eventTime": "11:30",
-    "eventVenue": "Plateau Corp Pvt Ltd, Shri Maharishi Tech Park, Saravanampatti, Coimbatore",
-    "eventLink": "https://www.meetup.com/coimbatore-javascript-group/events/306199440/?eventOrigin=group_events_list",
+    "eventName": "Platform Engineering Coimbatore Meetup March 2025",
+    "eventDescription": "We're excited to invite you to the first Platform Engineering Meetup in Coimbatore!",
+    "eventDate": "2025-03-15",
+    "eventTime": "14:00",
+    "eventVenue": "Humbletree Cloud Private Limited, DVP Towers, Coimbatore",
+    "eventLink": "https://www.meetup.com/platform-engineering-coimbatore/events/306509811/",
     "location": "Coimbatore",
-    "communityName": "Coimbatore JavaScript Group",
-    "communityLogo": "https://secure.meetupstatic.com/photos/event/1/7/c/d/clean_519606093.webp"
+    "communityName": "Platform Engineering Coimbatore",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/9/1/0/d/clean_525697133.webp"
   }
 ]
