@@ -163,5 +163,16 @@
     "location": "Coimbatore",
     "communityName": "Platform Engineering Coimbatore",
     "communityLogo": "https://secure.meetupstatic.com/photos/event/9/1/0/d/clean_525697133.webp"
+  },
+  {
+    "eventName": "FOSS meetup Chennai",
+    "eventDescription": "March meetup of the FOSS United Chennai community!",
+    "eventDate": "2025-03-22",
+    "eventTime": "14:00",
+    "eventVenue": "Tiger Analytics, RMZ Millenia Business Park 2",
+    "eventLink": "https://fossunited.org/c/chennai/2025/march",
+    "location": "Chenai",
+    "communityName": "FOSS United Chennai",
+    "communityLogo": "https://i.ibb.co/F45XJbvR/FOSS-United-Chennai.png"
   }
 ]
