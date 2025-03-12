@@ -30,32 +30,35 @@ type EventCardProps = {
 const Events = () => {
   const [monthlyCardHeight, setMonthlyCardHeight] = useState<number>(0);
   const [upcomingCardHeight, setUpcomingCardHeight] = useState<number>(0);
+   // Create a date object for start of today
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-  const monthlyEvents = events
-    .filter((event) => {
-      const currentDate = new Date();
-      const eventDate = new Date(event.eventDate);
-      return eventDate.getMonth() === currentDate.getMonth();
-    })
-    .sort(
-      (currentEvent, nextEvent) =>
-        new Date(currentEvent.eventDate).getDate() - new Date(nextEvent.eventDate).getDate()
-    );
+  // Create a date object for end of today
+  const endOfToday = new Date();
+  endOfToday.setHours(23, 59, 59, 999);
 
-  const upcomingEvents = events
-    .filter((event) => {
-      const eventDate = new Date(event.eventDate);
-      const currentDate = new Date();
-      const eventYear = eventDate.getFullYear();
-      const currentYear = currentDate.getFullYear();
-      const eventMonth = eventDate.getMonth();
-      const currentMonth = currentDate.getMonth();
-      return (eventYear === currentYear && eventMonth > currentMonth) || eventYear > currentYear;
-    })
-    .sort(
-      (currentEvent, nextEvent) =>
-        new Date(currentEvent.eventDate).getDate() - new Date(nextEvent.eventDate).getDate()
+  // sorts all events first rather than grouping into two types and then sorting
+  const sortedEvents = events.sort(
+    (a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+  );
+
+  const monthlyEvents = sortedEvents.filter((event) => {
+    const eventDate = new Date(event.eventDate);
+    return (
+      eventDate.getMonth() === today.getMonth() &&
+      eventDate.getFullYear() === today.getFullYear() &&
+      eventDate >= today
     );
+  });
+
+  const upcomingEvents = sortedEvents.filter((event) => {
+    const eventDate = new Date(event.eventDate);
+    return (
+      eventDate > endOfToday && // Compare with end of today
+      (eventDate.getMonth() !== today.getMonth() || eventDate.getFullYear() !== today.getFullYear())
+    );
+  });
 
   const calculateMaxHeight = (events: Event[]) => {
     if (events.length === 0) return 100;
@@ -151,7 +154,7 @@ const Events = () => {
                 : 'none'
             }}
           />
-          <div className='relative flex items-center justify-between gap-2'>
+          <div className='relative flex flex-wrap items-center justify-between gap-2'>
             {isOverflowing ? (
               <Tooltip content={communityName}>
                 <div className='rounded-md border-2 border-black bg-white px-2 py-1 text-xs text-black'>
@@ -173,14 +176,14 @@ const Events = () => {
                 alt={`${title} logo`}
                 width={24}
                 height={24}
-                className='rounded-full object-cover grayscale filter transition-all duration-300 hover:filter-none'
+                className='rounded-sm object-cover filter transition-all duration-300 hover:filter-none'
               />
             )}
           </div>
 
           <a href={link} target='_blank' rel='noopener noreferrer' className='block'>
             <h3
-              className='mb-2 mt-3 text-xl font-medium text-black transition-all duration-300'
+              className={`mb-2 mt-3 text-xl font-medium text-black transition-all duration-300`}
               style={{
                 height: `${isMonthly ? monthlyCardHeight : upcomingCardHeight}px`,
                 overflow: 'hidden'
@@ -192,10 +195,10 @@ const Events = () => {
 
             <div className='flex-row items-center text-sm text-gray-600'>
               <div className='flex items-center space-x-2'>
-                <span className='rounded bg-green-100 px-2 py-0.5 text-xs text-green-800'>
+                <span className={`rounded bg-green-100 px-2 py-0.5 text-xs text-green-800`}>
                   {location}
                 </span>
-                <span className='rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-800'>
+                <span className={`rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-800`}>
                   {date}
                 </span>
                 <AddToCalendar
@@ -219,12 +222,12 @@ const Events = () => {
   };
 
   return (
-    <main className='mx-4 rounded-xl bg-white p-4 md:mx-8 lg:mx-16'>
+    <main className='mx-4 rounded-xl bg-white p-6 md:mx-8 lg:mx-16'>
       <section>
         <h2 className='mb-3 text-lg font-normal'>
           <span className='text-[30px] font-semibold text-black'>this month</span>
         </h2>
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3'>
           {monthlyEvents.length > 0 ? (
             monthlyEvents.map((event, index) => (
               <EventCard
@@ -249,7 +252,7 @@ const Events = () => {
         <h2 className='mb-3 text-lg font-normal'>
           <span className='text-[30px] font-semibold text-black'>upcoming</span>
         </h2>
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3'>
           {upcomingEvents.length > 0 ? (
             upcomingEvents.map((event, index) => (
               <EventCard
@@ -289,7 +292,7 @@ function Tooltip({ content, children }: TooltipProps) {
         {children}
       </div>
       {showTooltip && (
-        <div className='absolute -top-12 left-1/2 z-50 -translate-x-1/2 transform whitespace-nowrap rounded-md border-2 border-black bg-gray-100 px-2 py-1 text-xs text-gray-800 shadow-lg'>
+        <div className='absolute -top-12 left-1/2 z-50 -translate-x-1/2 transform whitespace-nowrap rounded-md border-2 border-gray-800 bg-gray-100 px-2 py-1 text-xs text-gray-800 shadow-lg'>
           {content}
           <div className='absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 transform bg-gray-100' />
         </div>

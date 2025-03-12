@@ -21,8 +21,24 @@ const config: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'res.cloudinary.com',
+        hostname: 'res.cloudinary.com'
       },
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co'
+      },
+      {
+        protocol: 'https',
+        hostname: 'fossunited.org'
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'secure.meetupstatic.com'
+      }
     ]
   }
 };
