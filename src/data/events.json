@@ -64,5 +64,16 @@
     "location": "Chennai",
     "communityName": "FlutterFlow Developers Group Chennai",
     "communityLogo": "https://i.ibb.co/1YjTGTdr/FFDG-Chennai-Logo.png"
+  },
+  {
+    "eventName": "IWD 2025",
+    "eventDescription": "Join us for an exciting two-day celebration of International Women’s Day, hosted by Women Techmakers (WTM) that is dedicated to empowering women in technology through knowledge-sharing, mentorship, and hands-on experience. Expect insightful workshops, networking opportunities, and an engaging hackathon with mentors and judges guiding the teams.",
+    "eventDate": "2025-03-22",
+    "eventTime": "10:00",
+    "eventVenue": "Freshworks, Chennai",
+    "eventLink": "https://shorturl.at/fwQUp",
+    "location": "Chennai",
+    "communityName": "Women Tech Makers (WTM) Chennai",
+    "communityLogo": "https://i.ibb.co/ymLgFRk3/images.png"
   }
 ]
