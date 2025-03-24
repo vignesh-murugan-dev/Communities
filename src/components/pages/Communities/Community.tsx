@@ -2,19 +2,20 @@
 import React, { useState } from 'react';
 import communities from '../../../data/communities.json';
 import Image from 'next/image';
-import { MagnifyingGlass, X } from 'phosphor-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faXTwitter,
-  faLinkedin,
-  faDiscord,
-  faInstagram,
-  faBluesky,
-  faMastodon,
-  faTelegram,
-  faYoutube,
-  faGithub
-} from '@fortawesome/free-brands-svg-icons';
+  DiscordLogo,
+  GithubLogo,
+  InstagramLogo,
+  LinkedinLogo,
+  MagnifyingGlass,
+  MastodonLogo,
+  TelegramLogo,
+  XLogo,
+  YoutubeLogo,
+  Butterfly,
+  XSquare
+} from '@phosphor-icons/react';
+import HoverIcon from './HoverIcon';
 
 type CommunityCardProps = {
   name: string;
@@ -63,12 +64,23 @@ const CommunityCard = ({
     setMousePosition(null);
   };
 
+  const socialLinks = {
+    linkedin: { Icon: LinkedinLogo, color: 'text-blue-700', title: 'LinkedIn' },
+    github: { Icon: GithubLogo, color: 'text-black', title: 'GitHub' },
+    discord: { Icon: DiscordLogo, color: 'text-indigo-500', title: 'Discord' },
+    twitter: { Icon: XLogo, color: 'text-black', title: 'Twitter' },
+    instagram: { Icon: InstagramLogo, color: 'text-pink-600', title: 'Instagram' },
+    bluesky: { Icon: Butterfly, color: 'text-blue-400', title: 'Bluesky' },
+    mastodon: { Icon: MastodonLogo, color: 'text-purple-600', title: 'Mastodon' },
+    telegram: { Icon: TelegramLogo, color: 'text-blue-400', title: 'Telegram' },
+    youtube: { Icon: YoutubeLogo, color: 'text-red-600', title: 'Youtube' }
+  };
+
   return (
     <div
       className='group relative block cursor-pointer rounded-lg p-[2px] transition-all duration-300 hover:scale-[1]'
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onClick={() => website && window.open(website, '_blank')}
     >
       <div
         className='pointer-events-none relative inset-0 opacity-0 transition-opacity duration-300 hover:opacity-100'
@@ -92,14 +104,17 @@ const CommunityCard = ({
         />
 
         <div className='flex h-full flex-col'>
-          <div className='mb-4 flex items-center gap-4'>
+          <a href={website} target='_blank' rel='noopener noreferrer'
+            className='mb-4 flex items-center gap-4'
+          >
             {logo && (
               <Image
                 src={logo}
                 alt={`${name} logo`}
-                width={60}
-                height={60}
-                className='rounded-sm object-cover filter transition-all duration-300 hover:filter-none' 
+                width={0}
+                height={0}
+                sizes='60vw'
+                className='h-auto max-h-[80px] w-auto max-w-[80px] flex-shrink-0 rounded-sm object-cover transition-all duration-300 hover:filter-none'
               />
             )}
             <div>
@@ -113,109 +128,21 @@ const CommunityCard = ({
                 {location}
               </span>
             </div>
-          </div>
+          </a>
 
-          <p className='line-clamp-5 text-gray-600 text-justify'>{description}</p>
+          <p className='line-clamp-5 text-justify text-gray-600'>{description}</p>
 
           <div className='mt-4 flex gap-3 border-t border-gray-100 pt-4 opacity-100 transition-opacity'>
-            {linkedin && (
-              <a
-                href={linkedin}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-gray-600 transition-colors hover:text-blue-700'
-                title='LinkedIn'
-              >
-                <FontAwesomeIcon icon={faLinkedin} size='lg' />
-              </a>
-            )}
-             {github && (
-              <a
-                href={github}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-gray-600 transition-colors hover:text-black'
-                title='GitHub'
-              >
-                <FontAwesomeIcon icon={faGithub} size='lg' />
-              </a>
-            )}
-            {discord && (
-              <a
-                href={discord}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-gray-600 transition-colors hover:text-indigo-500'
-                title='Discord'
-              >
-                <FontAwesomeIcon icon={faDiscord} size='lg' />
-              </a>
-            )}
-            {twitter && (
-              <a
-                href={twitter}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-gray-600 transition-colors hover:text-black'
-                title='Twitter'
-              >
-                <FontAwesomeIcon icon={faXTwitter} size='lg' />
-              </a>
-            )}
-            {instagram && (
-              <a
-                href={instagram}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-gray-600 transition-colors hover:text-pink-600'
-                title='Instagram'
-              >
-                <FontAwesomeIcon icon={faInstagram} size='lg' />
-              </a>
-            )}
-            {bluesky && (
-              <a
-                href={bluesky}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-gray-600 transition-colors hover:text-blue-400'
-                title='Bluesky'
-              >
-                <FontAwesomeIcon icon={faBluesky} size='lg' />
-              </a>
-            )}
-            {mastodon && (
-              <a
-                href={mastodon}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-gray-600 transition-colors hover:text-purple-600'
-                title='Mastodon'
-              >
-                <FontAwesomeIcon icon={faMastodon} size='lg' />
-              </a>
-            )}
-            {telegram && (
-              <a
-                href={telegram}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-gray-600 transition-colors hover:text-blue-400'
-                title='Telegram'
-              >
-                <FontAwesomeIcon icon={faTelegram} size='lg' />
-              </a>
-            )}
-            {youtube && (
-              <a
-                href={youtube}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-gray-600 transition-colors hover:text-red-600'
-                title='Youtube'
-              >
-                <FontAwesomeIcon icon={faYoutube} size='lg' />
-              </a>
+            {Object.entries(socialLinks).map(([key, { Icon, color, title }]) =>
+              eval(key) ? (
+                <HoverIcon
+                  key={key}
+                  Icon={Icon}
+                  link={eval(key)}
+                  title={title}
+                  hoverColor={color}
+                />
+              ) : null
             )}
           </div>
         </div>
@@ -251,31 +178,33 @@ const Community = () => {
         </div>
 
         <div className='grid gap-6 md:grid-cols-1 lg:grid-cols-2'>
-          {filteredCommunities.sort((a, b) => a.name.localeCompare(b.name)).map((community, index) => (
-            <div key={index} className='group relative'>
-              <CommunityCard
-                name={community.name}
-                description={community.description}
-                logo={community.logo}
-                twitter={community.twitter}
-                linkedin={community.linkedin}
-                discord={community.discord}
-                website={community.website}
-                location={community.location}
-                bluesky={community.bluesky}
-                instagram={community.instagram}
-                mastodon={community.mastodon}
-                telegram={community.telegram}
-                github={community.github}
-                youtube={community.youtube}
-              />
-            </div>
-          ))}
+          {filteredCommunities
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((community, index) => (
+              <div key={index} className='group relative'>
+                <CommunityCard
+                  name={community.name}
+                  description={community.description}
+                  logo={community.logo}
+                  twitter={community.twitter}
+                  linkedin={community.linkedin}
+                  discord={community.discord}
+                  website={community.website}
+                  location={community.location}
+                  bluesky={community.bluesky}
+                  instagram={community.instagram}
+                  mastodon={community.mastodon}
+                  telegram={community.telegram}
+                  github={community.github}
+                  youtube={community.youtube}
+                />
+              </div>
+            ))}
         </div>
 
         {filteredCommunities.length === 0 && (
           <div className='flex h-full flex-col items-center justify-center'>
-            <X size={50} color='gray' weight='bold' />
+            <XSquare size={100} className='mb-4 text-gray-400' weight='light' />
             <p className='mt-6 text-center text-lg text-gray-500'>
               No communities found matching your search.
             </p>
