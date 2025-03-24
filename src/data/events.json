@@ -11,6 +11,17 @@
     "communityLogo": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_500,h_500,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-cncf/events/Logo_White_Background_eSFH3vi.png"
   },
   {
+    "eventName": "Chennai React meetup #10",
+    "eventDescription": "Chennai React Offline Meet-up",
+    "eventDate": "2025-04-06",
+    "eventTime": "10:00",
+    "eventVenue": "St.Joseph's College Of Engineering",
+    "eventLink": "https://lu.ma/51q5v9dk",
+    "location": "Chennai",
+    "communityName": "Chennai React",
+    "communityLogo": "https://ibb.co/k6JbnK50"
+  },
+  {
     "eventName": "10 Years of JSLovers",
     "eventDescription": "JSLovers Turns 10",
     "eventDate": "2025-04-05",
