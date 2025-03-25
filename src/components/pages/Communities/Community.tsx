@@ -65,15 +65,15 @@ const CommunityCard = ({
   };
 
   const socialLinks = {
-    linkedin: { Icon: LinkedinLogo, color: 'text-blue-700', title: 'LinkedIn' },
-    github: { Icon: GithubLogo, color: 'text-black', title: 'GitHub' },
-    discord: { Icon: DiscordLogo, color: 'text-indigo-500', title: 'Discord' },
-    twitter: { Icon: XLogo, color: 'text-black', title: 'Twitter' },
-    instagram: { Icon: InstagramLogo, color: 'text-pink-600', title: 'Instagram' },
-    bluesky: { Icon: Butterfly, color: 'text-blue-400', title: 'Bluesky' },
-    mastodon: { Icon: MastodonLogo, color: 'text-purple-600', title: 'Mastodon' },
-    telegram: { Icon: TelegramLogo, color: 'text-blue-400', title: 'Telegram' },
-    youtube: { Icon: YoutubeLogo, color: 'text-red-600', title: 'Youtube' }
+    linkedin: { Icon: LinkedinLogo, color: 'text-blue-700', title: 'LinkedIn', link:linkedin },
+    github: { Icon: GithubLogo, color: 'text-black', title: 'GitHub', link:github },
+    discord: { Icon: DiscordLogo, color: 'text-indigo-500', title: 'Discord', link:discord },
+    twitter: { Icon: XLogo, color: 'text-black', title: 'Twitter', link:twitter },
+    instagram: { Icon: InstagramLogo, color: 'text-pink-600', title: 'Instagram', link:instagram },
+    bluesky: { Icon: Butterfly, color: 'text-blue-400', title: 'Bluesky',link:bluesky },
+    mastodon: { Icon: MastodonLogo, color: 'text-purple-600', title: 'Mastodon', link:mastodon },
+    telegram: { Icon: TelegramLogo, color: 'text-blue-400', title: 'Telegram', link:telegram },
+    youtube: { Icon: YoutubeLogo, color: 'text-red-600', title: 'Youtube', link:youtube }
   };
 
   return (
@@ -133,12 +133,12 @@ const CommunityCard = ({
           <p className='line-clamp-5 text-justify text-gray-600'>{description}</p>
 
           <div className='mt-4 flex gap-3 border-t border-gray-100 pt-4 opacity-100 transition-opacity'>
-            {Object.entries(socialLinks).map(([key, { Icon, color, title }]) =>
+            {Object.entries(socialLinks).map(([key, { Icon, color, title,link }]) =>
               eval(key) ? (
                 <HoverIcon
                   key={key}
                   Icon={Icon}
-                  link={eval(key)}
+                  link={link ?? ''} // Provide a default value for link
                   title={title}
                   hoverColor={color}
                 />
