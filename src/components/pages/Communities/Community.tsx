@@ -65,15 +65,15 @@ const CommunityCard = ({
   };
 
   const socialLinks = {
-    linkedin: { Icon: LinkedinLogo, color: 'text-blue-700', title: 'LinkedIn', link:linkedin },
-    github: { Icon: GithubLogo, color: 'text-black', title: 'GitHub', link:github },
-    discord: { Icon: DiscordLogo, color: 'text-indigo-500', title: 'Discord', link:discord },
-    twitter: { Icon: XLogo, color: 'text-black', title: 'Twitter', link:twitter },
-    instagram: { Icon: InstagramLogo, color: 'text-pink-600', title: 'Instagram', link:instagram },
-    bluesky: { Icon: Butterfly, color: 'text-blue-400', title: 'Bluesky',link:bluesky },
-    mastodon: { Icon: MastodonLogo, color: 'text-purple-600', title: 'Mastodon', link:mastodon },
-    telegram: { Icon: TelegramLogo, color: 'text-blue-400', title: 'Telegram', link:telegram },
-    youtube: { Icon: YoutubeLogo, color: 'text-red-600', title: 'Youtube', link:youtube }
+    linkedin: { Icon: LinkedinLogo, color: 'text-blue-700', title: 'LinkedIn', link: linkedin },
+    github: { Icon: GithubLogo, color: 'text-black', title: 'GitHub', link: github },
+    discord: { Icon: DiscordLogo, color: 'text-indigo-500', title: 'Discord', link: discord },
+    twitter: { Icon: XLogo, color: 'text-black', title: 'Twitter', link: twitter },
+    instagram: { Icon: InstagramLogo, color: 'text-pink-600', title: 'Instagram', link: instagram },
+    bluesky: { Icon: Butterfly, color: 'text-blue-400', title: 'Bluesky', link: bluesky },
+    mastodon: { Icon: MastodonLogo, color: 'text-purple-600', title: 'Mastodon', link: mastodon },
+    telegram: { Icon: TelegramLogo, color: 'text-blue-400', title: 'Telegram', link: telegram },
+    youtube: { Icon: YoutubeLogo, color: 'text-red-600', title: 'Youtube', link: youtube }
   };
 
   return (
@@ -83,10 +83,10 @@ const CommunityCard = ({
       onMouseLeave={handleMouseLeave}
     >
       <div
-        className='pointer-events-none relative inset-0 opacity-0 transition-opacity duration-300 hover:opacity-100'
+        className='absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100'
         style={{
           background: mousePosition
-            ? `radial-gradient(300px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(74, 222, 128, 0.2), transparent 40%)`
+            ? `radial-gradient(150px circle at ${mousePosition.x}px ${mousePosition.y}px, rgb(74, 222, 128), transparent 70%)`
             : 'none',
           maskImage: 'linear-gradient(#000 0 0)',
           maskComposite: 'exclude',
@@ -104,7 +104,10 @@ const CommunityCard = ({
         />
 
         <div className='flex h-full flex-col'>
-          <a href={website} target='_blank' rel='noopener noreferrer'
+          <a
+            href={website}
+            target='_blank'
+            rel='noopener noreferrer'
             className='mb-4 flex items-center gap-4'
           >
             {logo && (
@@ -133,7 +136,7 @@ const CommunityCard = ({
           <p className='line-clamp-5 text-justify text-gray-600'>{description}</p>
 
           <div className='mt-4 flex gap-3 border-t border-gray-100 pt-4 opacity-100 transition-opacity'>
-            {Object.entries(socialLinks).map(([key, { Icon, color, title,link }]) =>
+            {Object.entries(socialLinks).map(([key, { Icon, color, title, link }]) =>
               eval(key) ? (
                 <HoverIcon
                   key={key}

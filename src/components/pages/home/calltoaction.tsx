@@ -6,7 +6,7 @@ const CallToAction = () => {
   return (
     <div className='px-6 py-12 md:px-16'>
       <div className='relative rounded-lg bg-[#4CAF50] p-10 shadow-lg'>
-        <div className='absolute bottom-0 right-0 hidden translate-x-1/4 md:block'>
+        <div className='absolute bottom-0 right-0 hidden md:block'>
           <Image
             src='/rockethalf.png'
             alt='Rocket'
@@ -23,7 +23,7 @@ const CallToAction = () => {
               Know a tech event? <br className='hidden md:block' /> Share it to help others find and
               join!
             </h3>
-            <p className='mt-3 text-lg text-white/80'>
+            <p className='mt-3 text-lg font-medium text-white/80 drop-shadow-md'>
               Add your event to our list and be a part of the growing tech community.
             </p>
           </div>
