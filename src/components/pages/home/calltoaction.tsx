@@ -4,9 +4,9 @@ import Image from 'next/image';
 
 const CallToAction = () => {
   return (
-    <div className='px-6 py-12 md:px-16'>
+    <div className='m-[12px] px-6 py-12 md:px-16'>
       <div className='relative rounded-lg bg-[#4CAF50] p-10 shadow-lg'>
-        <div className='absolute bottom-0 right-0 hidden md:block'>
+        <div className='absolute bottom-0 right-0 hidden translate-x-[72px] md:block'>
           <Image
             src='/rockethalf.png'
             alt='Rocket'
