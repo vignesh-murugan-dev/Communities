@@ -86,5 +86,17 @@
     "twitter": "https://x.com/wtmchennai",
     "discord": "https://katb.in/gdgchennai-discord",
     "youtube": "https://www.youtube.com/@GDGCHENNAICOMMUNITY"
+  },
+  {
+    "name": "KUG Chennai",
+    "logo": "https://avatars.githubusercontent.com/u/171473236?s=200&v=4",
+    "description": "Kotlin User Group Chennai is a community for Kotlin enthusiasts, developers, and learners passionate about building with Kotlin across Android, Backend, and Multiplatform. We host meetups, workshops, and hackathons to explore the latest in Kotlin development, share insights, and grow together as a community. Whether you're a beginner or an experienced developer, join us to connect, learn, and collaborate on exciting Kotlin projects!",
+    "location": "Chennai",
+    "website": "https://linktr.ee/kugchennai",
+    "github": "https://github.com/kugchennai",
+    "linkedin": "https://www.linkedin.com/groups/14464683/",
+    "instagram": "https://www.instagram.com/kugchennai/",
+    "twitter": "https://x.com/kugchennai",
+    "discord": "https://discord.com/invite/u2GTjKsU9z"
   }
 ]
