@@ -8,10 +8,10 @@
     "website": "https://fossunited.org/c/chennai",
     "instagram": "https://www.instagram.com/fossunitedchennai/",
     "linkedin": "https://www.linkedin.com/company/foss-united-chennai/",
-    "mastodon":"https://twitter.com/fosschennai",
-    "telegram":"https://t.me/fossunitedchennai",
-    "youtube":"https://www.youtube.com/@fossunitedchennai",
-    "github":"https://github.com/FOSSUChennai"
+    "mastodon": "https://twitter.com/fosschennai",
+    "telegram": "https://t.me/fossunitedchennai",
+    "youtube": "https://www.youtube.com/@fossunitedchennai",
+    "github": "https://github.com/FOSSUChennai"
   },
   {
     "name": "Chennai React",
@@ -24,8 +24,8 @@
     "instagram": "https://instagram.com/chennaireact",
     "linkedin": "https://www.linkedin.com/company/chennaireact/",
     "bluesky": "https://bsky.app/profile/chennaireact.bsky.social",
-    "youtube":"https://www.youtube.com/@ChennaiReactJS",
-    "github":"https://github.com/chennaireact"
+    "youtube": "https://www.youtube.com/@ChennaiReactJS",
+    "github": "https://github.com/chennaireact"
   },
   {
     "name": "FOSS United Pondicherry",
@@ -38,5 +38,17 @@
     "logo": "https://i.ibb.co/89fw9p0/1718639979394.jpg",
     "description": "We are a passionate community of JavaScript enthusiasts who come together to share knowledge, explore the latest trends, and collaborate on exciting projects.Our meetups cover a wide range of topics, from JavaScript fundamentals to advanced frameworks, front-end and back-end development, and everything in between. ",
     "location": "Chennai"
+  },
+  {
+    "name": "Namma Flutter",
+    "logo": "https://avatars.githubusercontent.com/u/176333249",
+    "description": "Namma Flutter is a community of Flutter enthusiasts dedicated to learning, sharing, and growing together. We host meetups, workshops, and events to explore the latest in Flutter development, exchange ideas, and foster innovation.",
+    "location": "Chennai",
+    "github": "https://github.com/Namma-Flutter",
+    "linkedin": "https://www.linkedin.com/company/nammaflutter/",
+    "instagram": "https://www.instagram.com/nammaflutter",
+    "twitter": "https://x.com/nammaflutter",
+    "telegram": "https://t.me/nammaflutter",
+    "youtube": "https://www.youtube.com/@nammaflutter"
   }
 ]
