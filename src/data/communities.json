@@ -50,5 +50,41 @@
     "twitter": "https://x.com/nammaflutter",
     "telegram": "https://t.me/nammaflutter",
     "youtube": "https://www.youtube.com/@nammaflutter"
+  },
+  {
+    "name": "Chennaipy",
+    "logo": "https://res.cloudinary.com/dwir71gi2/image/upload/v1737382622/chennaipy_ovbthm.png",
+    "description": "Chennaipy is a Python user-group, where Pythonistas in and around Chennai come together to share their knowledge and to contribute to the promotion of Python.",
+    "location": "Chennai",
+    "website": "https://chennaipy.org",
+    "github": "https://github.com/chennaipy/",
+    "linkedin": "https://www.linkedin.com/company/chennaipy/",
+    "twitter": "https://x.com/chennaipy"
+  },
+  {
+    "name": "GDG Chennai",
+    "logo": "https://avatars.githubusercontent.com/u/5188301?s=200&v=4",
+    "description": "Google Developers Group Chennai is an initiative to concentrate the efforts of many developers in and around Chennai to learn, share and get productive using the various Google products & Open source technologies.",
+    "location": "Chennai",
+    "website": "https://gdg.community.dev/gdg-chennai/",
+    "github": "https://github.com/gdgchennai",
+    "linkedin": "https://www.linkedin.com/company/gdgchennai/",
+    "instagram": "https://www.instagram.com/gdgchennai/",
+    "twitter": "https://x.com/GDGChennai",
+    "discord": "https://katb.in/gdgchennai-discord",
+    "youtube": "https://www.youtube.com/@GDGCHENNAICOMMUNITY"
+  },
+  {
+    "name": "WTM Chennai",
+    "logo": "https://res.cloudinary.com/dwir71gi2/image/upload/v1725966926/wtmchennai_d4tym8.webp",
+    "description": "Women Techmakers program provides visibility, community, and resources for women in technology. We are building a world where all women can thrive in tech.",
+    "location": "Chennai",
+    "website": "https://gdg.community.dev/gdg-chennai/",
+    "github": "https://github.com/gdgchennai",
+    "linkedin": "https://www.linkedin.com/company/wtm-chennai/",
+    "instagram": "https://www.instagram.com/wtm_chennai",
+    "twitter": "https://x.com/wtmchennai",
+    "discord": "https://katb.in/gdgchennai-discord",
+    "youtube": "https://www.youtube.com/@GDGCHENNAICOMMUNITY"
   }
 ]
