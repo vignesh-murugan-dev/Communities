@@ -97,5 +97,16 @@
     "location": "Chennai",
     "communityName": "MongoDB User Group Chennai",
     "communityLogo": "https://i.ibb.co/MkmpSxgY/MugChn.png"
+  },
+  {
+    "eventName": "AI and Data Science collective By FireDucks x DevRelSquad",
+    "eventDescription": "Join us for an exclusive AI & Data Science Collective, where developers, researchers, and AI enthusiasts unite to explore groundbreaking innovations in Artificial Intelligence and Data Science! This in-person gathering is designed to foster learning, collaboration, and networking among the brightest minds in AI. Whether you're a developer, data scientist, startup founder, or AI enthusiast, this event is your gateway to discovering the latest trends, tools, and breakthroughs in the field.",
+    "eventDate": "2025-04-26",
+    "eventTime": "09:30",
+    "eventVenue": "11th Floor , A, GLOBAL INFOCITY PARK, Kodandarama Nagar, Perungudi, Chennai, Tamil Nadu 600096",
+    "eventLink": "https://devrelsquad.live/FireDucksMeetupChennai",
+    "location": "Chennai",
+    "communityName": "DevRelSquad Chennai Chapter",
+    "communityLogo": "https://i.ibb.co/9Hvz0tSx/image.png"
   }
 ]
