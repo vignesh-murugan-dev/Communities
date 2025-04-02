@@ -1,8 +1,10 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const CallToAction = () => {
+  const router = useRouter();
   return (
     <div className='m-[12px] px-6 py-12 md:px-16'>
       <div className='relative rounded-lg bg-[#4CAF50] p-10 shadow-lg'>
@@ -39,7 +41,7 @@ const CallToAction = () => {
             </button>
             <button
               className='rounded-lg border border-white/50 bg-transparent px-6 py-3 text-base font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-white/20 focus:ring focus:ring-white/30 active:scale-95'
-              onClick={() => window.open('/Communities')}
+              onClick={() => router.push('/Communities')}
             >
               Communities
             </button>
