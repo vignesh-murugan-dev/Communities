@@ -21,7 +21,7 @@
     "communityName": "Chennai React",
     "communityLogo": "https://i.ibb.co/fdHFbNwV/KGIIG0u-F-400x400.jpg"
   },
-    {
+  {
     "eventName": "10 Years of JSLovers",
     "eventDescription": "JSLovers Turns 10",
     "eventDate": "2025-04-05",
@@ -113,11 +113,22 @@
     "eventName": "Becrez Carnival'25",
     "eventDescription": "Becrez Carnival is a 2-Day National Entreprenuership Fest on April 7 & 8 2025! 🎉 Join us at B.S. Abdur Rahman Crescent University for Tech Talks, panel talks, competitions,networking & Startup Expos! 🚀 Don’t miss out! 🔗 cisc.club/becrez",
     "eventDate": "2025-04-07",
-    "eventTime": "09:30", 
+    "eventTime": "09:30",
     "eventVenue": "B. S. Abdur Rahman Crescent Institute Of Science And Technology,120 Seethakathi Estate, Grand Southern Trunk Rd, Vandalur, Tamil Nadu 600048",
     "eventLink": "https://cisc.club/becrez",
     "location": "Chennai",
     "communityName": "Crescent Innovation and Startup Club",
     "communityLogo": "https://cisc.club/assets/logo-CWUyGK9o.png"
+  },
+  {
+    "eventName": "NammaFlutter 1st year Anniversary",
+    "eventDescription": "NammaFlutter is a community of Flutter developers in Chennai. We are celebrating our 1st year anniversary with a meetup. Join us for a day of fun, learning, and networking with fellow Flutter enthusiasts.",
+    "eventDate": "2025-04-26",
+    "eventTime": "09:00",
+    "eventVenue": "Entrans, Millenia Business Park, Phase 2, Campus 3A, 2nd Floor, Dr. MGR Main Rd, Kandhanchavadi, Perungudi, Chennai – 600096",
+    "eventLink": "https://lu.ma/8v6t725c",
+    "location": "Chennai",
+    "communityName": "NammaFlutter",
+    "communityLogo": "https://i.ibb.co/0R8qZ1qP/final-logo.png"
   }
 ]
