@@ -21,6 +21,17 @@
     "communityName": "Chennai React",
     "communityLogo": "https://i.ibb.co/fdHFbNwV/KGIIG0u-F-400x400.jpg"
   },
+    {
+    "eventName": "10 Years of JSLovers",
+    "eventDescription": "JSLovers Turns 10",
+    "eventDate": "2025-04-05",
+    "eventTime": "09:30",
+    "eventVenue": "FORD GTBC, Sholinganallur, Chennai",
+    "eventLink": "https://lu.ma/jslc",
+    "location": "Chennai",
+    "communityName": "JSLovers",
+    "communityLogo": "https://i.ibb.co/89fw9p0/1718639979394.jpg"
+  },
   {
     "eventName": "Platform Engineering Coimbatore Meetup March 2025",
     "eventDescription": "We're excited to invite you to the first Platform Engineering Meetup in Coimbatore!",
@@ -101,7 +112,7 @@
   {
     "eventName": "Becrez Carnival'25",
     "eventDescription": "Becrez Carnival is a 2-Day National Entreprenuership Fest on April 7 & 8 2025! 🎉 Join us at B.S. Abdur Rahman Crescent University for Tech Talks, panel talks, competitions,networking & Startup Expos! 🚀 Don’t miss out! 🔗 cisc.club/becrez",
-    "eventDate": "2024-04-07",
+    "eventDate": "2025-04-07",
     "eventTime": "09:30", 
     "eventVenue": "B. S. Abdur Rahman Crescent Institute Of Science And Technology,120 Seethakathi Estate, Grand Southern Trunk Rd, Vandalur, Tamil Nadu 600048",
     "eventLink": "https://cisc.club/becrez",
