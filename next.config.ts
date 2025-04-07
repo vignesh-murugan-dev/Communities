@@ -42,6 +42,10 @@ const config: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cisc.club'
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn2.allevents.in'
       }
     ]
   }
