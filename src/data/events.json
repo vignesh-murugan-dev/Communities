@@ -152,5 +152,16 @@
     "location": "Chennai",
     "communityName": "build2learn",
     "communityLogo": "https://i.ibb.co/CBsgh43/bxOxo5O.png"
+  },
+  {
+    "eventName": "JavaScript & Elastic Search: Beyond the basics",
+    "eventDescription": "If you’ve worked with JavaScript and are curious how to supercharge your applications with Elasticsearch, this event is for you!",
+    "eventDate": "2025-04-12",
+    "eventTime": "09:30",
+    "eventVenue": "Thiran Technologies, Nandanam",
+    "eventLink": "https://www.meetup.com/chennai-elastic-fantastics/events/307041299",
+    "location": "Chennai",
+    "communityName": "Elastic Chennai User Group",
+    "communityLogo": "https://ibb.co/RJphpSr"
   }
 ]
