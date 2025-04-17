@@ -174,5 +174,17 @@
     "location": "Chennai",
     "communityName": "TechNexus Community",
     "communityLogo": "https://secure.meetupstatic.com/photos/event/5/2/7/5/clean_525381109.webp"
-  }
+  },
+  {
+  "eventName": "Swift Chennai Chapter #01",
+  "eventDescription": "Swift Chennai ​Chapter #01 marks the start of a fresh, vibrant meetup series for Swift devs, iOS enthusiasts, and curious creators. Come for the code, stay for the kaapi, and leave with solid connections.",
+  "eventDate": "2025-04-26", // Format: YYYY-MM-DD
+  "eventTime": "10:30", // 24-hour format: HH:MM
+  "eventVenue": "Sedin Technologies, A1/1, 49th Street, 7th Ave, Sarvamangala Colony, Postal Colony, Ashok Nagar, Chennai, Tamil Nadu 600083, India",
+  "eventLink": "https://lu.ma/rqrv392a",
+  "location": "Chennai",
+  "communityName": "Swift Chennai",
+  "communityLogo": "https://i.imgur.com/d4jeksn.png"
+}
+
 ]
