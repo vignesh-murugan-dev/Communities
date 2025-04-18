@@ -46,6 +46,14 @@ const config: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn2.allevents.in'
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.djangoindia.org'
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.chennaipy.org'
       }
     ]
   }

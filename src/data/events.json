@@ -1,5 +1,50 @@
 [
   {
+    "eventName": "Django India Chennai meetup",
+    "eventDescription": "In-person meetup dedicated to Django, Python, and the broader world of open source! ",
+    "eventDate": "2025-04-26",
+    "eventTime": "10:00",
+    "eventVenue": "HappyFox Technologies LLP, Guindy, Chennai.",
+    "eventLink": "https://www.djangoindia.org/events/django-india-chennai-meetup",
+    "location": "Chennai",
+    "communityName": "Django India",
+    "communityLogo": "https://www.djangoindia.org/whatIsDjango/Logo.svg"
+  },
+  {
+    "eventName": "JS Mavens Meetup #14 - April Edition",
+    "eventDescription": "JS Mavens Monthy Meetup",
+    "eventDate": "2025-04-26",
+    "eventTime": "09:30",
+    "eventVenue": "Cookies Space 3A/2 · Nagercoil, Tamil Nadu",
+    "eventLink": "https://docs.google.com/forms/d/e/1FAIpQLSecN3SW4Lc9QOWRNi_DuhK9I2MARv_MS8TMG2WGVGg7dalqpg/viewform",
+    "location": "Nagercoil",
+    "communityName": "JS Mavens",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/4/c/5/f/highres_527419551.webp?w=384"
+  },
+  {
+    "eventName": "How to approach business as a product-based startup",
+    "eventDescription": "The Startup Club Monthly Meetup",
+    "eventDate": "2025-04-26",
+    "eventTime": "09:00",
+    "eventVenue": "Yuniq, 4th Floor, Ticel Biopark, 5, Csir Rd, Phase Ii, Tharamani, Chennai, India",
+    "eventLink": "https://allevents.in/chennai/how-to-approach-business-as-a-product-based-startup-and-how-to-craft-your-startup-story/80009323783946",
+    "location": "Chennai",
+    "communityName": "The Startup Club",
+    "communityLogo": "https://cdn2.allevents.in/thumbs/thumb67c7f84a810f9.jpg"
+  },
+
+  {
+    "eventName": "Chennaipy - April Meetup",
+    "eventDescription": "Chennaipy Offline Meet-up",
+    "eventDate": "2025-04-26",
+    "eventTime": "15:00",
+    "eventVenue": "IMSc, Alladi Ramakrishnan Hall, IMSc, C.I.T Campus, 4th Cross Street, Tharamani, Chennai · Chennai",
+    "eventLink": "https://www.meetup.com/chennaipy/events/307212531/?eventOrigin=group_upcoming_events",
+    "location": "Chennai",
+    "communityName": "Chennaipy",
+    "communityLogo": "https://www.chennaipy.org/static/images/logo.png"
+  },
+  {
     "eventName": "Kubernetes Community Days Chennai 2025",
     "eventDescription": "Kubernetes Community Days Chennai 2025 is a community-organized conference supported by the Cloud Native Computing Foundation (CNCF) to help grow and sustain the Kubernetes and cloud-native community in Chennai. It gathers adopters and technologists from open source and cloud-native communities for education, collaboration, and networking.",
     "eventDate": "2025-04-26",
@@ -176,14 +221,14 @@
     "communityLogo": "https://secure.meetupstatic.com/photos/event/5/2/7/5/clean_525381109.webp"
   },
   {
-  "eventName": "Swift Chennai Chapter #01",
-  "eventDescription": "Swift Chennai ​Chapter #01 marks the start of a fresh, vibrant meetup series for Swift devs, iOS enthusiasts, and curious creators. Come for the code, stay for the kaapi, and leave with solid connections.",
-  "eventDate": "2025-04-26",
-  "eventTime": "10:30",
-  "eventVenue": "Sedin Technologies, A1/1, 49th Street, 7th Ave, Sarvamangala Colony, Postal Colony, Ashok Nagar, Chennai, Tamil Nadu 600083, India",
-  "eventLink": "https://lu.ma/rqrv392a",
-  "location": "Chennai",
-  "communityName": "Swift Chennai",
-  "communityLogo": "https://i.ibb.co/fVSg8JGp/undefined-Imgur.png"
-}
+    "eventName": "Swift Chennai Chapter #01",
+    "eventDescription": "Swift Chennai ​Chapter #01 marks the start of a fresh, vibrant meetup series for Swift devs, iOS enthusiasts, and curious creators. Come for the code, stay for the kaapi, and leave with solid connections.",
+    "eventDate": "2025-04-26",
+    "eventTime": "10:30",
+    "eventVenue": "Sedin Technologies, A1/1, 49th Street, 7th Ave, Sarvamangala Colony, Postal Colony, Ashok Nagar, Chennai, Tamil Nadu 600083, India",
+    "eventLink": "https://lu.ma/rqrv392a",
+    "location": "Chennai",
+    "communityName": "Swift Chennai",
+    "communityLogo": "https://i.ibb.co/fVSg8JGp/undefined-Imgur.png"
+  }
 ]
