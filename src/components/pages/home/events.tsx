@@ -12,6 +12,7 @@ type Event = {
   eventName: string;
   eventDate: string;
   eventVenue: string;
+  eventTime: string;
   eventLink: string;
   location: string;
 };
@@ -22,6 +23,7 @@ type EventCardProps = {
   date: string;
   location: string;
   venue: string;
+  time: string;
   link: string;
   logo?: string;
   isMonthly: boolean;
@@ -30,7 +32,7 @@ type EventCardProps = {
 const Events = () => {
   const [monthlyCardHeight, setMonthlyCardHeight] = useState<number>(0);
   const [upcomingCardHeight, setUpcomingCardHeight] = useState<number>(0);
-   // Create a date object for start of today
+  // Create a date object for start of today
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -82,6 +84,7 @@ const Events = () => {
     date,
     location,
     venue,
+    time,
     link,
     logo,
     isMonthly
@@ -201,6 +204,9 @@ const Events = () => {
                 <span className={`rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-800`}>
                   {date}
                 </span>
+                <span className={`rounded bg-yellow-100 px-2 py-0.5 text-xs text-yellow-800`}>
+                  {time}
+                </span>
                 <AddToCalendar
                   eventTitle={title}
                   eventVenue={venue}
@@ -238,6 +244,7 @@ const Events = () => {
                 date={event.eventDate}
                 venue={event.eventVenue}
                 link={event.eventLink}
+                time={event.eventTime}
                 logo={event.communityLogo}
                 isMonthly={true}
               />
@@ -263,6 +270,7 @@ const Events = () => {
                 date={event.eventDate}
                 venue={event.eventVenue}
                 link={event.eventLink}
+                time={event.eventTime}
                 logo={event.communityLogo}
                 isMonthly={false}
               />
