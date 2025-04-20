@@ -3,8 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import React from 'react';
-// import RocketUpdated from '../../../../public/RocketUpdated.png';
-import RocketUpdated from '../../../../public/rocket.webp';
+import RocketUpdated from '../../../../public/RocketUpdated.webp';
 
 const Hero = () => {
   return (
