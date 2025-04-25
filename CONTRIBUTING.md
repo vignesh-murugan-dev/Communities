@@ -37,7 +37,7 @@ Add your event to the JSON array using this template:
   "eventLink": "https://registration-link.com",
   "location": "City Name",
   "communityName": "Your Community Name",
-  "communityLogo": "https://url-to-your-logo.svg"
+  "communityLogo": "https://url-to-your-logo.svg" // use imgbb to host the images or change next.config file
 }
 ```
 
