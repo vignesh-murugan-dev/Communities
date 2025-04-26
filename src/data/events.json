@@ -230,5 +230,16 @@
     "location": "Chennai",
     "communityName": "Swift Chennai",
     "communityLogo": "https://i.ibb.co/fVSg8JGp/undefined-Imgur.png"
+  },
+  {
+    "eventName": "D3 Community Meetup #1",
+    "eventDescription": "D3 Community Meetup #01: Join a vibrant new in-person community for Software Engineers focused on Full Stack, DevOps, Cloud & AI. Learn, network, and grow!",
+    "eventDate": "2025-05-03",
+    "eventTime": "9:30",
+    "eventVenue": "M2P Fintech, C1 & C56, Thiru Vi Ka Industrial Estate, SIDCO, Guindy, Chennai, Tamil Nadu 600032, India",
+    "eventLink": "https://lu.ma/yeijfokl",
+    "location": "Chennai",
+    "communityName": "D3 Community",
+    "communityLogo": "https://i.ibb.co/BKQb8hLG/D3-Community-Official-logo.png"
   }
 ]
