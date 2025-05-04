@@ -241,5 +241,16 @@
     "location": "Chennai",
     "communityName": "D3 Community",
     "communityLogo": "https://i.ibb.co/BKQb8hLG/D3-Community-Official-logo.png"
+  },
+  {
+    "eventName": "Figma Config 2025 Watch Party",
+    "eventDescription": "Join us for a fun, insightful, and community-powered morning filled ",
+    "eventDate": "2025-05-10",
+    "eventTime": "10:00",
+    "eventVenue": "Yuniq, 4th Floor, Ticel Biopark, 5, Csir Rd, Phase Ii, Tharamani, Chennai, India",
+    "eventLink": "https://docs.google.com/forms/d/e/1FAIpQLSeT_r2Hs5vzi6HEdArkjpvshzNSem8F9l30GGYlnHqW6BiWuQ/viewform",
+    "location": "Chennai",
+    "communityName": "Friends of Figma",
+    "communityLogo": "https://i.ibb.co/21Ndz7LH/fof-chennai-logo.jpg"
   }
 ]
