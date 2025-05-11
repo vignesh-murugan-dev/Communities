@@ -134,13 +134,5 @@
     "instagram": "https://www.instagram.com/build2learn_c",
     "linkedin": "https://www.linkedin.com/company/build2learn/",
     "github": "https://github.com/build2learn-in/"
-  },
-  {
-    "name": "TossConf25",
-    "logo": "https://tossconf25.kaniyam.com/images/hero_bg1.png",
-    "description": "TOSSConf25 (Tamil Open Source Software Conference 2025) is a community-driven event celebrating open-source software and Tamil computing. Scheduled for July 18–19, 2025, at St. Joseph’s Institute of Technology in Semmancheri, Chennai, the conference aims to bring together developers, contributors, and enthusiasts to promote open source initiatives in Tamil Nadu.",
-    "location": "Chennai",
-    "website": "https://tossconf25.kaniyam.com/",
-    "github": "https://github.com/tossconf2025"
   }
 ]
