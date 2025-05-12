@@ -274,5 +274,16 @@
     "location": "Chennai",
     "communityName": "TossConf25",
     "communityLogo": "https://i.ibb.co/fWZCQww/hero-bg1.png"
+  },
+  {
+    "eventName": "Grafana & Friends X SRE : Coimbatore Meetup",
+    "eventDescription": "This Grafana & Friends meetup - Coimbatore group hosts regular events centered on open source monitoring and observability with Grafana and complementary technologies",
+    "eventDate": "2025-05-24",
+    "eventTime": "09:30",
+    "eventVenue": "Humbletree Cloud Private Limited, 6, Ground Floor, DVP Towers, Kalapatti Main Rd, Nehru Nagar West, Coimbatore, Tamil Nadu 641014 ",
+    "eventLink": "https://www.meetup.com/grafana-friends-coimbatore/events/307606908",
+    "location": "Coimbatore",
+    "communityName": "Grafana & Friends - Coimbatore",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/8/8/6/e/clean_525574926.webp"
   }
 ]
