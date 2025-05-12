@@ -100,6 +100,17 @@
     "communityLogo": "https://i.ibb.co/F45XJbvR/FOSS-United-Chennai.png"
   },
   {
+    "eventName": "FSF 40 Meetup",
+    "eventDescription": "May meetup of the FOSS United Chennai community!",
+    "eventDate": "2025-05-24",
+    "eventTime": "10:00",
+    "eventVenue": "TBD",
+    "eventLink": "https://fossunited.org/c/chennai/2025/may-fsf-40",
+    "location": "Chennai",
+    "communityName": "FOSS United Chennai",
+    "communityLogo": "https://i.ibb.co/F45XJbvR/FOSS-United-Chennai.png"
+  },
+  {
     "eventName": "25th Build2Learn",
     "eventDescription": "Welcome to build2learn - Where Innovation Meets Community! Imagine a hackathon, but with a twist!🤔 It's not just about building incredible micro products; it's about forging lifelong connections with like-minded individuals who share your passion for innovation! 🤝💡At build2learn, we believe that magic happens when engineers come together to do what they love - BUILD!, Are you someone with a side project that you've been dreaming of bringing to life? build2learn is your chance to turn that dream into reality! ⏰🌟 Are you a student eager to create something extraordinary but in need of mentors to guide you? build2learn is the launchpad you've been waiting for! 🎓🚀 Or maybe you're someone who thrives on helping others unleash their full potential? build2learn is the perfect platform to make a lasting impact! 🤗 Join us at build2learn and embark on a journey of creation, collaboration, and camaraderie! 🌟 See you there!🌆 ",
     "eventDate": "2025-03-22",
@@ -204,7 +215,7 @@
     "eventDate": "2025-04-12",
     "eventTime": "09:30",
     "eventVenue": "Thiran Technologies, Nandanam",
-    "eventLink": "https://www.meetup.com/chennai-elastic-fantastics/events/307041299",
+    "eventLink": "https://www.meetup.com/chennai-elastic-fantmayastics/events/307041299",
     "location": "Chennai",
     "communityName": "Elastic Chennai User Group",
     "communityLogo": "https://ibb.co/RJphpSr"
