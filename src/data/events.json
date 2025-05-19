@@ -100,6 +100,17 @@
     "communityLogo": "https://i.ibb.co/F45XJbvR/FOSS-United-Chennai.png"
   },
   {
+    "eventName": "FSF 40 Meetup",
+    "eventDescription": "May meetup of the FOSS United Chennai community!",
+    "eventDate": "2025-05-24",
+    "eventTime": "10:00",
+    "eventVenue": "Freshworks, Chennai",
+    "eventLink": "https://fossunited.org/c/chennai/2025/may-fsf-40",
+    "location": "Chennai",
+    "communityName": "FOSS United Chennai",
+    "communityLogo": "https://i.ibb.co/F45XJbvR/FOSS-United-Chennai.png"
+  },
+  {
     "eventName": "25th Build2Learn",
     "eventDescription": "Welcome to build2learn - Where Innovation Meets Community! Imagine a hackathon, but with a twist!🤔 It's not just about building incredible micro products; it's about forging lifelong connections with like-minded individuals who share your passion for innovation! 🤝💡At build2learn, we believe that magic happens when engineers come together to do what they love - BUILD!, Are you someone with a side project that you've been dreaming of bringing to life? build2learn is your chance to turn that dream into reality! ⏰🌟 Are you a student eager to create something extraordinary but in need of mentors to guide you? build2learn is the launchpad you've been waiting for! 🎓🚀 Or maybe you're someone who thrives on helping others unleash their full potential? build2learn is the perfect platform to make a lasting impact! 🤗 Join us at build2learn and embark on a journey of creation, collaboration, and camaraderie! 🌟 See you there!🌆 ",
     "eventDate": "2025-03-22",
@@ -188,15 +199,15 @@
     "communityLogo": "https://cdn2.allevents.in/thumbs/thumb67835596402d9.png"
   },
   {
-    "eventName": "26th Build2Learn",
+    "eventName": "Build2Learn Meetup #27",
     "eventDescription": "Welcome to build2learn - Where Innovation Meets Community! Imagine a hackathon, but with a twist!🤔 It's not just about building incredible micro products; it's about forging lifelong connections with like-minded individuals who share your passion for innovation! 🤝💡At build2learn, we believe that magic happens when engineers come together to do what they love - BUILD!, Are you someone with a side project that you've been dreaming of bringing to life? build2learn is your chance to turn that dream into reality! ⏰🌟 Are you a student eager to create something extraordinary but in need of mentors to guide you? build2learn is the launchpad you've been waiting for! 🎓🚀 Or maybe you're someone who thrives on helping others unleash their full potential? build2learn is the perfect platform to make a lasting impact! 🤗 Join us at build2learn and embark on a journey of creation, collaboration, and camaraderie! 🌟 See you there!🌆 ",
-    "eventDate": "2025-04-19",
+    "eventDate": "2025-05-17",
     "eventTime": "09:30",
-    "eventVenue": "Freshworks SP infocity",
-    "eventLink": "https://docs.google.com/forms/d/e/1FAIpQLSeIquUO7lBZt1Ca6B0FNOhLj5Z4P764gHfdFQUWXqt1B-FaiA/viewform",
+    "eventVenue": "Entrans, Millenia Business Park, Phase 2, Campus 3A, 2nd Floor, Dr. MGR Main Rd, Kandhanchavadi, Perungudi, Chennai – 600096",
+    "eventLink": "https://lu.ma/n55b1sav?utm_source=ttech",
     "location": "Chennai",
-    "communityName": "build2learn",
-    "communityLogo": "https://i.ibb.co/CBsgh43/bxOxo5O.png"
+    "communityName": "Build2Learn",
+    "communityLogo": "https://i.ibb.co/6cJD7jWH/Screenshot-2025-05-04-at-8-26-37-AM.png"
   },
   {
     "eventName": "JavaScript & Elastic Search: Beyond the basics",
@@ -252,5 +263,38 @@
     "location": "Chennai",
     "communityName": "Friends of Figma",
     "communityLogo": "https://i.ibb.co/21Ndz7LH/fof-chennai-logo.jpg"
+  },
+  {
+    "eventName": "TossConf'25",
+    "eventDescription": "TOSSConf25 (Tamil Open Source Software Conference 2025) is a community-driven event celebrating open-source software and Tamil computing. Scheduled for July 18–19, 2025, at St. Joseph’s Institute of Technology in Semmancheri, Chennai, the conference aims to bring together developers, contributors, and enthusiasts to promote open source initiatives in Tamil Nadu.",
+    "eventDate": "2025-07-18",
+    "eventTime": "09:30",
+    "eventVenue": "St. Joseph's Institute of Technology, Old Mahabalipuram Road, Kamaraj Nagar, Semmancheri, Chennai, Tamil Nadu 600119 ",
+    "eventLink": "https://tossconf25.kaniyam.com/",
+    "location": "Chennai",
+    "communityName": "TossConf25",
+    "communityLogo": "https://i.ibb.co/fWZCQww/hero-bg1.png"
+  },
+  {
+    "eventName": "Grafana & Friends X SRE : Coimbatore Meetup",
+    "eventDescription": "This Grafana & Friends meetup - Coimbatore group hosts regular events centered on open source monitoring and observability with Grafana and complementary technologies",
+    "eventDate": "2025-05-24",
+    "eventTime": "09:30",
+    "eventVenue": "Humbletree Cloud Private Limited, 6, Ground Floor, DVP Towers, Kalapatti Main Rd, Nehru Nagar West, Coimbatore, Tamil Nadu 641014 ",
+    "eventLink": "https://www.meetup.com/grafana-friends-coimbatore/events/307606908",
+    "location": "Coimbatore",
+    "communityName": "Grafana & Friends - Coimbatore",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/8/8/6/e/clean_525574926.webp"
+  },
+  {
+    "eventName": "Code On JVM Chennai - May Meetup",
+    "eventDescription": "A fun, hands-on JVM meetup with tech talks, challenges, and swag in Chennai. Join the Java, Kotlin, and Scala crowd!",
+    "eventDate": "2025-05-24",
+    "eventTime": "09:00",
+    "eventVenue": "M2P Fintech, C1 & C56, Thiru Vi Ka Industrial Estate, SIDCO, Guindy, Chennai, Tamil Nadu 600032, India",
+    "eventLink": "https://lu.ma/zqrvw6ph",
+    "location": "Chennai",
+    "communityName": "Code On JVM Chennai",
+    "communityLogo": "https://i.ibb.co/5xSndqPW/Code-On-Chennai-JVM.png"
   }
 ]
