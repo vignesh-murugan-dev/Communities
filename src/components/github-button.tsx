@@ -5,7 +5,7 @@ import githubIcon from '../../public/githubIcon.svg';
 
 const GitHubButton = () => {
   const [stars, setStarCount] = useState<number | null>(null);
-  const repoUrl = `https://github.com/FOSSUChennai/Communities`;
+  const repoUrl = `https://github.com/JustinBenito/Communities`;
 
   useEffect(() => {
     fetchStars();
