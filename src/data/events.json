@@ -296,5 +296,16 @@
     "location": "Coimbatore",
     "communityName": "Grafana & Friends - Coimbatore",
     "communityLogo": "https://secure.meetupstatic.com/photos/event/8/8/6/e/clean_525574926.webp"
+  },
+  {
+    "eventName": "Code On JVM Chennai - May Meetup",
+    "eventDescription": "A fun, hands-on JVM meetup with tech talks, challenges, and swag in Chennai. Join the Java, Kotlin, and Scala crowd!",
+    "eventDate": "2025-05-24",
+    "eventTime": "09:00",
+    "eventVenue": "M2P Fintech, C1 & C56, Thiru Vi Ka Industrial Estate, SIDCO, Guindy, Chennai, Tamil Nadu 600032, India",
+    "eventLink": "https://lu.ma/zqrvw6ph",
+    "location": "Chennai",
+    "communityName": "Code On JVM Chennai",
+    "communityLogo": "https://i.ibb.co/5xSndqPW/Code-On-Chennai-JVM.png"
   }
 ]
