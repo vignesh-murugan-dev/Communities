@@ -37,7 +37,13 @@
     "name": "JS Lovers Chennai",
     "logo": "https://i.ibb.co/89fw9p0/1718639979394.jpg",
     "description": "We are a passionate community of JavaScript enthusiasts who come together to share knowledge, explore the latest trends, and collaborate on exciting projects.Our meetups cover a wide range of topics, from JavaScript fundamentals to advanced frameworks, front-end and back-end development, and everything in between. ",
-    "location": "Chennai"
+    "location": "Chennai",
+    "twitter": "https://twitter.com/jslovers_del",
+    "discord": "https://discord.gg/hTkXBKeWCd",
+    "website": "https://jslovers.com",
+    "linkedin": "https://www.linkedin.com/company/thejslovers/",
+    "youtube": "https://www.youtube.com/jslovers",
+    "github": "https://github.com/JSLOVERS"
   },
   {
     "name": "Namma Flutter",
