@@ -11,6 +11,17 @@
     "communityLogo": "https://www.djangoindia.org/whatIsDjango/Logo.svg"
   },
   {
+    "eventName": "Build with AI: AI Agents & Workflows",
+    "eventDescription": "Build smart. Build fast. Join us at GDG Chennai’s AI Agents & Workflows sprint – a hands-on event where coders build real-world AI automations in just one day.",
+    "eventDate": "2025-05-24",
+    "eventTime": "10:00",
+    "eventVenue": "Contentstack India Pvt. Ltd., Guru Nanak College Rd",
+    "eventLink": "https://gdg.community.dev/events/details/google-gdg-chennai-presents-build-with-ai-ai-agents-amp-workflows/",
+    "location": "Chennai",
+    "communityName": "Google Developer Group Chennai",
+    "communityLogo": "https://www.gstatic.com/devrel-devsite/prod/v2/images/gdg-logo.svg"
+  },
+  {
     "eventName": "JS Mavens Meetup #14 - April Edition",
     "eventDescription": "JS Mavens Monthy Meetup",
     "eventDate": "2025-04-26",
