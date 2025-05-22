@@ -28,7 +28,7 @@ Have an upcoming tech event in Tamil Nadu? Adding it is simple! Check out our [e
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/JustinBenito/Communities.git
+   git clone https://github.com/fossUChennai/tamilnadu.tech
    cd Communities
    ```
 
@@ -81,8 +81,8 @@ Pointers to keep in mind is:
 
 ## 🥰 Contributors
 
-<a href="https://github.com/JustinBenito/Communities/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=JustinBenito/Communities" />
+<a href="https://github.com/FOSSUChennai/tamilnadu.tech/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=FOSSUChennai/tamilnadu.tech" />
 </a>
 
 ## ⭐ Star History
