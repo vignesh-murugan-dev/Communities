@@ -111,6 +111,17 @@
     "communityLogo": "https://i.ibb.co/F45XJbvR/FOSS-United-Chennai.png"
   },
   {
+    "eventName": "FOSS United X Js Lovers",
+    "eventDescription": "Colloborative community meetup between FOSS United and JSLovers",
+    "eventDate": "2025-06-21",
+    "eventTime": "14:00",
+    "eventVenue": "TBD",
+    "eventLink": "https://fossunited.org/c/chennai/2025/june",
+    "location": "Chennai",
+    "communityName": "FOSS United Chennai",
+    "communityLogo": "https://i.ibb.co/F45XJbvR/FOSS-United-Chennai.png"
+  },
+  {
     "eventName": "FSF 40 Meetup",
     "eventDescription": "May meetup of the FOSS United Chennai community!",
     "eventDate": "2025-05-24",
@@ -307,5 +318,49 @@
     "location": "Chennai",
     "communityName": "Code On JVM Chennai",
     "communityLogo": "https://i.ibb.co/5xSndqPW/Code-On-Chennai-JVM.png"
+  },
+  {
+    "eventName": "Agentic AI With Google",
+    "eventDescription": "To know more about Agentic AI concepts with real time experience from experts",
+    "eventDate": "2025-05-31",
+    "eventTime": "10:00",
+    "eventVenue": "HCL Technologies, ELCOT IT Park, Near PandiKovil, Madurai, 625020 ",
+    "eventLink": "https://gdg.community.dev/events/details/google-gdg-cloud-madurai-presents-agentic-ai-with-google/",
+    "location": "Madurai",
+    "communityName": "GDG Cloud Madurai",
+    "communityLogo": "https://i.ibb.co/ynkrJnD4/gdglogo-0229df09.png"
+  },
+  {
+    "eventName": "Kubernetes Meetup - Chennai",
+    "eventDescription": "Join us for our next edition of Chennai meetup to learn about all things Kubernetes, how you can use DigitalOcean and Kubernetes to scale applications and more! Whether you're a seasoned developer or just starting, this is the perfect opportunity to learn, collaborate, and network with other developers in the city.",
+    "eventDate": "2025-05-31",
+    "eventTime": "10:00",
+    "eventVenue": "Contentstack India Pvt. Ltd., 5th Floor, WorkEZ, Helix.21, Guru Nanak College Rd, above West side, Indira Gandhi Nagar, Velachery, Chennai, Tamil Nadu 600042, India",
+    "eventLink": "https://lu.ma/9w3yvxrg",
+    "location": "Chennai",
+    "communityName": "Digital Ocean Community",
+    "communityLogo": "https://i.ibb.co/DPVD4SBv/Digital-Ocean-Logo.png"
+  },
+  {
+    "eventName": "Firebase Studio Workshop: Build Your First App",
+    "eventDescription": "Join us for an exciting and hands-on workshop where we explore the powerful capabilities of Firebase Studio. Learn how to seamlessly integrate Firebase into your projects and build your first app with ease. Our expert facilitators will guide you through fundamental features like Firestore, Authentication, and Hosting. Whether you are a beginner or have some experience, this session is tailored to help you enhance your app development skills. Don't miss this opportunity to connect with like-minded developers and expand your tech skills. Sign up now to secure your spot and start building impactful applications!",
+    "eventDate": "2025-06-14",
+    "eventTime": "10:00",
+    "eventVenue": "Makersmadurai - 33 first floor, Arunachala arcade Madurai, 625004",
+    "eventLink": "https://gdg.community.dev/events/details/google-gdg-cloud-madurai-presents-agentic-ai-with-google/",
+    "location": "Madurai",
+    "communityName": "GDG Madurai",
+    "communityLogo": "https://i.ibb.co/ynkrJnD4/gdglogo-0229df09.png"
+  },
+  {
+    "eventName": "WWDC25 Watch Party | Swift Chennai",
+    "eventDescription": "Join Swift Chennai for a special night of community, kaapi, and code as we stream the WWDC25 keynote together.",
+    "eventDate": "2025-06-09",
+    "eventTime": "20:00",
+    "eventVenue": "Kissflow (OrangeScape Technologies), No:5, Tower-B, 10th Floor, World Trade Center, 142, Rajiv Gandhi Salai, Perungudi, Chennai, Tamil Nadu 600096",
+    "eventLink": "https://lu.ma/9engu1qy?utm_source=tamilnadu_tech",
+    "location": "Chennai",
+    "communityName": "Swift Chennai",
+    "communityLogo": "https://i.ibb.co/pjGZgmHn/5ef8911a-11eb-4fb8-8dbf-a2c0c5a283d1.jpg"
   }
 ]
