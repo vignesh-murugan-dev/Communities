@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import events from '../../../data/events.json';
+// import events from '../../../data/events.json';
 import { MapPin } from '@phosphor-icons/react';
 import EmptyEventCard from '../../no-events-card';
 import Image from 'next/image';
@@ -32,6 +32,7 @@ type EventCardProps = {
 const Events = () => {
   const [monthlyCardHeight, setMonthlyCardHeight] = useState<number>(0);
   const [upcomingCardHeight, setUpcomingCardHeight] = useState<number>(0);
+  const [events, setEvents] = useState<Event[]>([]);
   // Create a date object for start of today
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -39,6 +40,15 @@ const Events = () => {
   // Create a date object for end of today
   const endOfToday = new Date();
   endOfToday.setHours(23, 59, 59, 999);
+
+  // gets the events.json file from network so that there need not be a manual deploy for each event
+  useEffect(() => {
+    fetch(
+      'https://raw.githubusercontent.com/FOSSUChennai/Communities/refs/heads/main/src/data/events.json'
+    )
+      .then((resp) => resp.json())
+      .then((json) => setEvents(json));
+  }, []);
 
   // sorts all events first rather than grouping into two types and then sorting
   const sortedEvents = events.sort(
