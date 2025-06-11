@@ -43,7 +43,7 @@ const Events = () => {
 
   // gets the events.json file from network so that there need not be a manual deploy for each event
   useEffect(() => {
-    if (process.env.NODE_ENV != 'development') {
+    if (process.env.NODE_ENV !== 'development') {
       fetch(
         'https://raw.githubusercontent.com/FOSSUChennai/Communities/refs/heads/main/src/data/events.json'
       )
