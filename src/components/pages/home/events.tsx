@@ -43,16 +43,23 @@ const Events = () => {
 
   // gets the events.json file from network so that there need not be a manual deploy for each event
   useEffect(() => {
-    fetch(
-      'https://raw.githubusercontent.com/FOSSUChennai/Communities/refs/heads/main/src/data/events.json'
-    )
-      .then((response) => {
-        if (!response.ok) {
-          setEvents(eventsJson);
-        }
-        return response.json();
-      })
-      .then((json) => setEvents(json));
+    if (process.env.NODE_ENV != 'development') {
+      fetch(
+        'https://raw.githubusercontent.com/FOSSUChennai/Communities/refs/heads/main/src/data/events.json'
+      )
+        .then((response) => {
+          if (!response.ok) {
+            // If the fetch fails or in development mode, use the local eventsJson
+            setEvents(eventsJson);
+            return null;
+          }
+          return response.json();
+        })
+        .then((json) => setEvents(json));
+    } else {
+      // In development, use the local eventsJson directly
+      setEvents(eventsJson);
+    }
   }, []);
 
   // sorts all events first rather than grouping into two types and then sorting
@@ -62,6 +69,13 @@ const Events = () => {
 
   const monthlyEvents = sortedEvents.filter((event) => {
     const eventDate = new Date(event.eventDate);
+    if (
+      eventDate.getMonth() === today.getMonth() &&
+      eventDate.getFullYear() === today.getFullYear() &&
+      eventDate >= today
+    ) {
+      console.log(`Event ${event.eventName} is a monthly event for this month.`);
+    }
     return (
       eventDate.getMonth() === today.getMonth() &&
       eventDate.getFullYear() === today.getFullYear() &&
