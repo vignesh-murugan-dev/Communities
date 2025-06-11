@@ -69,13 +69,7 @@ const Events = () => {
 
   const monthlyEvents = sortedEvents.filter((event) => {
     const eventDate = new Date(event.eventDate);
-    if (
-      eventDate.getMonth() === today.getMonth() &&
-      eventDate.getFullYear() === today.getFullYear() &&
-      eventDate >= today
-    ) {
-      console.log(`Event ${event.eventName} is a monthly event for this month.`);
-    }
+
     return (
       eventDate.getMonth() === today.getMonth() &&
       eventDate.getFullYear() === today.getFullYear() &&
