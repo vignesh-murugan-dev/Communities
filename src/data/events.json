@@ -373,5 +373,16 @@
     "location": "Chennai",
     "communityName": "Chennai Web Engineering",
     "communityLogo": "https://i.ibb.co/21x51045/cwe-transparent.png"
+  },
+  {
+    "eventName": "AI Geeks June Meetup #4",
+    "eventDescription": "Join AI Geeks for an insightful session on the latest trends in AI and machine learning.",
+    "eventDate": "2025-06-21",
+    "eventTime": "09:00",
+    "eventVenue": "YuniQ ,4th  Floor, TICEL BIOPARK, 5, CSIR Rd, Phase II, Tharamani, Chennai, Tamil Nadu 600113, India",
+    "eventLink": "https://lu.ma/3iw312xa",
+    "location": "Chennai",
+    "communityName": "AI Geeks Chennai",
+    "communityLogo": "https://i.ibb.co/hFYp8mx0/ai-geeks-chennai-logo.jpg"
   }
 ]
