@@ -52,7 +52,7 @@ jobs:
           fi
 
       - name: Comment on PR for Events Linting Failure
-        if: github.event_name == 'pull_request' && steps.lint-events.outputs.events_lint_failed == 'true'
+        if: steps.lint-events.outputs.events_lint_failed == 'true'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -67,10 +67,9 @@ jobs:
             });
 
       - name: Comment on PR for Events Linting Success
-        if: github.event_name == 'pull_request' && steps.lint-events.outputs.events_lint_failed == 'false'
+        if: steps.lint-events.outputs.events_lint_failed == 'false'
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -80,7 +79,7 @@ jobs:
             });
 
       - name: Comment on PR for Communities Linting Failure
-        if: github.event_name == 'pull_request' && steps.lint-communities.outputs.communities_lint_failed == 'true'
+        if: steps.lint-communities.outputs.communities_lint_failed == 'true'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -95,10 +94,9 @@ jobs:
             });
 
       - name: Comment on PR for Communities Linting Success
-        if: github.event_name == 'pull_request' && steps.lint-communities.outputs.communities_lint_failed == 'false'
+        if: steps.lint-communities.outputs.communities_lint_failed == 'false'
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -109,7 +107,7 @@ jobs:
 
       - name: Overall PR Summary and Approval
         id: approve-pr
-        if: github.event_name == 'pull_request' && steps.lint-events.outputs.events_lint_failed == 'false' && steps.lint-communities.outputs.communities_lint_failed == 'false'
+        if: steps.lint-events.outputs.events_lint_failed == 'false' && steps.lint-communities.outputs.communities_lint_failed == 'false'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
