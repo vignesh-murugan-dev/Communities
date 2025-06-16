@@ -253,6 +253,17 @@
     "communityName": "TechNexus Community",
     "communityLogo": "https://secure.meetupstatic.com/photos/event/5/2/7/5/clean_525381109.webp"
   },
+    {
+    "eventName": "GitHub Copilot Chennai Bootcamp",
+    "eventDescription": "The GitHub Copilot Global Bootcamp is a learning series designed to help developers fully leverage GitHub Copilot within Visual Studio Code, Visual Studio, and GitHub Codespaces while connecting with community experts like you! 😊",
+    "eventDate": "2025-06-28",
+    "eventTime": "10:00",
+    "eventVenue": "Microsoft Corporation India Pvt. Ltd, # 471, 2nd floor, Prestige Polygon, Anna Salai, Rathna Nagar Teynampet, Chennai - 600 018",
+    "eventLink": "https://www.meetup.com/technexus-community/events/307579615/",
+    "location": "Chennai",
+    "communityName": "TechNexus Community",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/5/2/7/5/clean_525381109.webp"
+  },
   {
     "eventName": "Swift Chennai Chapter #01",
     "eventDescription": "Swift Chennai ​Chapter #01 marks the start of a fresh, vibrant meetup series for Swift devs, iOS enthusiasts, and curious creators. Come for the code, stay for the kaapi, and leave with solid connections.",
