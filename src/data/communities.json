@@ -156,4 +156,12 @@
     "linkedin": "https://www.linkedin.com/company/d3-community",
     "youtube": "https://www.youtube.com/@d3CommunityOfficial",
   },
+    {
+    "name": "MongoDB User Group Chennai",
+    "logo": "https://i.ibb.co/MkmpSxgY/MugChn.png",
+    "description": "MUG Chennai is a MongoDB User Group, where MongoDB Enthusiasts in and around Chennai come together to share their knowledge and to contribute to the promotion of MongoDB.",
+    "location": "Chennai",
+    "website": "https://www.mongodb.com/community/user-groups/chennai/",
+    "linkedin": "https://www.linkedin.com/company/mugchennai",
+  },
 ]
