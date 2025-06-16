@@ -115,7 +115,7 @@
     "eventDescription": "Colloborative community meetup between FOSS United and JSLovers",
     "eventDate": "2025-06-21",
     "eventTime": "14:00",
-    "eventVenue": "TBD",
+    "eventVenue": "Zoominfo, 11th Floor , A, GLOBAL INFOCITY PARK, Kodandarama Nagar, Perungudi, Chennai, Tamil Nadu 600096, India",
     "eventLink": "https://fossunited.org/c/chennai/2025/june",
     "location": "Chennai",
     "communityName": "FOSS United Chennai",
@@ -384,5 +384,16 @@
     "location": "Chennai",
     "communityName": "AI Geeks Chennai",
     "communityLogo": "https://i.ibb.co/hFYp8mx0/ai-geeks-chennai-logo.jpg"
+  },
+  {
+    "eventName": "Build2Learn - 21st June 2025",
+    "eventDescription": "Bring your ideas, Build them with a team, showcase and celebrate ",
+    "eventDate": "2025-06-21",
+    "eventTime": "10:00",
+    "eventVenue": "Thoughtworks Ascendas IT park - Tharamani",
+    "eventLink": "https://lu.ma/w2q4yjer?utm_source=tamilnadutech",
+    "location": "Chennai",
+    "communityName": "Build2Learn",
+    "communityLogo": "https://i.ibb.co/CBsgh43/bxOxo5O.png"
   }
 ]
