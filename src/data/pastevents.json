@@ -1,5 +1,126 @@
 [
   {
+    "eventName": "InnovAite",
+    "eventDescription": "Unlock the Future with Machine Learning!",
+    "eventDate": "2025-01-11",
+    "eventTime": "09:00",
+    "eventVenue": "YuniQ, 4th Floor, TICEL BIOPARK, Tharamani, Chennai ",
+    "eventLink": "https://geekcoders-community.pages.dev/register",
+    "location": "Chennai",
+    "communityName": "Geek Coders",
+    "communityLogo": "https://geekcoders-community.pages.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.5594d213.png&w=3840&q=75"
+  },
+  {
+    "eventName": "Unlocking the Power of Satellite Data with Deep Learning",
+    "eventDescription": "Unlocking the Power of Satellite Data with Deep Learning",
+    "eventDate": "2025-01-11",
+    "eventTime": "09:30",
+    "eventVenue": "IITM RESEARCH PARK",
+    "eventLink": "https://www.meetup.com/chennai-microsoft-azure-user-group/events/304826160/?eventOrigin=group_upcoming_events",
+    "location": "Chennai",
+    "communityName": "Microsoft Azure User Group-Chennai",
+    "communityLogo": "https://globalazure.in/assets/img/community/chennai-aug.png"
+  },
+  {
+    "eventName": "Microsoft Azure Skillup Tamilnadu Session 1",
+    "eventDescription": "Dive into what's next and discover the capabilities of advanced language models like GPT-4o. Experience AI Studio, a user-friendly platform that simplifies building your own AI applications using insights from Microsoft’s Copilots. Learn how vector search, with techniques like retrieval-augmented generation (RAG), is revolutionizing information retrieval for precise results. Explore the Assistants API, which enables developers to create intuitive applications that can analyze data, recommend solutions, and automate tasks with ease. This session is your starting point to understand AI technologies' potential and integrate them into your projects.",
+    "eventDate": "2025-01-11",
+    "eventTime": "09:30",
+    "eventVenue": "Microsoft Corporation India Pvt. Ltd.",
+    "eventLink": "https://www.meetup.com/azure-developer-community-chennai/events/305016506/?eventOrigin=home_page_upcoming_events",
+    "location": "Chennai",
+    "communityName": "Azure Developer Community TamilNadu",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/c/d/2/clean_496503282.webp"
+  },
+  {
+    "eventName": "Apache Kafka® x Grafana Meetup",
+    "eventDescription": "Join us for our first IN PERSON Apache Kafka® meetup on Feb 1st from 10:00 am, hosted by Humbletree Cloud Private Limited in Coimbatore!",
+    "eventDate": "2025-02-01",
+    "eventTime": "10:00",
+    "eventVenue": "Humbletree Cloud, 6, Ground Floor, DVT Towers, nehru nagar west, Coimbatore ",
+    "eventLink": "https://meetu.ps/e/NLPSk/kmD4l/i",
+    "location": "Coimbatore",
+    "communityName": "Confluent",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/d/1/3/3/clean_525293555.webp"
+  },
+  {
+    "eventName": "Grafana Meetup",
+    "eventDescription": "Join us for IN PERSON Grafana labs x Presidio meetup on Jan 25th from 9:30 am, hosted by Presidio in Chennai!",
+    "eventDate": "2025-01-25",
+    "eventTime": "9:30",
+    "eventVenue": "Presidio, Level 7 & 8, Door 51, IndiQube Alpine, Ekkatuthangal, Guindy",
+    "eventLink": "https://www.meetup.com/grafana-and-friends-chennai/events/305394398/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link",
+    "location": "Chennai",
+    "communityName": "Grafana and Friends Chennai",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/7/b/2/a/event_525511530.webp"
+  },
+  {
+    "eventName": "OWASP Meetup",
+    "eventDescription": "Join us for IN PERSON OWASP meetup on Jan 18th from 10:00 am, hosted by TEKCLAN SOFTWARE SOLUTIONS PVT LTD in Chennai!",
+    "eventDate": "2025-01-18",
+    "eventTime": "10:00",
+    "eventVenue": "TEKCLAN SOFTWARE SOLUTIONS PVT LTD 4th Floor, Phase 2, Ticel Bio Park, 5, CSIR Rd, Tharamani,Chennai",
+    "eventLink": "https://www.meetup.com/chennai-owasp-meetup-group/events/305358664/?eventOrigin=home_page_upcoming_events$all",
+    "location": "Chennai",
+    "communityName": "OWASP Chennai Chapter",
+    "communityLogo": "https://secure.meetupstatic.com/photos/event/7/2/d/5/clean_492389397.webp"
+  },
+  {
+    "eventName": "Kubernetes Community Days Chennai 2025",
+    "eventDescription": "Kubernetes Community Days Chennai 2025 is a community-organized conference supported by the Cloud Native Computing Foundation (CNCF) to help grow and sustain the Kubernetes and cloud-native community in Chennai. It gathers adopters and technologists from open source and cloud-native communities for education, collaboration, and networking.",
+    "eventDate": "2025-04-26",
+    "eventTime": "08:30",
+    "eventVenue": "Sathyabama University",
+    "eventLink": "https://community.cncf.io/kcd-chennai/",
+    "location": "Chennai",
+    "communityName": "KCD Chennai",
+    "communityLogo": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_500,h_500,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-cncf/events/Logo_White_Background_eSFH3vi.png"
+  },
+  {
+    "eventName": "Chennaipy January Meetup",
+    "eventDescription": "This is a group for anyone who loves Python. Meet and discuss with other Pythonistas in Chennai. Contribute to promoting Python in and around Chennai.",
+    "eventDate": "2025-01-25",
+    "eventTime": "15:00",
+    "eventVenue": "Zilogic Systems Pvt Ltd, 2nd Floor, Ragula Tech Park, Type I, I/16, Dr. VSI Estate Phase 1, Thiruvanmiyur, Chennai, Tamil Nadu 600041",
+    "eventLink": "https://www.meetup.com/chennaipy/events/305536346/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link",
+    "location": "Chennai",
+    "communityName": "Chennaipy",
+    "communityLogo": "https://res.cloudinary.com/dwir71gi2/image/upload/v1737382622/chennaipy_ovbthm.png"
+  },
+  {
+    "eventName": "Cloud Native Chennai - Jan 2025 Meetup",
+    "eventDescription": "Join us for an in-person event to learn about Cloud Native projects and concepts. You will also have the opportunity to network with your peers, exchange best practices, and learn from real-world use cases. Whether you are just starting your cloud journey or you are already using Cloud Native, this event is a must-attend for anyone interested in unlocking the power of Cloud Native.",
+    "eventDate": "2025-01-25",
+    "eventTime": "05:00",
+    "eventVenue": "Tekclan Software Solutions PVT LTD, 4th Floor, Phase 2, Ticel Bio Park, 5, CSIR Rd, Tharamani, Chennai, Tamil Nadu 600113",
+    "eventLink": "https://community.cncf.io/events/details/cncf-cloud-native-chennai-presents-cloud-native-chennai-jan-2025-meetup/",
+    "location": "Chennai",
+    "communityName": "Cloud Native Chennai",
+    "communityLogo": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/CNC%2520-%2520Event%2520Thumbnail%2520-%2520Manikandan%2520Krishnamurthy_9i4xfUX.png"
+  },
+  {
+    "eventName": "build2learn",
+    "eventDescription": "Welcome to build2learn - Where Innovation Meets Community! Imagine a hackathon, but with a twist!🤔 It's not just about building incredible micro products; it's about forging lifelong connections with like-minded individuals who share your passion for innovation! 🤝💡At build2learn, we believe that magic happens when engineers come together to do what they love - BUILD!, Are you someone with a side project that you've been dreaming of bringing to life? build2learn is your chance to turn that dream into reality! ⏰🌟 Are you a student eager to create something extraordinary but in need of mentors to guide you? build2learn is the launchpad you've been waiting for! 🎓🚀 Or maybe you're someone who thrives on helping others unleash their full potential? build2learn is the perfect platform to make a lasting impact! 🤗 Join us at build2learn and embark on a journey of creation, collaboration, and camaraderie! 🌟 See you there!🌆 ",
+    "eventDate": "2025-01-25",
+    "eventTime": "09:30",
+    "eventVenue": "IBM INDIA PRIVATE LIMITED, 5th Floor, Unit 3, Pinnacle Building, Ascendas IT Park, Taramani, Chennai",
+    "eventLink": "https://docs.google.com/forms/d/e/1FAIpQLScsui1r6e6PsgDyOycPiIAY_rz9i8vQ02MnmikPw2ESVG830g/viewform",
+    "location": "Chennai",
+    "communityName": "build2learn",
+    "communityLogo": "https://i.ibb.co/CBsgh43/bxOxo5O.png"
+  },
+  {
+    "eventName": "January FOSS Meetup",
+    "eventDescription": "FOSS Meetup - January 2025.",
+    "eventDate": "2025-01-25",
+    "eventTime": "02:00",
+    "eventVenue": "YuniQ ,4th Floor, TICEL BIOPARK, 5, CSIR Rd, Phase II, Tharamani, Chennai, Tamil Nadu 600113 ",
+    "eventLink": "https://fossunited.org/c/chennai/2025/Jan",
+    "location": "Chennai",
+    "communityName": "FOSS United Chennai",
+    "communityLogo": "https://fossunited.org/files/Foss%20United%20Logo%20Black.svg"
+  },
+  {
     "eventName": "Django India Chennai meetup",
     "eventDescription": "In-person meetup dedicated to Django, Python, and the broader world of open source! ",
     "eventDate": "2025-04-26",
@@ -43,7 +164,6 @@
     "communityName": "The Startup Club",
     "communityLogo": "https://cdn2.allevents.in/thumbs/thumb67c7f84a810f9.jpg"
   },
-
   {
     "eventName": "Chennaipy - April Meetup",
     "eventDescription": "Chennaipy Offline Meet-up",
@@ -106,17 +226,6 @@
     "eventTime": "14:00",
     "eventVenue": "Full Creative, Tharamani",
     "eventLink": "https://fossunited.org/c/chennai/2025/april",
-    "location": "Chennai",
-    "communityName": "FOSS United Chennai",
-    "communityLogo": "https://i.ibb.co/F45XJbvR/FOSS-United-Chennai.png"
-  },
-  {
-    "eventName": "FOSS United X Js Lovers",
-    "eventDescription": "Colloborative community meetup between FOSS United and JSLovers",
-    "eventDate": "2025-06-21",
-    "eventTime": "14:00",
-    "eventVenue": "Zoominfo, 11th Floor , A, GLOBAL INFOCITY PARK, Kodandarama Nagar, Perungudi, Chennai, Tamil Nadu 600096, India",
-    "eventLink": "https://fossunited.org/c/chennai/2025/june",
     "location": "Chennai",
     "communityName": "FOSS United Chennai",
     "communityLogo": "https://i.ibb.co/F45XJbvR/FOSS-United-Chennai.png"
@@ -199,17 +308,6 @@
     "communityLogo": "https://cisc.club/assets/logo-CWUyGK9o.png"
   },
   {
-    "eventName": "NammaFlutter June Meetup",
-    "eventDescription": "NammaFlutter is a community of Flutter developers in Chennai. We are celebrating our 1st year anniversary with a meetup. Join us for a day of fun, learning, and networking with fellow Flutter enthusiasts.",
-    "eventDate": "2025-06-21",
-    "eventTime": "09:00",
-    "eventVenue": "M2P Fintech, C1 & C56, Thiru Vi Ka Industrial Estate, SIDCO, Guindy, Chennai, Tamil Nadu 600032, India",
-    "eventLink": "https://lu.ma/qoqchmc7",
-    "location": "Chennai",
-    "communityName": "NammaFlutter",
-    "communityLogo": "https://i.ibb.co/0R8qZ1qP/final-logo.png"
-  },
-  {
     "eventName": "Startup Atti | FinTech Edition",
     "eventDescription": "Startup Atti is an initiative by fellow startups & communities to support aspiring people. This time the event is focused on the startup ecosystem and fintech. We have a lineup of speakers from the startup ecosystem and fintech industry who will share their insights and experiences. Join us for a day of learning, networking, and fun!",
     "eventDate": "2025-04-26",
@@ -240,7 +338,7 @@
     "eventLink": "https://www.meetup.com/chennai-elastic-fantastics/events/307041299",
     "location": "Chennai",
     "communityName": "Elastic Chennai User Group",
-    "communityLogo": "https://ibb.co/RJphpSr"
+    "communityLogo": ""
   },
   {
     "eventName": "Microsoft Developer Day",
@@ -265,17 +363,6 @@
     "communityLogo": "https://i.ibb.co/fVSg8JGp/undefined-Imgur.png"
   },
   {
-    "eventName": "D3 Community Meetup #2",
-    "eventDescription": "D3 Community Meetup #02: Join a vibrant in-person community for Software Engineers focused on Full Stack, DevOps, Cloud & AI. Learn, network, and grow!",
-    "eventDate": "2025-06-21",
-    "eventTime": "9:30",
-    "eventVenue": "Zoominfo, 11th Floor , A, GLOBAL INFOCITY PARK, Kodandarama Nagar, Perungudi, Chennai, Tamil Nadu 600096, India",
-    "eventLink": "https://lu.ma/vhw0tdoi",
-    "location": "Chennai",
-    "communityName": "D3 Community",
-    "communityLogo": "https://i.ibb.co/BKQb8hLG/D3-Community-Official-logo.png"
-  },
-  {
     "eventName": "Figma Config 2025 Watch Party",
     "eventDescription": "Join us for a fun, insightful, and community-powered morning filled ",
     "eventDate": "2025-05-10",
@@ -285,17 +372,6 @@
     "location": "Chennai",
     "communityName": "Friends of Figma",
     "communityLogo": "https://i.ibb.co/21Ndz7LH/fof-chennai-logo.jpg"
-  },
-  {
-    "eventName": "TossConf'25",
-    "eventDescription": "TOSSConf25 (Tamil Open Source Software Conference 2025) is a community-driven event celebrating open-source software and Tamil computing. Scheduled for July 18–19, 2025, at St. Joseph’s Institute of Technology in Semmancheri, Chennai, the conference aims to bring together developers, contributors, and enthusiasts to promote open source initiatives in Tamil Nadu.",
-    "eventDate": "2025-07-18",
-    "eventTime": "09:30",
-    "eventVenue": "St. Joseph's Institute of Technology, Old Mahabalipuram Road, Kamaraj Nagar, Semmancheri, Chennai, Tamil Nadu 600119 ",
-    "eventLink": "https://tossconf25.kaniyam.com/",
-    "location": "Chennai",
-    "communityName": "TossConf25",
-    "communityLogo": "https://i.ibb.co/fWZCQww/hero-bg1.png"
   },
   {
     "eventName": "Grafana & Friends X SRE : Coimbatore Meetup",
@@ -362,38 +438,5 @@
     "location": "Chennai",
     "communityName": "Swift Chennai",
     "communityLogo": "https://i.ibb.co/pjGZgmHn/5ef8911a-11eb-4fb8-8dbf-a2c0c5a283d1.jpg"
-  },
-  {
-    "eventName": "Crafting Cohesive Web Experience: Breakpoints to Design Systems",
-    "eventDescription": "Join Chennai Web Engineering Session to learn building design system libraries and to effectively use breakpoints in CSS from industry experts",
-    "eventDate": "2025-06-21",
-    "eventTime": "11:00",
-    "eventVenue": "Ford GTBC, Elcot Sez, Shollinganallur, Chennai, Tamil Nadu 600119",
-    "eventLink": "https://www.meetup.com/chennai-web-engineering/events/308087414/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link",
-    "location": "Chennai",
-    "communityName": "Chennai Web Engineering",
-    "communityLogo": "https://i.ibb.co/21x51045/cwe-transparent.png"
-  },
-  {
-    "eventName": "AI Geeks June Meetup #4",
-    "eventDescription": "Join AI Geeks for an insightful session on the latest trends in AI and machine learning.",
-    "eventDate": "2025-06-21",
-    "eventTime": "09:00",
-    "eventVenue": "YuniQ ,4th  Floor, TICEL BIOPARK, 5, CSIR Rd, Phase II, Tharamani, Chennai, Tamil Nadu 600113, India",
-    "eventLink": "https://lu.ma/3iw312xa",
-    "location": "Chennai",
-    "communityName": "AI Geeks Chennai",
-    "communityLogo": "https://i.ibb.co/hFYp8mx0/ai-geeks-chennai-logo.jpg"
-  },
-  {
-    "eventName": "Build2Learn - 21st June 2025",
-    "eventDescription": "Bring your ideas, Build them with a team, showcase and celebrate ",
-    "eventDate": "2025-06-21",
-    "eventTime": "10:00",
-    "eventVenue": "Thoughtworks Ascendas IT park - Tharamani",
-    "eventLink": "https://lu.ma/w2q4yjer?utm_source=tamilnadutech",
-    "location": "Chennai",
-    "communityName": "Build2Learn",
-    "communityLogo": "https://i.ibb.co/CBsgh43/bxOxo5O.png"
   }
 ]

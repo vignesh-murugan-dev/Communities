@@ -70,11 +70,7 @@ const Archive = () => {
   const monthlyEvents = sortedEvents.filter((event) => {
     const eventDate = new Date(event.eventDate);
 
-    return (
-      eventDate.getMonth() === today.getMonth() &&
-      eventDate.getFullYear() === today.getFullYear() &&
-      eventDate >= today
-    );
+    return eventDate <= today;
   });
 
   const upcomingEvents = sortedEvents.filter((event) => {
