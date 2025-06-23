@@ -14,6 +14,16 @@
     "github": "https://github.com/FOSSUChennai"
   },
   {
+    "name": "FOSS United Coimbatore",
+    "logo": "https://i.ibb.co/m5900Dn2/Logo-FOSS-United-CBE.jpg",
+    "description": "FOSS United Coimbatore is a vibrant community dedicated to promoting Free and Open Source Software (FOSS) in the Coimbatore region. Operating under FOSS United",
+    "location": "Coimbatore",
+    "website": "https://fossunited.org/c/coimbatore",
+    "linkedin": "https://www.linkedin.com/company/fossunitedcbe/about/",
+    "mastodon": "https://mas.to/@fossunitedcbe",
+    "telegram": "https://t.me/fossunitedcoimbatore"
+  },
+  {
     "name": "Chennai React",
     "logo": "https://avatars.githubusercontent.com/u/175532518",
     "description": "Chennai React is a vibrant community of developers passionate about React.js, React Native, Next.js, and modern web and mobile development. We bring developers, industry experts, and tech enthusiasts together to learn, share, and network.",
