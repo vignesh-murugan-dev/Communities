@@ -72,9 +72,19 @@ jobs:
 
             core.setOutput('events_modified', eventsModified.toString());
             core.setOutput('communities_modified', communitiesModified.toString());
+      
+      - name: Set environment variables for next steps
+        run: |
+          echo "EVENTS_MODIFIED=${{ steps.check-modified-files.outputs.events_modified }}" >> $GITHUB_ENV
+          echo "COMMUNITIES_MODIFIED=${{ steps.check-modified-files.outputs.communities_modified }}" >> $GITHUB_ENV
+
+      - name: Set additional environment variables
+        run: |
+          echo "EVENTS_LINT_FAILED=${{ steps.lint-events.outputs.events_lint_failed }}" >> $GITHUB_ENV
+          echo "COMMUNITIES_LINT_FAILED=${{ steps.lint-communities.outputs.communities_lint_failed }}" >> $GITHUB_ENV
 
       - name: Comment on PR for Events Linting Failure
-        if: steps.lint-events.outputs.events_lint_failed == 'true' && steps.check-modified-files.outputs.events_modified == 'true'
+        if: env.EVENTS_LINT_FAILED == 'true' && env.EVENTS_MODIFIED == 'true'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -89,7 +99,7 @@ jobs:
             });
 
       - name: Comment on PR for Events Linting Success
-        if: steps.lint-events.outputs.events_lint_failed == 'false' && steps.check-modified-files.outputs.events_modified == 'true'
+        if: env.EVENTS_LINT_FAILED == 'false' && env.EVENTS_MODIFIED == 'true'
         uses: actions/github-script@v6
         with:
           script: |
@@ -101,7 +111,7 @@ jobs:
             });
 
       - name: Comment on PR for Communities Linting Failure
-        if: steps.lint-communities.outputs.communities_lint_failed == 'true' && steps.check-modified-files.outputs.communities_modified == 'true'
+        if: env.COMMUNITIES_LINT_FAILED == 'true' && env.COMMUNITIES_MODIFIED == 'true'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -116,7 +126,7 @@ jobs:
             });
 
       - name: Comment on PR for Communities Linting Success
-        if: steps.lint-communities.outputs.communities_lint_failed == 'false' && steps.check-modified-files.outputs.communities_modified == 'true'
+        if: env.COMMUNITIES_LINT_FAILED == 'false' && env.COMMUNITIES_MODIFIED == 'true'
         uses: actions/github-script@v6
         with:
           script: |
@@ -129,18 +139,22 @@ jobs:
 
       - name: Overall PR Summary and Approval
         id: approve-pr
-        if: steps.lint-events.outputs.events_lint_failed == 'false' && steps.lint-communities.outputs.communities_lint_failed == 'false'
+        if: env.EVENTS_LINT_FAILED == 'false' && env.COMMUNITIES_LINT_FAILED == 'false'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            // Access the step outputs through the GitHub Actions environment variables
+            const eventsModified = process.env.EVENTS_MODIFIED === 'true';
+            const communitiesModified = process.env.COMMUNITIES_MODIFIED === 'true';
+            
             let summaryMessage = '🎉 **JSON Checks Passed**\n\n';
 
-            if (steps.check-modified-files.outputs.events_modified == 'true') {
+            if (eventsModified) {
               summaryMessage += '- ✅ Events JSON Linting: Passed\n';
             }
 
-            if (steps.check-modified-files.outputs.communities_modified == 'true') {
+            if (communitiesModified) {
               summaryMessage += '- ✅ Communities JSON Linting: Passed\n';
             }
 
@@ -185,9 +199,14 @@ jobs:
 
             console.log(`PR #${context.issue.number} contains only JSON data files: ${jsonOnly}`);
             core.setOutput('json_only', jsonOnly.toString());
+            
+      - name: Set JSON only variable for next steps
+        if: steps.check-pr-files.outputs.json_only != ''
+        run: |
+          echo "JSON_ONLY=${{ steps.check-pr-files.outputs.json_only }}" >> $GITHUB_ENV
 
       - name: Auto Merge PR
-        if: steps.check-pr-files.outputs.json_only == 'true'
+        if: env.JSON_ONLY == 'true'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -354,5 +373,5 @@ jobs:
             }
 
       - name: Fail workflow if validation failed
-        if: steps.lint-events.outputs.events_lint_failed == 'true' || steps.lint-communities.outputs.communities_lint_failed == 'true'
+        if: env.EVENTS_LINT_FAILED == 'true' || env.COMMUNITIES_LINT_FAILED == 'true'
         run: exit 1
