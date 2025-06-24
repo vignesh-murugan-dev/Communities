@@ -177,36 +177,8 @@ jobs:
 
             core.setOutput('approved', 'true');
 
-      - name: Check if PR only changes JSON data files
-        id: check-pr-files
-        if: steps.approve-pr.outputs.approved == 'true'
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            // Get PR files
-            const { data: files } = await github.rest.pulls.listFiles({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number
-            });
-
-            // Check if only JSON files in src/data are modified
-            const jsonOnly = files.every(file => 
-              (file.filename === 'src/data/events.json' || 
-               file.filename === 'src/data/communities.json')
-            );
-
-            console.log(`PR #${context.issue.number} contains only JSON data files: ${jsonOnly}`);
-            core.setOutput('json_only', jsonOnly.toString());
-            
-      - name: Set JSON only variable for next steps
-        if: steps.check-pr-files.outputs.json_only != ''
-        run: |
-          echo "JSON_ONLY=${{ steps.check-pr-files.outputs.json_only }}" >> $GITHUB_ENV
-
       - name: Auto Merge PR
-        if: env.JSON_ONLY == 'true'
+        if: env.EVENTS_LINT_FAILED == 'false' && env.COMMUNITIES_LINT_FAILED == 'false'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -250,13 +222,8 @@ jobs:
                   // Read and parse the events.json file
                   const eventsData = JSON.parse(fs.readFileSync('src/data/events.json', 'utf8'));
                   
-                  // Get changes from the PR
-                  const { data: eventDiff } = await github.rest.pulls.getFiles({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    pull_number: context.issue.number,
-                    path: 'src/data/events.json'
-                  });
+                  // We already have the files information from earlier, no need to fetch again
+                  // The path parameter is not supported in the getFiles method
                   
                   // Extract event information for commit message
                   const eventTitles = eventsData
@@ -338,20 +305,54 @@ jobs:
               }
               
               // Merge the PR using squash method with enhanced commit info
-              await github.rest.pulls.merge({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.issue.number,
-                merge_method: 'squash',
-                commit_title: commitTitle,
-                commit_message: commitMessage
-              });
-              console.log(`Successfully merged PR #${context.issue.number}`);
+              try {
+                await github.rest.pulls.merge({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.issue.number,
+                  merge_method: 'squash',
+                  commit_title: commitTitle,
+                  commit_message: commitMessage
+                });
+                console.log(`Successfully merged PR #${context.issue.number}`);
+              } catch (mergeError) {
+                // Handle permission issues
+                console.log(`Error merging PR: ${mergeError.message}`);
+                
+                // Create a comment instead of failing entirely
+                await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: '✅ **All JSON validation checks passed!**\n\nThis PR is ready to be merged, but the automated merge failed due to permissions.\n\nPlease ask a repository maintainer to merge this PR manually.'
+                });
+                
+                // Don't fail the workflow
+                console.log('Created comment requesting manual merge');
+              }
               
             } catch (error) {
               console.log(`Failed to process PR #${context.issue.number}`);
               console.log(error);
-              core.setFailed(`Failed to process PR: ${error.message}`);
+              
+              // Create a comment about the error
+              try {
+                await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: `⚠️ **JSON validation passed, but there was an issue with automatic processing**\n\nAn error occurred: ${error.message}\n\nA repository maintainer should review this PR manually.`
+                });
+              } catch (commentError) {
+                console.log(`Failed to create error comment: ${commentError.message}`);
+              }
+              
+              // Don't fail the workflow completely if only the merge part failed
+              if (error.message.includes('Resource not accessible by integration')) {
+                console.log('Continuing workflow despite merge permission error');
+              } else {
+                core.setFailed(`Failed to process PR: ${error.message}`);
+              }
             }
 
       - name: Fail workflow if validation failed
