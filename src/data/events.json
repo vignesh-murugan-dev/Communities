@@ -42,5 +42,16 @@
     "location": "Chennai",
     "communityName": "Code on JVM",
     "communityLogo": "https://i.ibb.co/sprfRsVT/codeonjvmchennai-logo.jpg"
+  },
+  {
+    "eventName": "D3 Community Meetup #3",
+    "eventDescription": "D3 Community Meetup #03: Join a vibrant in-person community for Software Engineers focused on Full Stack, DevOps, Cloud & AI. Learn, network, and grow!",
+    "eventDate": "2025-07-26",
+    "eventTime": "14:00",
+    "eventVenue": "Kissflow (OrangeScape Technologies), No:5, Tower-B, 10th Floor, World Trade Center, 142, Rajiv Gandhi Salai, Tirumalai Nagar, Perungudi, Chennai, Tamil Nadu 600096, India",
+    "eventLink": "https://lu.ma/zmtjxd8s",
+    "location": "Chennai",
+    "communityName": "D3 Community",
+    "communityLogo": "https://i.ibb.co/BKQb8hLG/D3-Community-Official-logo.png"
   }
 ]
