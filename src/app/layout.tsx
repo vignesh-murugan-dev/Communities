@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { IS_PROD, SITE_URL } from '../lib/constants';
 import UmamiProvider from 'next-umami';
-import { ResizableNavbar } from '../components/shared/resizable-header';
+import Header from '../components/shared/header';
 import Footer from '../components/shared/footer';
 
 const geistSans = Geist({
@@ -68,8 +68,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} mx-auto max-w-[1120px] bg-[#fafafa] antialiased`}
       >
-        <ResizableNavbar />
-        <div className='pt-20'>{children}</div>
+        <Header />
+        {children}
         <Footer />
       </body>
       {IS_PROD && <UmamiProvider websiteId={webId} />}
