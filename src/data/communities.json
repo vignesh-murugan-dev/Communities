@@ -14,6 +14,16 @@
     "github": "https://github.com/FOSSUChennai"
   },
   {
+    "name": "FOSS United Coimbatore",
+    "logo": "https://i.ibb.co/m5900Dn2/Logo-FOSS-United-CBE.jpg",
+    "description": "FOSS United Coimbatore is a vibrant community dedicated to promoting Free and Open Source Software (FOSS) in the Coimbatore region. Operating under FOSS United",
+    "location": "Coimbatore",
+    "website": "https://fossunited.org/c/coimbatore",
+    "linkedin": "https://www.linkedin.com/company/fossunitedcbe/about/",
+    "mastodon": "https://mas.to/@fossunitedcbe",
+    "telegram": "https://t.me/fossunitedcoimbatore"
+  },
+  {
     "name": "Chennai React",
     "logo": "https://avatars.githubusercontent.com/u/175532518",
     "description": "Chennai React is a vibrant community of developers passionate about React.js, React Native, Next.js, and modern web and mobile development. We bring developers, industry experts, and tech enthusiasts together to learn, share, and network.",
@@ -152,7 +162,7 @@
     "description": "D3 is more than just a tech community; it's a vibrant ecosystem where digital dreamers connect, collaborate, and cultivate their skills. We're a technology-agnostic space, welcoming enthusiasts from all corners of the tech world.",
     "location": "Chennai",
     "twitter": "https://x.com/NammaD3Official",
-    "website": "https://bento.me/d3community",
+    "website": "https://d3community.in",
     "instagram": "https://www.instagram.com/d3communityofficial/",
     "linkedin": "https://www.linkedin.com/company/d3-community",
     "youtube": "https://www.youtube.com/@d3CommunityOfficial"
@@ -175,5 +185,16 @@
     "linkedin": "https://www.linkedin.com/company/codeonjvmchennai/",
     "telegram": "https://t.me/codeonjvmchennai",
     "youtube": "https://www.youtube.com/channel/UCxQft97E-LVwIHcZd38JghA"
+  },
+  {
+    "name": "GDG Cloud Chennai",
+    "logo": "https://i.ibb.co/XZRVypNb/gdg-cloud-chennai-logo.jpg",
+    "description": "GDG Cloud Chennai is the official and independent Google Developers Group (#GDG) for Google Cloud (#GCP) in Chennai location, supported by Google Developers. We have passionate individuals (from Developers to CTOs, System Admins to Data Scientists) who focus on Google Cloud, open-source technologies, and related topics.",
+    "location": "Chennai",
+    "website": "http://www.gdgcloudchennai.com/",
+    "linkedin": "https://www.linkedin.com/showcase/gdg-cloud-chennai",
+    "github": "https://github.com/GdgCloudChennai",
+    "instagram": "https://www.instagram.com/GdgCloudChennai/",
+    "twitter": "https://x.com/GdgCloudChennai"
   }
 ]
