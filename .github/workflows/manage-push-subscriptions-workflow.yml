@@ -36,13 +36,12 @@ jobs:
       - name: Save subscription to secrets
         if: steps.process.outputs.action == 'save'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           SUBSCRIPTION_DATA: ${{ toJSON(github.event.client_payload.subscription) }}
         run: |
+          echo "${GITHUB_TOKEN}" | gh auth login --with-token
           SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
           SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
-
-          echo "Saving subscription data for ID: $SUBSCRIPTION_ID"
 
           # Install jq for JSON processing
           sudo apt-get update && sudo apt-get install -y jq
@@ -55,8 +54,9 @@ jobs:
       - name: Remove subscription from secrets
         if: steps.process.outputs.action == 'remove'
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
+          echo "${GITHUB_TOKEN}" | gh auth login --with-token
           SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
           SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
 
