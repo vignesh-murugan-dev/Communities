@@ -22,7 +22,7 @@ jobs:
         run: |
           # Get the payload from the dispatch event
           echo "Event type: ${{ github.event.action }}"
-          # echo "Client payload: ${{ toJSON(github.event.client_payload) }}"
+          echo "Client payload received for processing"
 
           # Extract subscription data
           SUBSCRIPTION_ID="${{ github.event.client_payload.subscription.subscriptionId }}"
