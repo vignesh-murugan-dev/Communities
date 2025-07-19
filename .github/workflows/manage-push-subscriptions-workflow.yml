@@ -36,7 +36,7 @@ jobs:
       - name: Save subscription to secrets
         if: steps.process.outputs.action == 'save'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
           SUBSCRIPTION_DATA: ${{ toJSON(github.event.client_payload.subscription) }}
         run: |
           # Install GitHub CLI if not available
@@ -85,7 +85,7 @@ jobs:
       - name: Remove subscription from secrets
         if: steps.process.outputs.action == 'remove'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
         run: |
           # Install GitHub CLI if not available
           if ! command -v gh &> /dev/null; then
