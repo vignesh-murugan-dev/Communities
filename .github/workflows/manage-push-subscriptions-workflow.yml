@@ -36,85 +36,97 @@ jobs:
       - name: Save subscription to secrets
         if: steps.process.outputs.action == 'save'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SUBSCRIPTION_DATA: ${{ toJSON(github.event.client_payload.subscription) }}
         run: |
           # Install GitHub CLI if not available
           if ! command -v gh &> /dev/null; then
+            echo "Installing GitHub CLI..."
             curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
             echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
             sudo apt update
-            sudo apt install gh
+            sudo apt install gh -y
           fi
 
-          # Authenticate with GitHub CLI
-          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+          # Authenticate with GitHub CLI using the environment variable
+          echo "$GITHUB_TOKEN" | gh auth login --with-token
 
           # Create or update the subscription secret
           SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
           SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
 
-          # Save subscription data as a secret
-          echo "$SUBSCRIPTION_DATA" | gh secret set "$SECRET_NAME" --repo ${{ github.repository }}
+          echo "Saving subscription data for ID: $SUBSCRIPTION_ID"
+
+          # Save subscription data as a secret (escape newlines and quotes)
+          echo "$SUBSCRIPTION_DATA" | gh secret set "$SECRET_NAME" --repo "${{ github.repository }}"
 
           echo "✅ Saved subscription $SUBSCRIPTION_ID to GitHub Secrets"
 
           # Also update a general subscriptions list secret
-          # First, try to get existing subscriptions
-          EXISTING_SUBS=$(gh secret list --repo ${{ github.repository }} | grep "PUSH_SUBSCRIPTION_" | awk '{print $1}' | sed 's/PUSH_SUBSCRIPTION_//' | tr '\n' ',' | sed 's/,$//') || true
+          echo "Updating subscriptions list..."
+
+          # Get existing subscriptions (handle case where no secrets exist yet)
+          EXISTING_SUBS=$(gh secret list --repo "${{ github.repository }}" | grep "PUSH_SUBSCRIPTION_" | awk '{print $1}' | sed 's/PUSH_SUBSCRIPTION_//' | tr '\n' ',' | sed 's/,$//' || echo "")
 
           # Add the new subscription ID if it's not already there
-          if [[ "$EXISTING_SUBS" != *"$SUBSCRIPTION_ID"* ]]; then
-            if [ -n "$EXISTING_SUBS" ]; then
-              NEW_LIST="${EXISTING_SUBS},${SUBSCRIPTION_ID}"
-            else
-              NEW_LIST="$SUBSCRIPTION_ID"
-            fi
+          if [[ -z "$EXISTING_SUBS" ]]; then
+            NEW_LIST="$SUBSCRIPTION_ID"
+          elif [[ "$EXISTING_SUBS" != *"$SUBSCRIPTION_ID"* ]]; then
+            NEW_LIST="${EXISTING_SUBS},${SUBSCRIPTION_ID}"
           else
             NEW_LIST="$EXISTING_SUBS"
           fi
 
           # Update the subscriptions list
-          echo "$NEW_LIST" | gh secret set "PUSH_SUBSCRIPTIONS_LIST" --repo ${{ github.repository }}
+          echo "$NEW_LIST" | gh secret set "PUSH_SUBSCRIPTIONS_LIST" --repo "${{ github.repository }}"
 
           echo "✅ Updated subscriptions list: $NEW_LIST"
 
       - name: Remove subscription from secrets
         if: steps.process.outputs.action == 'remove'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Install GitHub CLI if not available
           if ! command -v gh &> /dev/null; then
+            echo "Installing GitHub CLI..."
             curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
             echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
             sudo apt update
-            sudo apt install gh
+            sudo apt install gh -y
           fi
 
-          # Authenticate with GitHub CLI
-          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+          # Authenticate with GitHub CLI using the environment variable
+          echo "$GITHUB_TOKEN" | gh auth login --with-token
 
           SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
           SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
 
+          echo "Removing subscription: $SUBSCRIPTION_ID"
+
           # Remove the subscription secret
-          gh secret delete "$SECRET_NAME" --repo ${{ github.repository }} || echo "Secret $SECRET_NAME not found or already deleted"
+          gh secret delete "$SECRET_NAME" --repo "${{ github.repository }}" || echo "Secret $SECRET_NAME not found or already deleted"
 
           echo "✅ Removed subscription $SUBSCRIPTION_ID from GitHub Secrets"
 
           # Update the subscriptions list
-          EXISTING_SUBS=$(gh secret list --repo ${{ github.repository }} | grep "PUSH_SUBSCRIPTION_" | awk '{print $1}' | sed 's/PUSH_SUBSCRIPTION_//' | tr '\n' ',' | sed 's/,$//') || true
+          echo "Updating subscriptions list..."
+
+          EXISTING_SUBS=$(gh secret list --repo "${{ github.repository }}" | grep "PUSH_SUBSCRIPTION_" | awk '{print $1}' | sed 's/PUSH_SUBSCRIPTION_//' | tr '\n' ',' | sed 's/,$//' || echo "")
 
           # Remove the subscription ID from the list
-          NEW_LIST=$(echo "$EXISTING_SUBS" | sed "s/$SUBSCRIPTION_ID,\|,$SUBSCRIPTION_ID\|$SUBSCRIPTION_ID//g" | sed 's/^,\|,$//g')
-
-          if [ -n "$NEW_LIST" ]; then
-            echo "$NEW_LIST" | gh secret set "PUSH_SUBSCRIPTIONS_LIST" --repo ${{ github.repository }}
-            echo "✅ Updated subscriptions list: $NEW_LIST"
+          if [[ -n "$EXISTING_SUBS" ]]; then
+            NEW_LIST=$(echo "$EXISTING_SUBS" | sed "s/$SUBSCRIPTION_ID,\|,$SUBSCRIPTION_ID\|^$SUBSCRIPTION_ID$//g" | sed 's/^,\|,$//g' | sed 's/,,/,/g')
+            
+            if [[ -n "$NEW_LIST" && "$NEW_LIST" != "," ]]; then
+              echo "$NEW_LIST" | gh secret set "PUSH_SUBSCRIPTIONS_LIST" --repo "${{ github.repository }}"
+              echo "✅ Updated subscriptions list: $NEW_LIST"
+            else
+              gh secret delete "PUSH_SUBSCRIPTIONS_LIST" --repo "${{ github.repository }}" || true
+              echo "✅ Removed empty subscriptions list"
+            fi
           else
-            gh secret delete "PUSH_SUBSCRIPTIONS_LIST" --repo ${{ github.repository }} || true
-            echo "✅ Removed empty subscriptions list"
+            echo "No existing subscriptions found"
           fi
 
       - name: Log operation
