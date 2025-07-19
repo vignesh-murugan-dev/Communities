@@ -36,17 +36,17 @@ jobs:
       - name: Save subscription to secrets
         if: steps.process.outputs.action == 'save'
         env:
-          github-token: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
           SUBSCRIPTION_DATA: ${{ toJSON(github.event.client_payload.subscription) }}
         run: |
-          echo "${github-token}" | gh auth login --with-token
+          echo "$GH_TOKEN" | gh auth login --with-token
           SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
           SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
 
-          # Install jq for JSON processing
+          echo "Saving subscription data for ID: $SUBSCRIPTION_ID"
+
           sudo apt-get update && sudo apt-get install -y jq
 
-          # Create the secret using GitHub CLI
           echo "$SUBSCRIPTION_DATA" | gh secret set "$SECRET_NAME" --body -
 
           echo "✅ Subscription $SUBSCRIPTION_ID saved to GitHub Secrets"
@@ -54,16 +54,14 @@ jobs:
       - name: Remove subscription from secrets
         if: steps.process.outputs.action == 'remove'
         env:
-          github-token: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          echo "${github-token}" | gh auth login --with-token
+          echo "$GH_TOKEN" | gh auth login --with-token
           SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
           SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
 
           echo "Removing subscription data for ID: $SUBSCRIPTION_ID"
-
-          # Delete the secret using GitHub CLI
-          gh secret delete "$SECRET_NAME"
+          gh secret delete "$SECRET_NAME" --yes
 
           echo "✅ Subscription $SUBSCRIPTION_ID removed from GitHub Secrets"
 
