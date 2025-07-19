@@ -44,47 +44,11 @@ jobs:
 
           echo "Saving subscription data for ID: $SUBSCRIPTION_ID"
 
-          # Install required packages
-          sudo apt-get update && sudo apt-get install -y python3-pip jq
-          pip3 install PyNaCl
+          # Install jq for JSON processing
+          sudo apt-get update && sudo apt-get install -y jq
 
-          # Get repository public key for encryption
-          curl -H "Authorization: Bearer $GITHUB_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/${{ github.repository }}/actions/secrets/public-key" \
-               -o repo_key.json
-
-          PUBLIC_KEY=$(jq -r '.key' repo_key.json)
-          KEY_ID=$(jq -r '.key_id' repo_key.json)
-
-          # Create Python script for encryption
-          cat > encrypt.py << 'EOF'
-          import json
-          import sys
-          import base64
-          from nacl import encoding, public
-
-          def encrypt_for_repo(public_key_b64, secret_value):
-              public_key = base64.b64decode(public_key_b64)
-              sealed_box = public.SealedBox(public.PublicKey(public_key))
-              encrypted = sealed_box.encrypt(secret_value.encode('utf-8'))
-              return base64.b64encode(encrypted).decode('utf-8')
-
-          public_key = sys.argv[1]
-          secret_value = sys.argv[2]
-          print(encrypt_for_repo(public_key, secret_value))
-          EOF
-
-          # Encrypt subscription data
-          ENCRYPTED_VALUE=$(python3 encrypt.py "$PUBLIC_KEY" "$SUBSCRIPTION_DATA")
-
-          # Create the secret
-          curl -X PUT \
-               -H "Authorization: Bearer $GITHUB_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/${{ github.repository }}/actions/secrets/$SECRET_NAME" \
-               -d "{\"encrypted_value\":\"$ENCRYPTED_VALUE\",\"key_id\":\"$KEY_ID\"}" \
-               -w "Status: %{http_code}\n"
+          # Create the secret using GitHub CLI
+          echo "$SUBSCRIPTION_DATA" | gh secret set "$SECRET_NAME" --body -
 
           echo "✅ Subscription $SUBSCRIPTION_ID saved to GitHub Secrets"
 
@@ -98,12 +62,8 @@ jobs:
 
           echo "Removing subscription data for ID: $SUBSCRIPTION_ID"
 
-          # Delete the secret
-          curl -X DELETE \
-               -H "Authorization: Bearer $GITHUB_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/${{ github.repository }}/actions/secrets/$SECRET_NAME" \
-               -w "Delete Status: %{http_code}\n"
+          # Delete the secret using GitHub CLI
+          gh secret delete "$SECRET_NAME"
 
           echo "✅ Subscription $SUBSCRIPTION_ID removed from GitHub Secrets"
 
