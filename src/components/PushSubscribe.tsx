@@ -159,7 +159,7 @@ const PushSubscribe: React.FC<PushSubscribeProps> = ({ className = '' }) => {
     <>
       {/* Notification Prompt */}
       {showPrompt && !isSubscribed && (
-        <div className='fixed right-4 top-4 z-50 max-w-sm rounded-lg border border-gray-200 bg-white p-4 shadow-lg'>
+        <div className='fixed bottom-4 right-4 z-50 max-w-sm rounded-lg border border-gray-200 bg-white p-4 shadow-lg'>
           <div className='flex items-start justify-between'>
             <div className='flex items-start space-x-3'>
               <BellIcon className='mt-0.5 h-6 w-6 text-green-500' />

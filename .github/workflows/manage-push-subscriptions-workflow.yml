@@ -39,95 +39,73 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           SUBSCRIPTION_DATA: ${{ toJSON(github.event.client_payload.subscription) }}
         run: |
-          # Install GitHub CLI if not available
-          if ! command -v gh &> /dev/null; then
-            echo "Installing GitHub CLI..."
-            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-            sudo apt update
-            sudo apt install gh -y
-          fi
-
-          # Authenticate with GitHub CLI using the environment variable
-          echo "$GITHUB_TOKEN" | gh auth login --with-token
-
-          # Create or update the subscription secret
           SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
           SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
 
           echo "Saving subscription data for ID: $SUBSCRIPTION_ID"
 
-          # Save subscription data as a secret (escape newlines and quotes)
-          echo "$SUBSCRIPTION_DATA" | gh secret set "$SECRET_NAME" --repo "${{ github.repository }}"
+          # Install required packages
+          sudo apt-get update && sudo apt-get install -y python3-pip jq
+          pip3 install PyNaCl
 
-          echo "✅ Saved subscription $SUBSCRIPTION_ID to GitHub Secrets"
+          # Get repository public key for encryption
+          curl -H "Authorization: Bearer $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               "https://api.github.com/repos/${{ github.repository }}/actions/secrets/public-key" \
+               -o repo_key.json
 
-          # Also update a general subscriptions list secret
-          echo "Updating subscriptions list..."
+          PUBLIC_KEY=$(jq -r '.key' repo_key.json)
+          KEY_ID=$(jq -r '.key_id' repo_key.json)
 
-          # Get existing subscriptions (handle case where no secrets exist yet)
-          EXISTING_SUBS=$(gh secret list --repo "${{ github.repository }}" | grep "PUSH_SUBSCRIPTION_" | awk '{print $1}' | sed 's/PUSH_SUBSCRIPTION_//' | tr '\n' ',' | sed 's/,$//' || echo "")
+          # Create Python script for encryption
+          cat > encrypt.py << 'EOF'
+          import json
+          import sys
+          import base64
+          from nacl import encoding, public
 
-          # Add the new subscription ID if it's not already there
-          if [[ -z "$EXISTING_SUBS" ]]; then
-            NEW_LIST="$SUBSCRIPTION_ID"
-          elif [[ "$EXISTING_SUBS" != *"$SUBSCRIPTION_ID"* ]]; then
-            NEW_LIST="${EXISTING_SUBS},${SUBSCRIPTION_ID}"
-          else
-            NEW_LIST="$EXISTING_SUBS"
-          fi
+          def encrypt_for_repo(public_key_b64, secret_value):
+              public_key = base64.b64decode(public_key_b64)
+              sealed_box = public.SealedBox(public.PublicKey(public_key))
+              encrypted = sealed_box.encrypt(secret_value.encode('utf-8'))
+              return base64.b64encode(encrypted).decode('utf-8')
 
-          # Update the subscriptions list
-          echo "$NEW_LIST" | gh secret set "PUSH_SUBSCRIPTIONS_LIST" --repo "${{ github.repository }}"
+          public_key = sys.argv[1]
+          secret_value = sys.argv[2]
+          print(encrypt_for_repo(public_key, secret_value))
+          EOF
 
-          echo "✅ Updated subscriptions list: $NEW_LIST"
+          # Encrypt subscription data
+          ENCRYPTED_VALUE=$(python3 encrypt.py "$PUBLIC_KEY" "$SUBSCRIPTION_DATA")
+
+          # Create the secret
+          curl -X PUT \
+               -H "Authorization: Bearer $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               "https://api.github.com/repos/${{ github.repository }}/actions/secrets/$SECRET_NAME" \
+               -d "{\"encrypted_value\":\"$ENCRYPTED_VALUE\",\"key_id\":\"$KEY_ID\"}" \
+               -w "Status: %{http_code}\n"
+
+          echo "✅ Subscription $SUBSCRIPTION_ID saved to GitHub Secrets"
 
       - name: Remove subscription from secrets
         if: steps.process.outputs.action == 'remove'
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          # Install GitHub CLI if not available
-          if ! command -v gh &> /dev/null; then
-            echo "Installing GitHub CLI..."
-            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-            sudo apt update
-            sudo apt install gh -y
-          fi
-
-          # Authenticate with GitHub CLI using the environment variable
-          echo "$GITHUB_TOKEN" | gh auth login --with-token
-
           SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
           SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
 
-          echo "Removing subscription: $SUBSCRIPTION_ID"
+          echo "Removing subscription data for ID: $SUBSCRIPTION_ID"
 
-          # Remove the subscription secret
-          gh secret delete "$SECRET_NAME" --repo "${{ github.repository }}" || echo "Secret $SECRET_NAME not found or already deleted"
+          # Delete the secret
+          curl -X DELETE \
+               -H "Authorization: Bearer $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               "https://api.github.com/repos/${{ github.repository }}/actions/secrets/$SECRET_NAME" \
+               -w "Delete Status: %{http_code}\n"
 
-          echo "✅ Removed subscription $SUBSCRIPTION_ID from GitHub Secrets"
-
-          # Update the subscriptions list
-          echo "Updating subscriptions list..."
-
-          EXISTING_SUBS=$(gh secret list --repo "${{ github.repository }}" | grep "PUSH_SUBSCRIPTION_" | awk '{print $1}' | sed 's/PUSH_SUBSCRIPTION_//' | tr '\n' ',' | sed 's/,$//' || echo "")
-
-          # Remove the subscription ID from the list
-          if [[ -n "$EXISTING_SUBS" ]]; then
-            NEW_LIST=$(echo "$EXISTING_SUBS" | sed "s/$SUBSCRIPTION_ID,\|,$SUBSCRIPTION_ID\|^$SUBSCRIPTION_ID$//g" | sed 's/^,\|,$//g' | sed 's/,,/,/g')
-            
-            if [[ -n "$NEW_LIST" && "$NEW_LIST" != "," ]]; then
-              echo "$NEW_LIST" | gh secret set "PUSH_SUBSCRIPTIONS_LIST" --repo "${{ github.repository }}"
-              echo "✅ Updated subscriptions list: $NEW_LIST"
-            else
-              gh secret delete "PUSH_SUBSCRIPTIONS_LIST" --repo "${{ github.repository }}" || true
-              echo "✅ Removed empty subscriptions list"
-            fi
-          else
-            echo "No existing subscriptions found"
-          fi
+          echo "✅ Subscription $SUBSCRIPTION_ID removed from GitHub Secrets"
 
       - name: Log operation
         run: |
