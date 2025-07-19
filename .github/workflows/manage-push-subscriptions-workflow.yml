@@ -1,0 +1,126 @@
+name: Manage Push Subscriptions
+
+on:
+  repository_dispatch:
+    types: [save_push_subscription, remove_push_subscription]
+
+jobs:
+  manage-subscription:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Process subscription data
+        id: process
+        run: |
+          # Get the payload from the dispatch event
+          echo "Event type: ${{ github.event.action }}"
+          # echo "Client payload: ${{ toJSON(github.event.client_payload) }}"
+
+          # Extract subscription data
+          SUBSCRIPTION_ID="${{ github.event.client_payload.subscription.subscriptionId }}"
+          ACTION="${{ github.event.client_payload.action }}"
+          TIMESTAMP="${{ github.event.client_payload.subscription.timestamp }}"
+
+          echo "subscription_id=${SUBSCRIPTION_ID}" >> $GITHUB_OUTPUT
+          echo "action=${ACTION}" >> $GITHUB_OUTPUT
+          echo "timestamp=${TIMESTAMP}" >> $GITHUB_OUTPUT
+
+      - name: Save subscription to secrets
+        if: steps.process.outputs.action == 'save'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SUBSCRIPTION_DATA: ${{ toJSON(github.event.client_payload.subscription) }}
+        run: |
+          # Install GitHub CLI if not available
+          if ! command -v gh &> /dev/null; then
+            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            sudo apt update
+            sudo apt install gh
+          fi
+
+          # Authenticate with GitHub CLI
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+          # Create or update the subscription secret
+          SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
+          SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
+
+          # Save subscription data as a secret
+          echo "$SUBSCRIPTION_DATA" | gh secret set "$SECRET_NAME" --repo ${{ github.repository }}
+
+          echo "✅ Saved subscription $SUBSCRIPTION_ID to GitHub Secrets"
+
+          # Also update a general subscriptions list secret
+          # First, try to get existing subscriptions
+          EXISTING_SUBS=$(gh secret list --repo ${{ github.repository }} | grep "PUSH_SUBSCRIPTION_" | awk '{print $1}' | sed 's/PUSH_SUBSCRIPTION_//' | tr '\n' ',' | sed 's/,$//') || true
+
+          # Add the new subscription ID if it's not already there
+          if [[ "$EXISTING_SUBS" != *"$SUBSCRIPTION_ID"* ]]; then
+            if [ -n "$EXISTING_SUBS" ]; then
+              NEW_LIST="${EXISTING_SUBS},${SUBSCRIPTION_ID}"
+            else
+              NEW_LIST="$SUBSCRIPTION_ID"
+            fi
+          else
+            NEW_LIST="$EXISTING_SUBS"
+          fi
+
+          # Update the subscriptions list
+          echo "$NEW_LIST" | gh secret set "PUSH_SUBSCRIPTIONS_LIST" --repo ${{ github.repository }}
+
+          echo "✅ Updated subscriptions list: $NEW_LIST"
+
+      - name: Remove subscription from secrets
+        if: steps.process.outputs.action == 'remove'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Install GitHub CLI if not available
+          if ! command -v gh &> /dev/null; then
+            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            sudo apt update
+            sudo apt install gh
+          fi
+
+          # Authenticate with GitHub CLI
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+          SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
+          SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
+
+          # Remove the subscription secret
+          gh secret delete "$SECRET_NAME" --repo ${{ github.repository }} || echo "Secret $SECRET_NAME not found or already deleted"
+
+          echo "✅ Removed subscription $SUBSCRIPTION_ID from GitHub Secrets"
+
+          # Update the subscriptions list
+          EXISTING_SUBS=$(gh secret list --repo ${{ github.repository }} | grep "PUSH_SUBSCRIPTION_" | awk '{print $1}' | sed 's/PUSH_SUBSCRIPTION_//' | tr '\n' ',' | sed 's/,$//') || true
+
+          # Remove the subscription ID from the list
+          NEW_LIST=$(echo "$EXISTING_SUBS" | sed "s/$SUBSCRIPTION_ID,\|,$SUBSCRIPTION_ID\|$SUBSCRIPTION_ID//g" | sed 's/^,\|,$//g')
+
+          if [ -n "$NEW_LIST" ]; then
+            echo "$NEW_LIST" | gh secret set "PUSH_SUBSCRIPTIONS_LIST" --repo ${{ github.repository }}
+            echo "✅ Updated subscriptions list: $NEW_LIST"
+          else
+            gh secret delete "PUSH_SUBSCRIPTIONS_LIST" --repo ${{ github.repository }} || true
+            echo "✅ Removed empty subscriptions list"
+          fi
+
+      - name: Log operation
+        run: |
+          echo "📝 Push subscription operation completed:"
+          echo "   Action: ${{ steps.process.outputs.action }}"
+          echo "   Subscription ID: ${{ steps.process.outputs.subscription_id }}"
+          echo "   Timestamp: ${{ steps.process.outputs.timestamp }}"
+          echo "   Repository: ${{ github.repository }}"

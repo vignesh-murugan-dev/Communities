@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import GitHubButton from '../github-button';
+import PushSubscribe from '../PushSubscribe';
 import Logo from '../../../public/logo.webp';
 import { RssSimple } from '@phosphor-icons/react';
 
@@ -18,6 +19,7 @@ export default function Header() {
         />
       </Link>
       <div className='flex h-full items-center space-x-4'>
+        <PushSubscribe className='hidden sm:flex' />
         <GitHubButton />
         <Link
           href='/rss'
