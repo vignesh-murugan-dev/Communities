@@ -73,7 +73,7 @@ jobs:
               
               # Find new events by comparing arrays (objects in new_events.json not in old_events.json)
                 NEW_EVENT=$(jq -s '
-                (.[1] - .[0])
+                [ .[1][] | select(.eventName as $e | [.[0][] | .eventName] | index($e) | not) ]
                 ' old_events.json new_events.json)
 
               if [ -n "$NEW_EVENT" ] && [ "$NEW_EVENT" != "{}" ] && [ "$NEW_EVENT" != "null" ]; then
