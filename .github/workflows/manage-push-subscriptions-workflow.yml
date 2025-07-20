@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: sarveshmrao/communities-notification-subs
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GH_DB_PAT }}
           path: subs-repo
 
       - name: Setup Node.js
