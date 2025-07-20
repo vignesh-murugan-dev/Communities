@@ -1,0 +1,216 @@
+name: Send Push Notifications
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'Notification Title'
+        required: true
+        default: 'Tamil Nadu Tech Update'
+      body:
+        description: 'Notification Body'
+        required: true
+        default: 'New tech event available!'
+      url:
+        description: 'Notification URL (optional)'
+        required: false
+        default: '/'
+      test_mode:
+        description: 'Test mode (sends to limited recipients)'
+        type: boolean
+        required: false
+        default: true
+
+jobs:
+  send-notifications:
+    runs-on: ubuntu-latest
+    name: Send Push Notifications
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y jq curl
+
+      - name: Get all subscription secrets
+        id: get-secrets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Getting all secrets starting with 'sub_'..."
+
+          # Get list of all secrets
+          gh api repos/${{ github.repository }}/actions/secrets --jq '.secrets[].name' > all_secrets.txt
+
+          # Filter secrets starting with "PUSH_SUBSCRIPTION_SUB_"
+          grep '^PUSH_SUBSCRIPTION_SUB_' all_secrets.txt > subscription_secrets.txt || echo "No subscription secrets found"
+
+          # Count secrets
+          SECRET_COUNT=$(wc -l < subscription_secrets.txt)
+          echo "Found $SECRET_COUNT subscription secrets"
+          echo "secret_count=$SECRET_COUNT" >> $GITHUB_OUTPUT
+
+          # Show first few for logging
+          echo "First 5 subscription secrets:"
+          head -5 subscription_secrets.txt
+
+      - name: Prepare notification payload
+        id: prepare-payload
+        run: |
+          # Create notification payload
+          cat > notification_payload.json << EOF
+          {
+            "title": "${{ inputs.title }}",
+            "body": "${{ inputs.body }}",
+            "url": "${{ inputs.url }}",
+            "test": ${{ inputs.test_mode }},
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
+
+          echo "Notification payload prepared:"
+          cat notification_payload.json
+
+      - name: Send notifications to subscribers
+        id: send-notifications
+        if: steps.get-secrets.outputs.secret_count > 0
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+        run: |
+          echo "Starting notification send process..."
+
+          # Install web-push for sending notifications
+          npm install -g web-push
+
+          TOTAL_SECRETS=$(cat subscription_secrets.txt | wc -l)
+          SENT_COUNT=0
+          FAILED_COUNT=0
+
+          # Limit in test mode
+          if [ "${{ inputs.test_mode }}" = "true" ]; then
+            echo "Test mode enabled - limiting to first 3 subscriptions"
+            head -3 subscription_secrets.txt > test_secrets.txt
+            mv test_secrets.txt subscription_secrets.txt
+            TOTAL_SECRETS=$(cat subscription_secrets.txt | wc -l)
+          fi
+
+          echo "Processing $TOTAL_SECRETS subscriptions..."
+
+          # Create notification payload
+          NOTIFICATION_PAYLOAD=$(cat notification_payload.json | jq -c .)
+
+          # Loop through each subscription secret
+          while read -r SECRET_NAME; do
+            if [ -z "$SECRET_NAME" ]; then
+              continue
+            fi
+            
+            echo "Processing subscription: $SECRET_NAME"
+            
+            # Get the actual subscription data from GitHub secret
+            SUBSCRIPTION_DATA=$(gh secret get "$SECRET_NAME" 2>/dev/null)
+            
+            if [ $? -ne 0 ] || [ -z "$SUBSCRIPTION_DATA" ]; then
+              echo "❌ Failed to get subscription data for $SECRET_NAME"
+              FAILED_COUNT=$((FAILED_COUNT + 1))
+              continue
+            fi
+            
+            # Parse subscription data
+            ENDPOINT=$(echo "$SUBSCRIPTION_DATA" | jq -r '.endpoint // empty')
+            P256DH=$(echo "$SUBSCRIPTION_DATA" | jq -r '.keys.p256dh // empty')
+            AUTH=$(echo "$SUBSCRIPTION_DATA" | jq -r '.keys.auth // empty')
+            
+            if [ -z "$ENDPOINT" ] || [ -z "$P256DH" ] || [ -z "$AUTH" ]; then
+              echo "❌ Invalid subscription data for $SECRET_NAME"
+              FAILED_COUNT=$((FAILED_COUNT + 1))
+              continue
+            fi
+            
+            # Send push notification using web-push
+            echo "Sending notification to: ${ENDPOINT:0:50}..."
+            
+            # Create temporary subscription file
+            cat > "temp_sub_${SECRET_NAME}.json" << EOF
+            {
+              "endpoint": "$ENDPOINT",
+              "keys": {
+                "p256dh": "$P256DH",
+                "auth": "$AUTH"
+              }
+            }
+          EOF
+            
+            # Send notification
+            if web-push send-notification \
+              --endpoint="$ENDPOINT" \
+              --key="$P256DH" \
+              --auth="$AUTH" \
+              --vapid-subject="mailto:your-email@domain.com" \
+              --vapid-pubkey="$VAPID_PUBLIC_KEY" \
+              --vapid-pvtkey="$VAPID_PRIVATE_KEY" \
+              --payload="$NOTIFICATION_PAYLOAD" \
+              --ttl=3600 2>/dev/null; then
+              echo "✅ Successfully sent notification to $SECRET_NAME"
+              SENT_COUNT=$((SENT_COUNT + 1))
+            else
+              echo "❌ Failed to send notification to $SECRET_NAME"
+              FAILED_COUNT=$((FAILED_COUNT + 1))
+            fi
+            
+            # Cleanup temp file
+            rm -f "temp_sub_${SECRET_NAME}.json"
+            
+            # Small delay between sends to avoid rate limiting
+            sleep 0.2
+            
+          done < subscription_secrets.txt
+
+          echo "🎉 Notification send completed!"
+          echo "📊 Results:"
+          echo "   Total processed: $TOTAL_SECRETS"
+          echo "   Successfully sent: $SENT_COUNT"
+          echo "   Failed: $FAILED_COUNT"
+          if [ "$TOTAL_SECRETS" -gt 0 ]; then
+            echo "   Success rate: $(( SENT_COUNT * 100 / TOTAL_SECRETS ))%"
+          fi
+
+          # Set outputs for summary
+          echo "total_processed=$TOTAL_SECRETS" >> $GITHUB_OUTPUT
+          echo "sent_count=$SENT_COUNT" >> $GITHUB_OUTPUT
+          echo "failed_count=$FAILED_COUNT" >> $GITHUB_OUTPUT
+
+      - name: Summary report
+        run: |
+          echo "## 📱 Push Notification Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Notification Details:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Title: ${{ inputs.title }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Body: ${{ inputs.body }}" >> $GITHUB_STEP_SUMMARY
+          echo "- URL: ${{ inputs.url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Test Mode: ${{ inputs.test_mode }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Results:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Subscription secrets found: ${{ steps.get-secrets.outputs.secret_count }}" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.get-secrets.outputs.secret_count }}" -gt "0" ]; then
+            echo "- Notifications sent: ${{ steps.send-notifications.outputs.sent_count || 'N/A' }}" >> $GITHUB_STEP_SUMMARY
+            echo "- Failed notifications: ${{ steps.send-notifications.outputs.failed_count || 'N/A' }}" >> $GITHUB_STEP_SUMMARY
+            echo "- Total processed: ${{ steps.send-notifications.outputs.total_processed || 'N/A' }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- Status: ⚠️ No subscribers found" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "*Timestamp: $(date -u)*" >> $GITHUB_STEP_SUMMARY
+
+      - name: Cleanup
+        run: |
+          rm -f all_secrets.txt subscription_secrets.txt notification_payload.json test_secrets.txt
