@@ -39,32 +39,25 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y jq curl
 
-      - name: Get all subscription secrets
-        id: get-secrets
+      - name: Clone subscriptions repo
         env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
+          GH_DB_PAT: ${{ secrets.GH_DB_PAT }}
         run: |
-          echo "Getting all secrets starting with 'sub_'..."
+          git clone https://x-access-token:${GH_DB_PAT}@github.com/sarveshmrao/communities-notification-subs.git subs_repo
 
-          # Get list of all secrets
-          gh api repos/${{ github.repository }}/actions/secrets --jq '.secrets[].name' > all_secrets.txt
-
-          # Filter secrets starting with "PUSH_SUBSCRIPTION_SUB_"
-          grep '^PUSH_SUBSCRIPTION_SUB_' all_secrets.txt > subscription_secrets.txt || echo "No subscription secrets found"
-
-          # Count secrets
-          SECRET_COUNT=$(wc -l < subscription_secrets.txt)
-          echo "Found $SECRET_COUNT subscription secrets"
-          echo "secret_count=$SECRET_COUNT" >> $GITHUB_OUTPUT
-
-          # Show first few for logging
-          echo "First 5 subscription secrets:"
-          head -5 subscription_secrets.txt
+      - name: Get all subscription files
+        id: get-files
+        run: |
+          cd subs_repo
+          ls *.json > ../subscription_files.txt || echo "No subscription files found"
+          FILE_COUNT=$(wc -l < ../subscription_files.txt)
+          echo "file_count=$FILE_COUNT" >> $GITHUB_OUTPUT
+          echo "First 5 subscription files:"
+          head -5 ../subscription_files.txt
 
       - name: Prepare notification payload
         id: prepare-payload
         run: |
-          # Create notification payload
           cat > notification_payload.json << EOF
           {
             "title": "${{ inputs.title }}",
@@ -74,85 +67,55 @@ jobs:
             "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           }
           EOF
-
           echo "Notification payload prepared:"
           cat notification_payload.json
 
       - name: Send notifications to subscribers
         id: send-notifications
-        if: steps.get-secrets.outputs.secret_count > 0
+        if: steps.get-files.outputs.file_count > 0
         env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
           VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
         run: |
-          echo "Starting notification send process..."
-
-          # Install web-push for sending notifications
           npm install -g web-push
 
-          TOTAL_SECRETS=$(cat subscription_secrets.txt | wc -l)
+          TOTAL_FILES=$(cat subscription_files.txt | wc -l)
           SENT_COUNT=0
           FAILED_COUNT=0
 
           # Limit in test mode
           if [ "${{ inputs.test_mode }}" = "true" ]; then
             echo "Test mode enabled - limiting to first 3 subscriptions"
-            head -3 subscription_secrets.txt > test_secrets.txt
-            mv test_secrets.txt subscription_secrets.txt
-            TOTAL_SECRETS=$(cat subscription_secrets.txt | wc -l)
+            head -3 subscription_files.txt > test_files.txt
+            mv test_files.txt subscription_files.txt
+            TOTAL_FILES=$(cat subscription_files.txt | wc -l)
           fi
 
-          echo "Processing $TOTAL_SECRETS subscriptions..."
+          echo "Processing $TOTAL_FILES subscriptions..."
 
-          # Create notification payload
           NOTIFICATION_PAYLOAD=$(cat notification_payload.json | jq -c .)
 
-          # Loop through each subscription secret
-          while read -r SECRET_NAME; do
-            if [ -z "$SECRET_NAME" ]; then
+          while read -r FILE_NAME; do
+            if [ -z "$FILE_NAME" ]; then
               continue
             fi
-            
-            echo "Processing subscription: $SECRET_NAME"
-            
-            # Get the actual subscription data from GitHub secret using the API
-            SUBSCRIPTION_DATA=$(gh api repos/${{ github.repository }}/actions/secrets/$SECRET_NAME --jq '.secret' --header "Authorization: Bearer $GH_TOKEN")
-            echo "Subscription data for $SECRET_NAME:"
+
+            echo "Processing subscription file: $FILE_NAME"
+            SUBSCRIPTION_DATA=$(cat subs_repo/"$FILE_NAME")
             echo "$SUBSCRIPTION_DATA"
-            
-            if [ $? -ne 0 ] || [ -z "$SUBSCRIPTION_DATA" ]; then
-              echo "❌ Failed to get subscription data for $SECRET_NAME"
-              FAILED_COUNT=$((FAILED_COUNT + 1))
-              continue
-            fi
-            
-            # Parse subscription data
+
             ENDPOINT=$(echo "$SUBSCRIPTION_DATA" | jq -r '.endpoint // empty')
             P256DH=$(echo "$SUBSCRIPTION_DATA" | jq -r '.keys.p256dh // empty')
             AUTH=$(echo "$SUBSCRIPTION_DATA" | jq -r '.keys.auth // empty')
-            
+
             if [ -z "$ENDPOINT" ] || [ -z "$P256DH" ] || [ -z "$AUTH" ]; then
-              echo "❌ Invalid subscription data for $SECRET_NAME"
+              echo "❌ Invalid subscription data in $FILE_NAME"
               FAILED_COUNT=$((FAILED_COUNT + 1))
               continue
             fi
-            
-            # Send push notification using web-push
+
             echo "Sending notification to: ${ENDPOINT:0:50}..."
-            
-            # Create temporary subscription file
-            cat > "temp_sub_${SECRET_NAME}.json" << EOF
-            {
-              "endpoint": "$ENDPOINT",
-              "keys": {
-                "p256dh": "$P256DH",
-                "auth": "$AUTH"
-              }
-            }
-          EOF
-            
-            # Send notification
+
             if web-push send-notification \
               --endpoint="$ENDPOINT" \
               --key="$P256DH" \
@@ -162,32 +125,27 @@ jobs:
               --vapid-pvtkey="$VAPID_PRIVATE_KEY" \
               --payload="$NOTIFICATION_PAYLOAD" \
               --ttl=3600 2>/dev/null; then
-              echo "✅ Successfully sent notification to $SECRET_NAME"
+              echo "✅ Successfully sent notification to $FILE_NAME"
               SENT_COUNT=$((SENT_COUNT + 1))
             else
-              echo "❌ Failed to send notification to $SECRET_NAME"
+              echo "❌ Failed to send notification to $FILE_NAME"
               FAILED_COUNT=$((FAILED_COUNT + 1))
             fi
-            
-            # Cleanup temp file
-            rm -f "temp_sub_${SECRET_NAME}.json"
-            
-            # Small delay between sends to avoid rate limiting
+
             sleep 0.2
-            
-          done < subscription_secrets.txt
+
+          done < subscription_files.txt
 
           echo "🎉 Notification send completed!"
           echo "📊 Results:"
-          echo "   Total processed: $TOTAL_SECRETS"
+          echo "   Total processed: $TOTAL_FILES"
           echo "   Successfully sent: $SENT_COUNT"
           echo "   Failed: $FAILED_COUNT"
-          if [ "$TOTAL_SECRETS" -gt 0 ]; then
-            echo "   Success rate: $(( SENT_COUNT * 100 / TOTAL_SECRETS ))%"
+          if [ "$TOTAL_FILES" -gt 0 ]; then
+            echo "   Success rate: $(( SENT_COUNT * 100 / TOTAL_FILES ))%"
           fi
 
-          # Set outputs for summary
-          echo "total_processed=$TOTAL_SECRETS" >> $GITHUB_OUTPUT
+          echo "total_processed=$TOTAL_FILES" >> $GITHUB_OUTPUT
           echo "sent_count=$SENT_COUNT" >> $GITHUB_OUTPUT
           echo "failed_count=$FAILED_COUNT" >> $GITHUB_OUTPUT
 
@@ -202,8 +160,8 @@ jobs:
           echo "- Test Mode: ${{ inputs.test_mode }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Results:**" >> $GITHUB_STEP_SUMMARY
-          echo "- Subscription secrets found: ${{ steps.get-secrets.outputs.secret_count }}" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ steps.get-secrets.outputs.secret_count }}" -gt "0" ]; then
+          echo "- Subscription files found: ${{ steps.get-files.outputs.file_count }}" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.get-files.outputs.file_count }}" -gt "0" ]; then
             echo "- Notifications sent: ${{ steps.send-notifications.outputs.sent_count || 'N/A' }}" >> $GITHUB_STEP_SUMMARY
             echo "- Failed notifications: ${{ steps.send-notifications.outputs.failed_count || 'N/A' }}" >> $GITHUB_STEP_SUMMARY
             echo "- Total processed: ${{ steps.send-notifications.outputs.total_processed || 'N/A' }}" >> $GITHUB_STEP_SUMMARY
@@ -215,4 +173,5 @@ jobs:
 
       - name: Cleanup
         run: |
-          rm -f all_secrets.txt subscription_secrets.txt notification_payload.json test_secrets.txt
+          rm -f subscription_files.txt notification_payload.json test_files.txt
+          rm -rf subs_repo
