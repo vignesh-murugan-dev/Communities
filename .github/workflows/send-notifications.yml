@@ -117,7 +117,9 @@ jobs:
             echo "Processing subscription: $SECRET_NAME"
             
             # Get the actual subscription data from GitHub secret
-            SUBSCRIPTION_DATA=$(gh secret get "$SECRET_NAME" 2>/dev/null)
+            SUBSCRIPTION_DATA=secrets.$SECRET_NAME
+            echo "Subscription data for $SECRET_NAME:"
+            echo "$SUBSCRIPTION_DATA"
             
             if [ $? -ne 0 ] || [ -z "$SUBSCRIPTION_DATA" ]; then
               echo "❌ Failed to get subscription data for $SECRET_NAME"
