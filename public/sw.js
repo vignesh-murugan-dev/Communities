@@ -28,8 +28,8 @@ self.addEventListener('push', (event) => {
 
   const options = {
     body: data.body || 'New tech event available!',
-    icon: '/logo.webp',
-    badge: '/logo.webp',
+    icon: '/favicon.ico',
+    badge: '/favicon.ico',
     tag: 'tech-event',
     data: {
       url: data.url || '/',
@@ -38,7 +38,7 @@ self.addEventListener('push', (event) => {
     actions: [
       {
         action: 'view',
-        title: 'View Event'
+        title: data.blast ? 'View Details' : 'View Event'
       },
       {
         action: 'close',

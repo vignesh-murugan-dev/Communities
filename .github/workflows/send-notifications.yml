@@ -84,7 +84,7 @@ jobs:
           GH_DB_PAT: ${{ secrets.GH_DB_PAT }}
         run: |
           echo "Cloning subscriptions repo..."
-          git clone https://x-access-token:${GH_DB_PAT}@github.com/sarveshmrao/communities-notification-subs.git subs_repo
+          git clone https://x-access-token:${GH_DB_PAT}@github.com/${{ secrets.SUBSCRIPTION_REPO }}.git subs_repo
           echo "Repo cloned. Listing files:"
           ls subs_repo
 
@@ -108,12 +108,14 @@ jobs:
               BODY="📅 ${{ steps.detect-changes.outputs.eventDate }} at ${{ steps.detect-changes.outputs.eventTime }} in ${{ steps.detect-changes.outputs.location }}"
               URL="${{ steps.detect-changes.outputs.eventLink }}"
               TEST_MODE=false
+              BLAST=false
           else
               echo "Using workflow_dispatch inputs."
               TITLE="${{ inputs.title }}"
               BODY="${{ inputs.body }}"
               URL="${{ inputs.url }}"
-              TEST_MODE=${{ inputs.test_mode }}
+              TEST_MODE=false
+              BLAST=true
           fi
 
           echo "Raw TITLE: $TITLE"
@@ -149,43 +151,49 @@ jobs:
           FAIL=0
           echo "Total subscriptions to process: $TOTAL"
 
+          # Handle test mode
           if jq -e '.test' notification.json | grep -q true; then
               echo "Test mode enabled. Limiting recipients to first 3."
-              head -3 subs.txt > test.txt && mv test.txt subs.txt
+              head -3 subs.txt > subs_tmp.txt && mv subs_tmp.txt subs.txt
               TOTAL=$(wc -l < subs.txt)
               echo "Test mode total: $TOTAL"
           fi
 
-          for FILE in $(cat subs.txt); do
-              echo "Processing subscription file: $FILE"
-              SUB=$(cat subs_repo/$FILE)
-              ENDPOINT=$(echo "$SUB" | jq -r '.endpoint')
-              P256DH=$(echo "$SUB" | jq -r '.keys.p256dh')
-              AUTH=$(echo "$SUB" | jq -r '.keys.auth')
+          # Check if there are any subscriptions to process
+          if [ "$TOTAL" -eq 0 ]; then
+              echo "::warning ::No subscriptions found to send notifications."
+          else
+              while IFS= read -r FILE || [ -n "$FILE" ]; do
+                  [ -z "$FILE" ] && continue
+                  echo "Processing subscription file: $FILE"
+                  SUB=$(cat subs_repo/"$FILE")
+                  ENDPOINT=$(echo "$SUB" | jq -r '.endpoint')
+                  P256DH=$(echo "$SUB" | jq -r '.keys.p256dh')
+                  AUTH=$(echo "$SUB" | jq -r '.keys.auth')
 
+                  if [ -z "$ENDPOINT" ] || [ -z "$P256DH" ] || [ -z "$AUTH" ]; then
+                      echo "::warning ::Invalid subscription in $FILE"
+                      FAIL=$((FAIL+1))
+                      continue
+                  fi
 
-              if [ -z "$ENDPOINT" ] || [ -z "$P256DH" ] || [ -z "$AUTH" ]; then
-                  echo "::warning ::Invalid subscription in $FILE"
-                  FAIL=$((FAIL+1))
-                  continue
-              fi
-
-              if web-push send-notification \
-                      --endpoint="$ENDPOINT" \
-                      --key="$P256DH" \
-                      --auth="$AUTH" \
-                      --vapid-subject="mailto:you@example.com" \
-                      --vapid-pubkey="$VAPID_PUBLIC_KEY" \
-                      --vapid-pvtkey="$VAPID_PRIVATE_KEY" \
-                      --payload="$(cat notification.json | jq -c .)" \
-                      --ttl=3600 2>/dev/null; then
-                  SENT=$((SENT+1))
-              else
-                  echo "::error ::Failed to send notification to $ENDPOINT"
-                  FAIL=$((FAIL+1))
-              fi
-              sleep 0.2
-          done
+                  if web-push send-notification \
+                          --endpoint="$ENDPOINT" \
+                          --key="$P256DH" \
+                          --auth="$AUTH" \
+                          --vapid-subject="mailto:you@example.com" \
+                          --vapid-pubkey="$VAPID_PUBLIC_KEY" \
+                          --vapid-pvtkey="$VAPID_PRIVATE_KEY" \
+                          --payload="$(jq -c . < notification.json)" \
+                          --ttl=3600 2>/dev/null; then
+                      SENT=$((SENT+1))
+                  else
+                      echo "::error ::Failed to send notification to $ENDPOINT"
+                      FAIL=$((FAIL+1))
+                  fi
+                  sleep 0.2
+              done < subs.txt
+          fi
 
           echo "Notifications sent: $SENT"
           echo "Notifications failed: $FAIL"
