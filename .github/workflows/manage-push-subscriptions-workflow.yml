@@ -45,11 +45,11 @@ jobs:
 
           sudo apt-get update && sudo apt-get install -y jq
 
-          # Write the payload JSON to a file
-          echo '::add-mask::${{ toJSON(github.event.client_payload.subscription) }}' > subscription.json
+            # Write the payload JSON to a file (do not echo to logs)
+            echo '${{ toJSON(github.event.client_payload.subscription) }}' > subscription.json
 
-          # Mask the secret to prevent it from leaking in logs
-          echo "::add-mask::$(cat subscription.json)"
+            # Mask the secret value to prevent leaking in logs
+            echo "::add-mask::$(cat subscription.json)" > /dev/null
 
           # Upload it to GitHub Secrets
           gh secret set "$SECRET_NAME" --body - < subscription.json
