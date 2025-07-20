@@ -69,7 +69,9 @@ jobs:
               
               # Find new events by comparing arrays
               NEW_EVENT=$(jq -r --slurpfile old old_events.json --slurpfile new new_events.json '
-                [ $new[0][] | select(.eventName as $name | $old[0][] | map(.eventName) | index($name) | not) ] | if length > 0 then .[0] else empty end
+                [ $new[0][] as $nevent | select(
+                  ($old[0][] | map(.eventName) | index($nevent.eventName)) == null
+                ) ] | if length > 0 then .[0] else empty end
               ' 2>/dev/null || echo "{}")
               
               if [ "$NEW_EVENT" != "{}" ] && [ "$NEW_EVENT" != "null" ] && [ -n "$NEW_EVENT" ]; then
