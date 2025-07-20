@@ -163,9 +163,6 @@ jobs:
               P256DH=$(echo "$SUB" | jq -r '.keys.p256dh')
               AUTH=$(echo "$SUB" | jq -r '.keys.auth')
 
-              echo "Endpoint: $ENDPOINT"
-              echo "P256DH: $P256DH"
-              echo "AUTH: $AUTH"
 
               if [ -z "$ENDPOINT" ] || [ -z "$P256DH" ] || [ -z "$AUTH" ]; then
                   echo "::warning ::Invalid subscription in $FILE"
@@ -173,7 +170,6 @@ jobs:
                   continue
               fi
 
-              echo "Sending notification to $ENDPOINT..."
               if web-push send-notification \
                       --endpoint="$ENDPOINT" \
                       --key="$P256DH" \
@@ -183,7 +179,6 @@ jobs:
                       --vapid-pvtkey="$VAPID_PRIVATE_KEY" \
                       --payload="$(cat notification.json | jq -c .)" \
                       --ttl=3600 2>/dev/null; then
-                  echo "Notification sent successfully to $ENDPOINT"
                   SENT=$((SENT+1))
               else
                   echo "::error ::Failed to send notification to $ENDPOINT"
