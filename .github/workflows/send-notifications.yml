@@ -48,56 +48,106 @@ jobs:
         run: |
           echo "Detecting changes in events.json..."
 
-          # Get the changed files
-          git diff --name-only HEAD~1 HEAD > changed_files.txt
-
-          if grep -q "src/data/events.json" changed_files.txt; then
-            echo "events_changed=true" >> $GITHUB_OUTPUT
-            echo "✅ Events.json has been modified"
+          # Check if this is the first commit or if we have previous commits
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            echo "Previous commit exists, checking for changes..."
             
-            # Get the actual changes (added events)
-            git show HEAD:src/data/events.json > new_events.json
-            git show HEAD~1:src/data/events.json > old_events.json 2>/dev/null || echo "[]" > old_events.json
+            # Get the changed files
+            git diff --name-only HEAD~1 HEAD > changed_files.txt
             
-            # Find new events by comparing arrays
-            NEW_EVENT=$(jq -r --slurpfile old old_events.json --slurpfile new new_events.json '
-              ($new[0] - $old[0]) | if length > 0 then .[0] else empty end
-            ' 2>/dev/null || echo "{}")
-            
-            if [ "$NEW_EVENT" != "{}" ] && [ "$NEW_EVENT" != "null" ] && [ -n "$NEW_EVENT" ]; then
-              echo "new_event_found=true" >> $GITHUB_OUTPUT
-              echo "$NEW_EVENT" > detected_event.json
+            if grep -q "src/data/events.json" changed_files.txt; then
+              echo "events_changed=true" >> $GITHUB_OUTPUT
+              echo "✅ Events.json has been modified"
               
-              # Extract event details
-              EVENT_NAME=$(echo "$NEW_EVENT" | jq -r '.eventName // "New Tech Event"')
-              EVENT_DESCRIPTION=$(echo "$NEW_EVENT" | jq -r '.eventDescription // ""')
-              EVENT_DATE=$(echo "$NEW_EVENT" | jq -r '.eventDate // ""')
-              EVENT_TIME=$(echo "$NEW_EVENT" | jq -r '.eventTime // ""')
-              EVENT_VENUE=$(echo "$NEW_EVENT" | jq -r '.eventVenue // ""')
-              EVENT_LINK=$(echo "$NEW_EVENT" | jq -r '.eventLink // ""')
-              LOCATION=$(echo "$NEW_EVENT" | jq -r '.location // ""')
-              COMMUNITY_NAME=$(echo "$NEW_EVENT" | jq -r '.communityName // ""')
+              # Get the actual changes (added events)
+              git show HEAD:src/data/events.json > new_events.json
+              git show HEAD~1:src/data/events.json > old_events.json
               
-              echo "event_name=$EVENT_NAME" >> $GITHUB_OUTPUT
-              echo "event_description=$EVENT_DESCRIPTION" >> $GITHUB_OUTPUT
-              echo "event_date=$EVENT_DATE" >> $GITHUB_OUTPUT
-              echo "event_time=$EVENT_TIME" >> $GITHUB_OUTPUT
-              echo "event_venue=$EVENT_VENUE" >> $GITHUB_OUTPUT
-              echo "event_link=$EVENT_LINK" >> $GITHUB_OUTPUT
-              echo "location=$LOCATION" >> $GITHUB_OUTPUT
-              echo "community_name=$COMMUNITY_NAME" >> $GITHUB_OUTPUT
+              # Find new events by comparing arrays
+              NEW_EVENT=$(jq -r --slurpfile old old_events.json --slurpfile new new_events.json '
+                ($new[0] - $old[0]) | if length > 0 then .[0] else empty end
+              ' 2>/dev/null || echo "{}")
               
-              echo "🎉 New event detected: $EVENT_NAME"
-              echo "📍 Location: $LOCATION"
-              echo "🏢 Community: $COMMUNITY_NAME"
-              echo "📅 Date: $EVENT_DATE at $EVENT_TIME"
+              if [ "$NEW_EVENT" != "{}" ] && [ "$NEW_EVENT" != "null" ] && [ -n "$NEW_EVENT" ]; then
+                echo "new_event_found=true" >> $GITHUB_OUTPUT
+                echo "$NEW_EVENT" > detected_event.json
+                
+                # Extract event details
+                EVENT_NAME=$(echo "$NEW_EVENT" | jq -r '.eventName // "New Tech Event"')
+                EVENT_DESCRIPTION=$(echo "$NEW_EVENT" | jq -r '.eventDescription // ""')
+                EVENT_DATE=$(echo "$NEW_EVENT" | jq -r '.eventDate // ""')
+                EVENT_TIME=$(echo "$NEW_EVENT" | jq -r '.eventTime // ""')
+                EVENT_VENUE=$(echo "$NEW_EVENT" | jq -r '.eventVenue // ""')
+                EVENT_LINK=$(echo "$NEW_EVENT" | jq -r '.eventLink // ""')
+                LOCATION=$(echo "$NEW_EVENT" | jq -r '.location // ""')
+                COMMUNITY_NAME=$(echo "$NEW_EVENT" | jq -r '.communityName // ""')
+                
+                echo "event_name=$EVENT_NAME" >> $GITHUB_OUTPUT
+                echo "event_description=$EVENT_DESCRIPTION" >> $GITHUB_OUTPUT
+                echo "event_date=$EVENT_DATE" >> $GITHUB_OUTPUT
+                echo "event_time=$EVENT_TIME" >> $GITHUB_OUTPUT
+                echo "event_venue=$EVENT_VENUE" >> $GITHUB_OUTPUT
+                echo "event_link=$EVENT_LINK" >> $GITHUB_OUTPUT
+                echo "location=$LOCATION" >> $GITHUB_OUTPUT
+                echo "community_name=$COMMUNITY_NAME" >> $GITHUB_OUTPUT
+                
+                echo "🎉 New event detected: $EVENT_NAME"
+                echo "📍 Location: $LOCATION"
+                echo "🏢 Community: $COMMUNITY_NAME"
+                echo "📅 Date: $EVENT_DATE at $EVENT_TIME"
+              else
+                echo "new_event_found=false" >> $GITHUB_OUTPUT
+                echo "No new events found in the changes"
+              fi
             else
-              echo "new_event_found=false" >> $GITHUB_OUTPUT
-              echo "No new events found in the changes"
+              echo "events_changed=false" >> $GITHUB_OUTPUT
+              echo "events.json was not modified"
             fi
           else
-            echo "events_changed=false" >> $GITHUB_OUTPUT
-            echo "events.json was not modified"
+            echo "First commit or no previous commits - checking if events.json exists and has content"
+            
+            if [ -f "src/data/events.json" ]; then
+              echo "events_changed=true" >> $GITHUB_OUTPUT
+              echo "✅ Events.json exists (first commit scenario)"
+              
+              # For first commit, get the first event from the file
+              FIRST_EVENT=$(jq -r '.[0] // empty' src/data/events.json 2>/dev/null || echo "{}")
+              
+              if [ "$FIRST_EVENT" != "{}" ] && [ "$FIRST_EVENT" != "null" ] && [ -n "$FIRST_EVENT" ]; then
+                echo "new_event_found=true" >> $GITHUB_OUTPUT
+                echo "$FIRST_EVENT" > detected_event.json
+                
+                # Extract event details
+                EVENT_NAME=$(echo "$FIRST_EVENT" | jq -r '.eventName // "New Tech Event"')
+                EVENT_DESCRIPTION=$(echo "$FIRST_EVENT" | jq -r '.eventDescription // ""')
+                EVENT_DATE=$(echo "$FIRST_EVENT" | jq -r '.eventDate // ""')
+                EVENT_TIME=$(echo "$FIRST_EVENT" | jq -r '.eventTime // ""')
+                EVENT_VENUE=$(echo "$FIRST_EVENT" | jq -r '.eventVenue // ""')
+                EVENT_LINK=$(echo "$FIRST_EVENT" | jq -r '.eventLink // ""')
+                LOCATION=$(echo "$FIRST_EVENT" | jq -r '.location // ""')
+                COMMUNITY_NAME=$(echo "$FIRST_EVENT" | jq -r '.communityName // ""')
+                
+                echo "event_name=$EVENT_NAME" >> $GITHUB_OUTPUT
+                echo "event_description=$EVENT_DESCRIPTION" >> $GITHUB_OUTPUT
+                echo "event_date=$EVENT_DATE" >> $GITHUB_OUTPUT
+                echo "event_time=$EVENT_TIME" >> $GITHUB_OUTPUT
+                echo "event_venue=$EVENT_VENUE" >> $GITHUB_OUTPUT
+                echo "event_link=$EVENT_LINK" >> $GITHUB_OUTPUT
+                echo "location=$LOCATION" >> $GITHUB_OUTPUT
+                echo "community_name=$COMMUNITY_NAME" >> $GITHUB_OUTPUT
+                
+                echo "🎉 First event detected: $EVENT_NAME"
+                echo "📍 Location: $LOCATION"
+                echo "🏢 Community: $COMMUNITY_NAME"
+                echo "📅 Date: $EVENT_DATE at $EVENT_TIME"
+              else
+                echo "new_event_found=false" >> $GITHUB_OUTPUT
+                echo "No events found in events.json"
+              fi
+            else
+              echo "events_changed=false" >> $GITHUB_OUTPUT
+              echo "events.json does not exist"
+            fi
           fi
 
       - name: Clone subscriptions repo
