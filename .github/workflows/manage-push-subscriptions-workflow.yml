@@ -9,8 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout target repository
         uses: actions/checkout@v4
+        with:
+          repository: sarveshmrao/communities-notification-subs
+          token: ${{ secrets.GH_PAT }}
+          path: subs-repo
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -20,11 +24,6 @@ jobs:
       - name: Process subscription data
         id: process
         run: |
-          # Get the payload from the dispatch event
-          echo "Event type: ${{ github.event.action }}"
-          echo "Client payload received for processing"
-
-          # Extract subscription data
           SUBSCRIPTION_ID="${{ github.event.client_payload.subscription.subscriptionId }}"
           ACTION="${{ github.event.client_payload.action }}"
           TIMESTAMP="${{ github.event.client_payload.subscription.timestamp }}"
@@ -33,41 +32,36 @@ jobs:
           echo "action=${ACTION}" >> $GITHUB_OUTPUT
           echo "timestamp=${TIMESTAMP}" >> $GITHUB_OUTPUT
 
-      - name: Save subscription to secrets
+      - name: Save subscription as JSON file
         if: steps.process.outputs.action == 'save'
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
-          SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
+          SUBS_FILE="subs-repo/${SUBSCRIPTION_ID}.json"
 
           echo "Saving subscription data for ID: $SUBSCRIPTION_ID"
+          echo '${{ toJSON(github.event.client_payload.subscription) }}' > "$SUBS_FILE"
 
-          # sudo apt-get update && sudo apt-get install -y jq
-
-            # Write the payload JSON to a file (do not echo to logs)
-            echo '${{ toJSON(github.event.client_payload.subscription) }}' > subscription.json
-
-            # Mask the secret value to prevent leaking in logs
-            echo "::add-mask::$(cat subscription.json)" > /dev/null
-
-          # Upload it to GitHub Secrets
-          gh secret set "$SECRET_NAME" --body - < subscription.json
-
-          echo "✅ Subscription $SUBSCRIPTION_ID saved to GitHub Secrets"
-
-      - name: Remove subscription from secrets
+      - name: Remove subscription JSON file
         if: steps.process.outputs.action == 'remove'
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           SUBSCRIPTION_ID="${{ steps.process.outputs.subscription_id }}"
-          SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
+          SUBS_FILE="subs-repo/${SUBSCRIPTION_ID}.json"
 
           echo "Removing subscription data for ID: $SUBSCRIPTION_ID"
-          gh secret delete "$SECRET_NAME"
+          if [ -f "$SUBS_FILE" ]; then
+            rm "$SUBS_FILE"
+          else
+            echo "File $SUBS_FILE does not exist."
+          fi
 
-          echo "✅ Subscription $SUBSCRIPTION_ID removed from GitHub Secrets"
+      - name: Commit and push changes
+        run: |
+          cd subs-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "Manage subscription: ${{ steps.process.outputs.action }} ${{ steps.process.outputs.subscription_id }}"
+          git push
 
       - name: Log operation
         run: |
@@ -75,4 +69,4 @@ jobs:
           echo "   Action: ${{ steps.process.outputs.action }}"
           echo "   Subscription ID: ${{ steps.process.outputs.subscription_id }}"
           echo "   Timestamp: ${{ steps.process.outputs.timestamp }}"
-          echo "   Repository: ${{ github.repository }}"
+          echo "   Repository: sarveshmrao/communities-notification-subs"
