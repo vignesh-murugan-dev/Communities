@@ -42,7 +42,7 @@ jobs:
       - name: Get all subscription secrets
         id: get-secrets
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           echo "Getting all secrets starting with 'sub_'..."
 
@@ -82,7 +82,7 @@ jobs:
         id: send-notifications
         if: steps.get-secrets.outputs.secret_count > 0
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
           VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
         run: |
