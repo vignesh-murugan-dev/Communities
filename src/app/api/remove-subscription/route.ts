@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Generate subscription ID for removal
-    const subscriptionId = generateSubscriptionId(data.endpoint);
+    const subscriptionId = await generateSubscriptionId(data.endpoint);
 
     // Dispatch removal to GitHub Actions
     const githubResponse = await dispatchToGitHub({
@@ -86,16 +86,20 @@ async function dispatchToGitHub(removalData: RemovalData) {
 /**
  * Generates a unique subscription ID from endpoint
  */
-function generateSubscriptionId(endpoint: string): string {
-  let hash = 0;
-  for (let i = 0; i < endpoint.length; i++) {
-    const char = endpoint.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash;
-  }
+async function generateSubscriptionId(endpoint: string): Promise<string> {
+  // let hash = 0;
+  // for (let i = 0; i < endpoint.length; i++) {
+  //   const char = endpoint.charCodeAt(i);
+  //   hash = (hash << 5) - hash + char;
+  //   hash = hash & hash;
+  // }
 
-  const positiveHash = Math.abs(hash);
-  const timestamp = Date.now().toString().slice(-6);
+  // const positiveHash = Math.abs(hash);
+  // const timestamp = Date.now().toString().slice(-6);
 
-  return `sub_${positiveHash}_${timestamp}`;
+  // return `sub_${positiveHash}_${timestamp}`;
+  const encoder = new TextEncoder();
+  const data = encoder.encode(endpoint);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return [...new Uint8Array(hashBuffer)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }

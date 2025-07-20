@@ -105,6 +105,9 @@ const PushSubscribe: React.FC<PushSubscribeProps> = ({ className = '' }) => {
       if (!response.ok) {
         throw new Error('Failed to save subscription');
       }
+      // save the response.subscriptionId to storage
+      const data = await response.json();
+      localStorage.setItem('pushSubscriptionId', data.subscriptionId);
 
       setIsSubscribed(true);
       setShowPrompt(false);
