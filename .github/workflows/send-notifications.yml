@@ -72,16 +72,9 @@ jobs:
             cat old_events.json
               
               # Find new events by comparing arrays (objects in new_events.json not in old_events.json)
-                NEW_EVENT=$(jq -n \
-                --slurpfile old old_events.json \
-                --slurpfile new new_events.json '
-                    $new[0] as $newArr |
-                    $old[0] as $oldArr |
-                    [ $newArr[] | select(
-                        (tostring) as $n |
-                        ($oldArr[] | tostring | select(. == $n)) | not
-                    ) ]
-                ' 2>/dev/null)
+                NEW_EVENT=$(jq -s '
+                (.[1] - .[0])
+                ' old_events.json new_events.json)
 
               if [ -n "$NEW_EVENT" ] && [ "$NEW_EVENT" != "{}" ] && [ "$NEW_EVENT" != "null" ]; then
                 echo "new_event_found=true" >> $GITHUB_OUTPUT
