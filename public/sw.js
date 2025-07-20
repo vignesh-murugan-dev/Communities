@@ -38,7 +38,7 @@ self.addEventListener('push', (event) => {
     actions: [
       {
         action: 'view',
-        title: data.blast ? 'View Details' : 'View Event'
+        title: data.test ? 'View Details' : 'View Event'
       },
       {
         action: 'close',

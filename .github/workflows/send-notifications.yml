@@ -108,14 +108,12 @@ jobs:
               BODY="📅 ${{ steps.detect-changes.outputs.eventDate }} at ${{ steps.detect-changes.outputs.eventTime }} in ${{ steps.detect-changes.outputs.location }}"
               URL="${{ steps.detect-changes.outputs.eventLink }}"
               TEST_MODE=false
-              BLAST=false
           else
               echo "Using workflow_dispatch inputs."
               TITLE="${{ inputs.title }}"
               BODY="${{ inputs.body }}"
               URL="${{ inputs.url }}"
-              TEST_MODE=false
-              BLAST=true
+              TEST_MODE=true
           fi
 
           echo "Raw TITLE: $TITLE"
