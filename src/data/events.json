@@ -75,5 +75,16 @@
     "location": "Chennai",
     "communityName": "Testing community",
     "communityLogo": "https://res.cloudinary.com/dwir71gi2/image/upload/v1737382622/chennaipy_ovbthm.png"
+  },
+  {
+    "eventName": "Testing1 events",
+    "eventDescription": "Testing1 description.",
+    "eventDate": "2025-07-26",
+    "eventTime": "15:00",
+    "eventVenue": "Testing1 venue",
+    "eventLink": "https://www.meetup.com/chennaipy/events/309690796/?eventOrigin=group_upcoming_events",
+    "location": "Chennai",
+    "communityName": "Testing1 community",
+    "communityLogo": "https://res.cloudinary.com/dwir71gi2/image/upload/v1737382622/chennaipy_ovbthm.png"
   }
 ]
