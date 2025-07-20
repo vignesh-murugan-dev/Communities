@@ -43,7 +43,7 @@ jobs:
 
           echo "Saving subscription data for ID: $SUBSCRIPTION_ID"
 
-          sudo apt-get update && sudo apt-get install -y jq
+          # sudo apt-get update && sudo apt-get install -y jq
 
             # Write the payload JSON to a file (do not echo to logs)
             echo '${{ toJSON(github.event.client_payload.subscription) }}' > subscription.json
