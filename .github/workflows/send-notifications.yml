@@ -66,6 +66,10 @@ jobs:
               # Get the actual changes (added events)
               git show HEAD:src/data/events.json > new_events.json
               git show HEAD~1:src/data/events.json > old_events.json
+            echo "Contents of new_events.json:"
+            cat new_events.json
+            echo "Contents of old_events.json:"
+            cat old_events.json
               
               # Find new events by comparing arrays (objects in new_events.json not in old_events.json)
               NEW_EVENT=$(jq -r '
