@@ -67,12 +67,12 @@ jobs:
               git show HEAD:src/data/events.json > new_events.json
               git show HEAD~1:src/data/events.json > old_events.json
               
-              # Find new events by comparing arrays
-              NEW_EVENT=$(jq -r --slurpfile old old_events.json --slurpfile new new_events.json '
-                [ $new[0][] as $nevent | select(
-                  ($old[0][] | map(@json) | index($nevent | @json)) == null
-                ) ] | if length > 0 then .[0] else empty end
-              ' 2>/dev/null || echo "{}")
+              # Find new events by comparing arrays (objects in new_events.json not in old_events.json)
+              NEW_EVENT=$(jq -r '
+                (input_filename == "new_events.json") as $new |
+                (input_filename == "old_events.json") as $old |
+                (.[0] - .[1]) | if length > 0 then .[0] else empty end
+              ' new_events.json old_events.json 2>/dev/null || echo "{}")
               
               if [ "$NEW_EVENT" != "{}" ] && [ "$NEW_EVENT" != "null" ] && [ -n "$NEW_EVENT" ]; then
                 echo "new_event_found=true" >> $GITHUB_OUTPUT
