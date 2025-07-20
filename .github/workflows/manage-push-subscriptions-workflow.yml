@@ -65,7 +65,7 @@ jobs:
           SECRET_NAME="PUSH_SUBSCRIPTION_${SUBSCRIPTION_ID}"
 
           echo "Removing subscription data for ID: $SUBSCRIPTION_ID"
-          gh secret delete "$SECRET_NAME" --yes
+          gh secret delete "$SECRET_NAME"
 
           echo "✅ Subscription $SUBSCRIPTION_ID removed from GitHub Secrets"
 
