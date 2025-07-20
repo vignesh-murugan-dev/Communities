@@ -20,6 +20,7 @@ on:
         type: boolean
         required: false
         default: true
+
   push:
     paths:
       - 'src/data/events.json'
@@ -36,66 +37,35 @@ jobs:
       - name: Ensure full git history
         run: git fetch --unshallow || true
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+      - name: Setup Node.js & tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq curl
+          npm install -g web-push
 
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y jq curl
-
-      - name: Detect events.json changes
+      - name: Detect new events (on push)
         id: detect-changes
         if: github.event_name == 'push'
         run: |
-          echo "Detecting changes in events.json..."
+          echo "::notice ::Checking if events.json changed..."
+          git diff --name-only HEAD~1 HEAD | grep -q "src/data/events.json" || exit 0
 
-          if git rev-parse HEAD~1 >/dev/null 2>&1; then
-            echo "Previous commit exists. Checking diff..."
+          git show HEAD:src/data/events.json > new.json
+          git show HEAD~1:src/data/events.json > old.json
 
-            git diff --name-only HEAD~1 HEAD > changed_files.txt
-            if grep -q "src/data/events.json" changed_files.txt; then
-              echo "events_changed=true" >> $GITHUB_OUTPUT
+          NEW_EVENTS=$(jq -s '.[1] - .[0]' old.json new.json)
+          echo "$NEW_EVENTS" > diff.json
+          COUNT=$(jq 'length' diff.json)
 
-              git show HEAD:src/data/events.json > new_events.json || echo "[]" > new_events.json
-              git show HEAD~1:src/data/events.json > old_events.json || echo "[]" > old_events.json
-
-              echo "Comparing for new events..."
-              NEW_EVENTS=$(jq -s '.[1] - .[0]' old_events.json new_events.json)
-
-              echo "$NEW_EVENTS" > detected_event.json
-
-              COUNT=$(echo "$NEW_EVENTS" | jq 'length')
-              if [ "$COUNT" -gt 0 ]; then
-                echo "new_event_found=true" >> $GITHUB_OUTPUT
-
-                FIRST_EVENT=$(echo "$NEW_EVENTS" | jq '.[0]')
-                echo "$FIRST_EVENT" > detected_event.json
-
-                jq -r '. as $e | to_entries[] | "\(.key)=\($e[.key])"' <<< "$FIRST_EVENT" >> $GITHUB_OUTPUT
-              else
-                echo "new_event_found=false" >> $GITHUB_OUTPUT
-              fi
-            else
-              echo "events_changed=false" >> $GITHUB_OUTPUT
-            fi
+          if [ "$COUNT" -gt 0 ]; then
+            echo "::notice ::Found $COUNT new event(s)."
+            FIRST_EVENT=$(jq '.[0]' diff.json)
+            echo "$FIRST_EVENT" > detected_event.json
+            jq -r '. as $e | to_entries[] | "\(.key)=\($e[.key])"' <<< "$FIRST_EVENT" >> $GITHUB_OUTPUT
+            echo "new_event_found=true" >> $GITHUB_OUTPUT
           else
-            echo "First commit - using src/data/events.json as new event source."
-            echo "events_changed=true" >> $GITHUB_OUTPUT
-
-            if [ -f src/data/events.json ]; then
-              FIRST_EVENT=$(jq '.[0] // {}' src/data/events.json)
-              echo "$FIRST_EVENT" > detected_event.json
-
-              if [ "$FIRST_EVENT" != "{}" ]; then
-                echo "new_event_found=true" >> $GITHUB_OUTPUT
-                jq -r '. as $e | to_entries[] | "\(.key)=\($e[.key])"' <<< "$FIRST_EVENT" >> $GITHUB_OUTPUT
-              else
-                echo "new_event_found=false" >> $GITHUB_OUTPUT
-              fi
-            else
-              echo "new_event_found=false" >> $GITHUB_OUTPUT
-            fi
+            echo "::notice ::No new events found."
+            echo "new_event_found=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Clone subscriptions repo
@@ -104,29 +74,26 @@ jobs:
         run: |
           git clone https://x-access-token:${GH_DB_PAT}@github.com/sarveshmrao/communities-notification-subs.git subs_repo
 
-      - name: Get all subscription files
-        id: get-files
+      - name: List subscription files
+        id: list-files
         run: |
           cd subs_repo
-          ls *.json > ../subscription_files.txt || echo "" > ../subscription_files.txt
-          echo "file_count=$(wc -l < ../subscription_files.txt)" >> $GITHUB_OUTPUT
+          ls *.json > ../subs.txt || echo "" > ../subs.txt
+          echo "file_count=$(wc -l < ../subs.txt)" >> $GITHUB_OUTPUT
 
-      - name: Prepare notification payload
-        id: prepare-payload
+      - name: Prepare notification content
+        id: prepare
         run: |
           if [ "${{ github.event_name }}" = "push" ] && [ "${{ steps.detect-changes.outputs.new_event_found }}" = "true" ]; then
             TITLE="🎉 New Tech Event: ${{ steps.detect-changes.outputs.eventName }}"
             BODY="📅 ${{ steps.detect-changes.outputs.eventDate }} at ${{ steps.detect-changes.outputs.eventTime }} in ${{ steps.detect-changes.outputs.location }}"
             URL="${{ steps.detect-changes.outputs.eventLink }}"
             TEST_MODE=false
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          else
             TITLE="${{ inputs.title }}"
             BODY="${{ inputs.body }}"
             URL="${{ inputs.url }}"
             TEST_MODE=${{ inputs.test_mode }}
-          else
-            echo '{}' > notification_payload.json
-            exit 0
           fi
 
           TITLE=$(echo "$TITLE" | cut -c1-100)
@@ -137,74 +104,61 @@ jobs:
                 --arg url "$URL" \
                 --argjson test "$TEST_MODE" \
                 --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-                '{title: $title, body: $body, url: $url, test: $test, timestamp: $timestamp}' > notification_payload.json
+                '{title: $title, body: $body, url: $url, test: $test, timestamp: $timestamp}' > notification.json
 
-          echo "Notification payload:"
-          cat notification_payload.json
-
-      - name: Send notifications to subscribers
-        id: send-notifications
-        if: steps.get-files.outputs.file_count != '0'
+      - name: Send Notifications
+        id: send
         env:
           VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
         run: |
-          npm install -g web-push
-
-          IS_TEST_MODE=false
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.test_mode }}" = "true" ]; then
-            IS_TEST_MODE=true
-          fi
-
-          TOTAL_FILES=$(wc -l < subscription_files.txt)
+          TOTAL=$(wc -l < subs.txt)
           SENT=0
           FAIL=0
 
-          if [ "$IS_TEST_MODE" = true ]; then
-            head -3 subscription_files.txt > test.txt && mv test.txt subscription_files.txt
-            TOTAL_FILES=$(wc -l < subscription_files.txt)
+          if jq -e '.test' notification.json | grep -q true; then
+            head -3 subs.txt > test.txt && mv test.txt subs.txt
+            TOTAL=$(wc -l < subs.txt)
           fi
 
-          for FILE in $(cat subscription_files.txt); do
+          for FILE in $(cat subs.txt); do
             SUB=$(cat subs_repo/$FILE)
-            ENDPOINT=$(echo "$SUB" | jq -r '.endpoint // empty')
-            P256DH=$(echo "$SUB" | jq -r '.keys.p256dh // empty')
-            AUTH=$(echo "$SUB" | jq -r '.keys.auth // empty')
+            ENDPOINT=$(echo "$SUB" | jq -r '.endpoint')
+            P256DH=$(echo "$SUB" | jq -r '.keys.p256dh')
+            AUTH=$(echo "$SUB" | jq -r '.keys.auth')
 
             if [ -z "$ENDPOINT" ] || [ -z "$P256DH" ] || [ -z "$AUTH" ]; then
-              echo "Invalid subscription in $FILE"
+              echo "::warning ::Invalid subscription in $FILE"
               FAIL=$((FAIL+1))
               continue
             fi
 
             if web-push send-notification \
-              --endpoint="$ENDPOINT" \
-              --key="$P256DH" \
-              --auth="$AUTH" \
-              --vapid-subject="mailto:you@example.com" \
-              --vapid-pubkey="$VAPID_PUBLIC_KEY" \
-              --vapid-pvtkey="$VAPID_PRIVATE_KEY" \
-              --payload="$(cat notification_payload.json | jq -c .)" \
-              --ttl=3600 2>/dev/null; then
+                --endpoint="$ENDPOINT" \
+                --key="$P256DH" \
+                --auth="$AUTH" \
+                --vapid-subject="mailto:you@example.com" \
+                --vapid-pubkey="$VAPID_PUBLIC_KEY" \
+                --vapid-pvtkey="$VAPID_PRIVATE_KEY" \
+                --payload="$(cat notification.json | jq -c .)" \
+                --ttl=3600 2>/dev/null; then
               SENT=$((SENT+1))
             else
               FAIL=$((FAIL+1))
             fi
-
             sleep 0.2
           done
 
-          echo "total_processed=$TOTAL_FILES" >> $GITHUB_OUTPUT
           echo "sent_count=$SENT" >> $GITHUB_OUTPUT
           echo "failed_count=$FAIL" >> $GITHUB_OUTPUT
+          echo "total=$TOTAL" >> $GITHUB_OUTPUT
 
-      - name: Summary report
+      - name: Summary
         run: |
-          echo "## Push Notification Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- Trigger: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Subscription Files: ${{ steps.get-files.outputs.file_count }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Sent: ${{ steps.send-notifications.outputs.sent_count }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Failed: ${{ steps.send-notifications.outputs.failed_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "## Push Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Total Subscriptions: ${{ steps.list-files.outputs.file_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Sent: ${{ steps.send.outputs.sent_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Failed: ${{ steps.send.outputs.failed_count }}" >> $GITHUB_STEP_SUMMARY
 
       - name: Cleanup
-        run: rm -rf subs_repo *.json
+        run: rm -rf subs_repo *.json subs.txt
