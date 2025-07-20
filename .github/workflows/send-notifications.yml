@@ -20,6 +20,9 @@ on:
         type: boolean
         required: false
         default: true
+  push:
+    paths:
+      - 'src/data/events.json'
 
 jobs:
   send-notifications:
@@ -38,6 +41,64 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update && sudo apt-get install -y jq curl
+
+      - name: Detect events.json changes
+        id: detect-changes
+        if: github.event_name == 'push'
+        run: |
+          echo "Detecting changes in events.json..."
+
+          # Get the changed files
+          git diff --name-only HEAD~1 HEAD > changed_files.txt
+
+          if grep -q "src/data/events.json" changed_files.txt; then
+            echo "events_changed=true" >> $GITHUB_OUTPUT
+            echo "✅ Events.json has been modified"
+            
+            # Get the actual changes (added events)
+            git show HEAD:src/data/events.json > new_events.json
+            git show HEAD~1:src/data/events.json > old_events.json 2>/dev/null || echo "[]" > old_events.json
+            
+            # Find new events by comparing arrays
+            NEW_EVENT=$(jq -r --slurpfile old old_events.json --slurpfile new new_events.json '
+              ($new[0] - $old[0]) | if length > 0 then .[0] else empty end
+            ' 2>/dev/null || echo "{}")
+            
+            if [ "$NEW_EVENT" != "{}" ] && [ "$NEW_EVENT" != "null" ] && [ -n "$NEW_EVENT" ]; then
+              echo "new_event_found=true" >> $GITHUB_OUTPUT
+              echo "$NEW_EVENT" > detected_event.json
+              
+              # Extract event details
+              EVENT_NAME=$(echo "$NEW_EVENT" | jq -r '.eventName // "New Tech Event"')
+              EVENT_DESCRIPTION=$(echo "$NEW_EVENT" | jq -r '.eventDescription // ""')
+              EVENT_DATE=$(echo "$NEW_EVENT" | jq -r '.eventDate // ""')
+              EVENT_TIME=$(echo "$NEW_EVENT" | jq -r '.eventTime // ""')
+              EVENT_VENUE=$(echo "$NEW_EVENT" | jq -r '.eventVenue // ""')
+              EVENT_LINK=$(echo "$NEW_EVENT" | jq -r '.eventLink // ""')
+              LOCATION=$(echo "$NEW_EVENT" | jq -r '.location // ""')
+              COMMUNITY_NAME=$(echo "$NEW_EVENT" | jq -r '.communityName // ""')
+              
+              echo "event_name=$EVENT_NAME" >> $GITHUB_OUTPUT
+              echo "event_description=$EVENT_DESCRIPTION" >> $GITHUB_OUTPUT
+              echo "event_date=$EVENT_DATE" >> $GITHUB_OUTPUT
+              echo "event_time=$EVENT_TIME" >> $GITHUB_OUTPUT
+              echo "event_venue=$EVENT_VENUE" >> $GITHUB_OUTPUT
+              echo "event_link=$EVENT_LINK" >> $GITHUB_OUTPUT
+              echo "location=$LOCATION" >> $GITHUB_OUTPUT
+              echo "community_name=$COMMUNITY_NAME" >> $GITHUB_OUTPUT
+              
+              echo "🎉 New event detected: $EVENT_NAME"
+              echo "📍 Location: $LOCATION"
+              echo "🏢 Community: $COMMUNITY_NAME"
+              echo "📅 Date: $EVENT_DATE at $EVENT_TIME"
+            else
+              echo "new_event_found=false" >> $GITHUB_OUTPUT
+              echo "No new events found in the changes"
+            fi
+          else
+            echo "events_changed=false" >> $GITHUB_OUTPUT
+            echo "events.json was not modified"
+          fi
 
       - name: Clone subscriptions repo
         env:
@@ -58,7 +119,40 @@ jobs:
       - name: Prepare notification payload
         id: prepare-payload
         run: |
-          cat > notification_payload.json << EOF
+          # Determine notification content based on trigger type
+          if [ "${{ github.event_name }}" = "push" ] && [ "${{ steps.detect-changes.outputs.new_event_found }}" = "true" ]; then
+            echo "Creating notification for new event..."
+            
+            # Use detected event information
+            TITLE="🎉 New Tech Event: ${{ steps.detect-changes.outputs.event_name }}"
+            BODY="📅 ${{ steps.detect-changes.outputs.event_date }} at ${{ steps.detect-changes.outputs.event_time }} in ${{ steps.detect-changes.outputs.location }}"
+            URL="${{ steps.detect-changes.outputs.event_link }}"
+            
+            # Truncate title and body if too long
+            TITLE=$(echo "$TITLE" | cut -c1-100)
+            BODY=$(echo "$BODY" | cut -c1-150)
+            
+            cat > notification_payload.json << EOF
+          {
+            "title": "$TITLE",
+            "body": "$BODY",
+            "url": "$URL",
+            "test": false,
+            "eventData": {
+              "eventName": "${{ steps.detect-changes.outputs.event_name }}",
+              "eventDate": "${{ steps.detect-changes.outputs.event_date }}",
+              "eventTime": "${{ steps.detect-changes.outputs.event_time }}",
+              "location": "${{ steps.detect-changes.outputs.location }}",
+              "communityName": "${{ steps.detect-changes.outputs.community_name }}",
+              "eventLink": "${{ steps.detect-changes.outputs.event_link }}"
+            },
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Creating manual notification..."
+            
+            cat > notification_payload.json << EOF
           {
             "title": "${{ inputs.title }}",
             "body": "${{ inputs.body }}",
@@ -67,12 +161,21 @@ jobs:
             "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           }
           EOF
+          else
+            echo "No notification content to prepare"
+            echo '{}' > notification_payload.json
+          fi
+
           echo "Notification payload prepared:"
           cat notification_payload.json
 
       - name: Send notifications to subscribers
         id: send-notifications
-        if: steps.get-files.outputs.file_count > 0
+        if: |
+          steps.get-files.outputs.file_count > 0 && (
+            (github.event_name == 'push' && steps.detect-changes.outputs.new_event_found == 'true') ||
+            github.event_name == 'workflow_dispatch'
+          )
         env:
           VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
@@ -83,8 +186,14 @@ jobs:
           SENT_COUNT=0
           FAILED_COUNT=0
 
+          # Determine if this is test mode
+          IS_TEST_MODE="false"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.test_mode }}" = "true" ]; then
+            IS_TEST_MODE="true"
+          fi
+
           # Limit in test mode
-          if [ "${{ inputs.test_mode }}" = "true" ]; then
+          if [ "$IS_TEST_MODE" = "true" ]; then
             echo "Test mode enabled - limiting to first 3 subscriptions"
             head -3 subscription_files.txt > test_files.txt
             mv test_files.txt subscription_files.txt
@@ -92,6 +201,8 @@ jobs:
           fi
 
           echo "Processing $TOTAL_FILES subscriptions..."
+          echo "Event trigger: ${{ github.event_name }}"
+          echo "Test mode: $IS_TEST_MODE"
 
           NOTIFICATION_PAYLOAD=$(cat notification_payload.json | jq -c .)
 
@@ -153,11 +264,26 @@ jobs:
         run: |
           echo "## 📱 Push Notification Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Trigger Information:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Trigger: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "- Events Changed: ${{ steps.detect-changes.outputs.events_changed }}" >> $GITHUB_STEP_SUMMARY
+            echo "- New Event Found: ${{ steps.detect-changes.outputs.new_event_found }}" >> $GITHUB_STEP_SUMMARY
+            if [ "${{ steps.detect-changes.outputs.new_event_found }}" = "true" ]; then
+              echo "- Event Name: ${{ steps.detect-changes.outputs.event_name }}" >> $GITHUB_STEP_SUMMARY
+              echo "- Community: ${{ steps.detect-changes.outputs.community_name }}" >> $GITHUB_STEP_SUMMARY
+              echo "- Location: ${{ steps.detect-changes.outputs.location }}" >> $GITHUB_STEP_SUMMARY
+              echo "- Date: ${{ steps.detect-changes.outputs.event_date }} at ${{ steps.detect-changes.outputs.event_time }}" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Notification Details:**" >> $GITHUB_STEP_SUMMARY
-          echo "- Title: ${{ inputs.title }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Body: ${{ inputs.body }}" >> $GITHUB_STEP_SUMMARY
-          echo "- URL: ${{ inputs.url }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Test Mode: ${{ inputs.test_mode }}" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "- Title: ${{ inputs.title }}" >> $GITHUB_STEP_SUMMARY
+            echo "- Body: ${{ inputs.body }}" >> $GITHUB_STEP_SUMMARY
+            echo "- URL: ${{ inputs.url }}" >> $GITHUB_STEP_SUMMARY
+            echo "- Test Mode: ${{ inputs.test_mode }}" >> $GITHUB_STEP_SUMMARY
+          fi
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Results:**" >> $GITHUB_STEP_SUMMARY
           echo "- Subscription files found: ${{ steps.get-files.outputs.file_count }}" >> $GITHUB_STEP_SUMMARY

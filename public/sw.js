@@ -49,7 +49,7 @@ self.addEventListener('push', (event) => {
     silent: false
   };
 
-  event.waitUntil(self.registration.showNotification(data.title || 'Tamil Nadu Tech', options));
+  event.waitUntil(self.registration.showNotification(data.title || 'tamilnadu.tech', options));
 });
 
 self.addEventListener('notificationclick', (event) => {
