@@ -87,17 +87,6 @@ async function dispatchToGitHub(removalData: RemovalData) {
  * Generates a unique subscription ID from endpoint
  */
 async function generateSubscriptionId(endpoint: string): Promise<string> {
-  // let hash = 0;
-  // for (let i = 0; i < endpoint.length; i++) {
-  //   const char = endpoint.charCodeAt(i);
-  //   hash = (hash << 5) - hash + char;
-  //   hash = hash & hash;
-  // }
-
-  // const positiveHash = Math.abs(hash);
-  // const timestamp = Date.now().toString().slice(-6);
-
-  // return `sub_${positiveHash}_${timestamp}`;
   const encoder = new TextEncoder();
   const data = encoder.encode(endpoint);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
