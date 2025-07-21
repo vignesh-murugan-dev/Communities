@@ -179,7 +179,7 @@ jobs:
                           --endpoint="$ENDPOINT" \
                           --key="$P256DH" \
                           --auth="$AUTH" \
-                          --vapid-subject="mailto:you@example.com" \
+                          --vapid-subject="https://tamilnadu.tech/" \
                           --vapid-pubkey="$VAPID_PUBLIC_KEY" \
                           --vapid-pvtkey="$VAPID_PRIVATE_KEY" \
                           --payload="$(jq -c . < notification.json)" \

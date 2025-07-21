@@ -4,7 +4,7 @@ import webpush from 'web-push';
 // Configure web-push with VAPID keys
 if (process.env.VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY) {
   webpush.setVapidDetails(
-    process.env.WEB_PUSH_CONTACT || 'mailto:notifications@tntech.dev',
+    process.env.WEB_PUSH_CONTACT || 'https://tamilnadu.tech/',
     process.env.VAPID_PUBLIC_KEY,
     process.env.VAPID_PRIVATE_KEY
   );
