@@ -112,19 +112,6 @@ async function dispatchToGitHub(subscriptionData: SubscriptionPayload) {
  * Generates a unique subscription ID from endpoint
  */
 async function generateSubscriptionId(endpoint: string): Promise<string> {
-  // Create a hash of the endpoint for a unique but consistent ID
-  // let hash = 0;
-  // for (let i = 0; i < endpoint.length; i++) {
-  //   const char = endpoint.charCodeAt(i);
-  //   hash = (hash << 5) - hash + char;
-  //   hash = hash & hash; // Convert to 32-bit integer
-  // }
-
-  // // Convert to positive number and add timestamp for uniqueness
-  // const positiveHash = Math.abs(hash);
-  // const timestamp = Date.now().toString().slice(-6); // Last 6 digits of timestamp
-
-  // return `sub_${positiveHash}_${timestamp}`;
   const encoder = new TextEncoder();
   const data = encoder.encode(endpoint);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
