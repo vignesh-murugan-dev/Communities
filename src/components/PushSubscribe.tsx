@@ -14,7 +14,10 @@ const PushSubscribe: React.FC<PushSubscribeProps> = ({ className = '' }) => {
   const [error, setError] = useState<string | null>(null);
 
   // VAPID public key - you'll need to generate this
-  const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || 'YOUR_VAPID_PUBLIC_KEY';
+  if (!process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY) {
+    throw new Error("Environment variable NEXT_PUBLIC_VAPID_PUBLIC_KEY is required but not set. Please set it to a valid VAPID public key.");
+  }
+  const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
 
   useEffect(() => {
     const checkSubscriptionStatus = async () => {
