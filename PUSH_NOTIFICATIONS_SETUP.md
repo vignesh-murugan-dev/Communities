@@ -91,46 +91,13 @@ The `PushSubscribe` component is automatically added to the header. Users can:
 
 ### Sending Notifications
 
-#### Manual API Call
-
-```bash
-curl -X POST https://your-domain.com/api/send-notification \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "New Tech Event!",
-    "body": "Check out the latest React meetup in Chennai",
-    "url": "/",
-    "eventId": "react-meetup-123"
-  }'
-```
-
-#### Test Notification
-
-```bash
-curl https://your-domain.com/api/send-notification?test=true
-```
-
 ### Integration with Event Creation
 
 When new events are added, you can automatically send notifications by calling the send notification API:
 
-```typescript
-// Example: After saving a new event
-await fetch('/api/send-notification', {
-  method: 'POST',
-  headers: {
-    Authorization: `Bearer ${process.env.NOTIFICATION_API_KEY}`,
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    title: `New Event: ${eventName}`,
-    body: `Join us for ${eventName} on ${eventDate}`,
-    url: `/events/${eventId}`,
-    eventId: eventId
-  })
-});
-```
+### Integration with Workflow Dispatch
+
+Maintainers/Admins have access to sending test notifications in the Github Actions tab.
 
 ## File Structure
 
