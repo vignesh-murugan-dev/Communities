@@ -210,7 +210,7 @@ const PushSubscribe: React.FC<PushSubscribeProps> = ({ className = '' }) => {
         title={isSubscribed ? 'Unsubscribe from notifications' : 'Subscribe to notifications'}
       >
         {isSubscribed ? <BellRingingIcon className='h-5 w-5' /> : <BellIcon className='h-5 w-5' />}
-        <span className='text-sm'>
+        <span className='hidden text-sm sm:inline'>
           {isLoading ? 'Loading...' : isSubscribed ? 'Notifications On' : 'Get Notifications'}
         </span>
       </button>
