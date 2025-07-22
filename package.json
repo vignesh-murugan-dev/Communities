@@ -11,7 +11,8 @@
     "prepare": "husky",
     "format:check": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "format:write": "prettier --cache --write --list-different --ignore-path .gitignore --ignore-path .prettierignore .",
-    "lint": "next lint && eslint . --max-warnings 0"
+    "lint": "next lint && eslint . --max-warnings 0",
+    "test:community-resolver": "npx tsx src/scripts/testCommunityResolver.ts"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.7",
