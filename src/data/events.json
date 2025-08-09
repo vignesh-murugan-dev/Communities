@@ -108,5 +108,16 @@
     "location": "Chennai",
     "communityName": "CTOtalk",
     "communityLogo": "https://ctotalk.in/hubfs/cto-talk-logo.svg"
+  },
+  {
+    "eventName": "D3 Community Meetup #4",
+    "eventDescription": "D3 Community Meetup #04: Join a vibrant in-person community for Software Engineers focused on Full Stack, DevOps, Cloud & AI. Learn, network, and grow!",
+    "eventDate": "2025-09-20",
+    "eventTime": "09:30",
+    "eventVenue": "YuniQ, Ticel Bio Park - Phase 2, Taramani",
+    "eventLink": "https://d3community.in",
+    "location": "Chennai",
+    "communityName": "D3 Community",
+    "communityLogo": "https://i.ibb.co/BKQb8hLG/D3-Community-Official-logo.png"
   }
 ]
