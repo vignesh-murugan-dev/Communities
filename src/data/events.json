@@ -42,5 +42,16 @@
     "location": "Madurai",
     "communityName": "Namma Flutter",
     "communityLogo": "https://avatars.githubusercontent.com/u/176333249"
+  },
+  {
+    "eventName": "August FOSS Meetup",
+    "eventDescription": "FOSS Meetup - August 2025.",
+    "eventDate": "2025-08-23",
+    "eventTime": "10:00",
+    "eventVenue": "Thoughtworks, International Tech Park, Zenith - 9th Floor, Ascendas, Taramani Link Rd, Tharamani, Chennai, Tamil Nadu 600113 ",
+    "eventLink": "https://fossunited.org/c/chennai/2025/august",
+    "location": "Chennai",
+    "communityName": "FOSS United Chennai",
+    "communityLogo": "https://fossunited.org/files/Foss%20United%20Logo%20Black.svg"
   }
 ]
