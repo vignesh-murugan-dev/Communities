@@ -64,5 +64,16 @@
   "location": "Chennai",
   "communityName": "Chennai DevOps for Continuous Delivery and Beyond",
   "communityLogo": "https://i.ibb.co/Y4wkwRW9/Devops.jpg" 
-}
+},
+  {
+    "eventName": "From Dev to Ops - Devops Community Sep 25 Meetup",
+    "eventDescription": "From Dev to Ops is a community of devops practitioners who share raw, behind-the-scenes war room experiences — the outages, the quick fixes, the lessons learned, and the systems that broke in a fun, honest, and simple way.",
+    "eventDate": "2025-09-13",
+    "eventTime": "09:00",
+    "eventVenue": "Go Perfecter AI Private Limited, Temple Steps, 6th Floor B Block, 181-187 Anna Salai, Little Mount, Saidapet, Chennai - 600015 ",
+    "eventLink": "https://lu.ma/7ecrqx68",
+    "location": "Chennai",
+    "communityName": "From Dev to Ops",
+    "communityLogo": "https://i.ibb.co/KZTKzgt/from-dev-to-ops-logo-900-x-900-px.png"
+  }
 ]
