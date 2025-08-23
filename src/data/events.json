@@ -55,14 +55,26 @@
     "communityLogo": "https://fossunited.org/files/Foss%20United%20Logo%20Black.svg"
   },
   {
-  "eventName": "Chennai DevOps Meetup",
-  "eventDescription": "Chennai DevOps Meetup is back again with the next meet up !!! . This is a free meet up for all the DevOps enthusiasts out there. We will be having some amazing speakers from the industry who will be sharing their knowledge and experience with us. Don't miss this opportunity to learn and network with like-minded individuals.",
-  "eventDate": "2025-09-06", 
-  "eventTime": "10.30", 
-  "eventVenue": "IBM India Private Limited, 5th Floor,Unit 3,Pinnacle Building, Ascendas IT Park, CSIR Road, Taramani, Chennai- 600113",
-  "eventLink": "https://www.meetup.com/chennaidevops/events/310557996/",
-  "location": "Chennai",
-  "communityName": "Chennai DevOps for Continuous Delivery and Beyond",
-  "communityLogo": "https://i.ibb.co/Y4wkwRW9/Devops.jpg" 
-}
+    "eventName": "Chennai DevOps Meetup",
+    "eventDescription": "Chennai DevOps Meetup is back again with the next meet up !!! . This is a free meet up for all the DevOps enthusiasts out there. We will be having some amazing speakers from the industry who will be sharing their knowledge and experience with us. Don't miss this opportunity to learn and network with like-minded individuals.",
+    "eventDate": "2025-09-06",
+    "eventTime": "10.30",
+    "eventVenue": "IBM India Private Limited, 5th Floor,Unit 3,Pinnacle Building, Ascendas IT Park, CSIR Road, Taramani, Chennai- 600113",
+    "eventLink": "https://www.meetup.com/chennaidevops/events/310557996/",
+    "location": "Chennai",
+    "communityName": "Chennai DevOps for Continuous Delivery and Beyond",
+    "communityLogo": "https://i.ibb.co/Y4wkwRW9/Devops.jpg"
+  },
+  {
+    "eventName": "TechXConf 2025 — AI & Cloud Conference",
+    "eventDescription": "TechXConf is a global phenomenon that unites visionary speakers, pioneering technologies, and a vibrant community of tech enthusiasts. Our mission is to explore, educate, and envision the future of technology through two dynamic domains:Generative AI and Cloud Computing.",
+    "eventDate": "2025-11-01",
+    "eventTime": "09:00",
+    "eventVenue": "Chennai Trade Centre New Building, 3, Karumariamman Koil St, Ganapathi Colony, Wood Creek County,Tulasingapuram, Nandambakkam, Chennai, Tamil Nadu – 600 089.",
+    "eventLink": "https://techxconf.com/",
+    "location": "Chennai",
+    "communityName": "TechXConf",
+    "communityLogo": "https://i.ibb.co/FkPD9QdN/techconf-logo.png",
+    "paid": true
+  }
 ]
