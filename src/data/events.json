@@ -64,7 +64,7 @@
   "location": "Chennai",
   "communityName": "Chennai DevOps for Continuous Delivery and Beyond",
   "communityLogo": "https://i.ibb.co/Y4wkwRW9/Devops.jpg" 
-},
+  },
   {
     "eventName": "From Dev to Ops - Devops Community Sep 25 Meetup",
     "eventDescription": "From Dev to Ops is a community of devops practitioners who share raw, behind-the-scenes war room experiences — the outages, the quick fixes, the lessons learned, and the systems that broke in a fun, honest, and simple way.",
@@ -75,5 +75,17 @@
     "location": "Chennai",
     "communityName": "From Dev to Ops",
     "communityLogo": "https://i.ibb.co/KZTKzgt/from-dev-to-ops-logo-900-x-900-px.png"
+  },
+  {
+    "eventName": "TechXConf 2025 — AI & Cloud Conference",
+    "eventDescription": "TechXConf is a global phenomenon that unites visionary speakers, pioneering technologies, and a vibrant community of tech enthusiasts. Our mission is to explore, educate, and envision the future of technology through two dynamic domains:Generative AI and Cloud Computing.",
+    "eventDate": "2025-11-01",
+    "eventTime": "09:00",
+    "eventVenue": "Chennai Trade Centre New Building, 3, Karumariamman Koil St, Ganapathi Colony, Wood Creek County,Tulasingapuram, Nandambakkam, Chennai, Tamil Nadu – 600 089.",
+    "eventLink": "https://techxconf.com/",
+    "location": "Chennai",
+    "communityName": "TechXConf",
+    "communityLogo": "https://i.ibb.co/FkPD9QdN/techconf-logo.png",
+    "paid": true
   }
 ]
