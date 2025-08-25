@@ -78,7 +78,7 @@ const fetchEvents = async (): Promise<Event[]> => {
  * @param {any} data - The data to validate.
  * @returns {boolean} - True if valid, false otherwise.
  */
-function isValidEventArray(data: any): data is Event[] {
+function isValidEventArray(data: unknown): data is Event[] {
   return (
     Array.isArray(data) &&
     data.every(
