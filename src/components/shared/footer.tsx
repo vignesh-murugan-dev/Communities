@@ -18,7 +18,7 @@ export default function Footer() {
           target='_blank'
           className='ml-8 mt-4 text-[#042613] underline'
         >
-          Wiki.tamilnadu.tech
+          wiki.tamilnadu.tech
         </a>
       </div>
     </footer>
