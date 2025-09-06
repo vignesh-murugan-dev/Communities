@@ -76,5 +76,16 @@
     "location": "Chennai",
     "communityName": "Codesapiens",
     "communityLogo": "https://i.ibb.co/bgwW96Mh/logo.png"
+  },
+  {
+    "eventName": "React India x Chennai React Meetup",
+    "eventDescription": "Chennai React is a community of React developers in Chennai. We meet every month to discuss the latest in React, share knowledge, and build connections.",
+    "eventDate": "2025-09-27",
+    "eventTime": "13:30",
+    "eventVenue": "Kanini software solutions, Elcot",
+    "eventLink": "https://luma.com/react-india-chennai-meetup-2025",
+    "location": "Chennai",
+    "communityName": "Chennai React",
+    "communityLogo": "https://avatars.githubusercontent.com/u/175532518"
   }
 ]
