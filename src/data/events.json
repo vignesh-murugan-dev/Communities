@@ -8,7 +8,8 @@
     "eventLink": "https://gdg.community.dev/events/details/google-gdg-chennai-presents-devfest-2025-chennai",
     "location": "Chennai",
     "communityName": "Google Developer Group Chennai",
-    "communityLogo": "https://i.ibb.co/ynkrJnD4/gdglogo-0229df09.png"
+    "communityLogo": "https://i.ibb.co/ynkrJnD4/gdglogo-0229df09.png",
+    "paid": true
   },
   {
     "eventName": "FOSS Meetup | September 2025",
