@@ -77,16 +77,5 @@
     "location": "Chennai",
     "communityName": "Digital Dreamers Den (D3)",
     "communityLogo": "https://i.ibb.co/BKQb8hLG/D3-Community-Official-logo.png"
-  },
-   {
-    "eventName": "AI Geeks Meetup",
-    "eventDescription": "AI Geeks Meetup - October 2025.",
-    "eventDate": "2025-10-11",
-    "eventTime": "09:30 AM",
-    "eventVenue": "IBM India Private Limited, 5th Floor,Unit 3,Pinnacle Building, Ascendas IT Park, CSIR Road, Taramani, Chennai- 600113",
-    "eventLink": " https://luma.com/utimfusc",
-    "location": "Chennai",
-    "communityName": "AI Geeks Chennai",
-    "communityLogo": "https://ibb.co/wZqyCHSQ"
-}
+  }
 ]
