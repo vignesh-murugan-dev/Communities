@@ -10,6 +10,19 @@
   "communityName": "Kaniyam",
   "communityLogo": "https://i.ibb.co/Fbd1bckP/kaniyam.webp"
   },
+
+  {
+  "eventName": "CII CONNECT 2025",
+  "eventDescription": "Conference on Information and Communication Technology (ICT) - Tamil Nadu",
+  "eventDate": "2025-10-16, 2025-10-17",
+  "eventTime": "09:00",
+  "eventVenue": "Hotel Le Royal Méridien, Coimbatore",
+  "eventLink": "https://cam.mycii.in/ORNew/Registration.html?EventId=E000072076",
+  "location": "Coimbatore",
+  "communityName": "CII",
+  "communityLogo": "https://ibb.co/BH7gTNqH"
+  },
+  
   {
     "eventName": "DevFest 2025 Chennai",
     "eventDescription": "DevFest is one of the largest and most inclusive community-led technology conferences worldwide! Every year, Google Developer Groups host DevFests, where attendees explore developer tools, learn from Google Developer Experts, and connect with other tech enthusiasts from their local community.",
