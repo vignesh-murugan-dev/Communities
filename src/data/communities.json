@@ -341,7 +341,6 @@
     "location": "Coimbatore",
     "website": "https://www.meetup.com/platform-engineering-coimbatore/"
   },
-
   {
     "name": "JS Mavens",
     "logo": "https://i.ibb.co/W40Zh5w7/js-mavens.jpg",
@@ -441,5 +440,17 @@
     "description": "ILUGC was started on 1997 and it is an one of the oldest Linux Users Group in India. We are a heterogeneous group of computer users from the South Indian city of Chennai (a.k.a Madras), united in our use of Free/Libre/Open Source Software and support of Software Freedom in general and GNU/Linux in particular",
     "location": "Chennai",
     "website": "https://ilugc.in/"
+  },
+  {
+    "name": "OpenSearch User Group Chennai",
+    "logo": "https://res.cloudinary.com/dfhtr1rwo/image/upload/v1762066985/opensearch_logo_hg3k8s.png",
+    "description": "OpenSearch User Group Chennai is a community for everyone passionate about search, observability, security analytics, and AI. Join us to connect, learn, and grow with Chennai’s open-source search community.",
+    "location": "Chennai",
+    "website": "https://www.meetup.com/opensearch-project-chennai/",
+    "github": "https://github.com/opensearch-project",
+    "linkedin": "https://www.linkedin.com/company/opensearch-project/",
+    "twitter:": "https://x.com/OpenSearchProj",
+    "slack": "https://opensearch.org/slack/",
+    "youtube": "https://www.youtube.com/@OpenSearchProject"
   }
 ]
