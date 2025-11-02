@@ -1,4 +1,15 @@
 [
+    {
+    "eventName": "ILUGC Monthly Meet - November 8",
+    "eventDescription": "ILUGC Monthly Meet - November 8",
+    "eventDate": "2025-11-08",
+    "eventTime": "03:00",
+    "eventVenue": "Classroom No.3, Aerospace Engineering, IITM · Chennai",
+    "eventLink": "https://register.ilugc.in",
+    "location": "Chennai",
+    "communityName": "India Linux User's Group Chennai",
+    "communityLogo": "https://github.com/Gopinathan2003/ilugc_logo/blob/main/ilugc_logo.png?raw=true"
+  },
   {
     "eventName": "CII CONNECT 2025",
     "eventDescription": "Conference on Information and Communication Technology (ICT) - Tamil Nadu",
