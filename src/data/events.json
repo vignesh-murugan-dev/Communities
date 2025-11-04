@@ -10,7 +10,6 @@
     "communityName": "CII",
     "communityLogo": "https://i.ibb.co/9mfqytsm/image001.png"
   },
-
   {
     "eventName": "Java Birthday Bash!",
     "eventDescription": "Bring your energy, your ideas, and your best coding jokes — because this ain’t just an event, it’s a JVM party!",
@@ -22,7 +21,6 @@
     "communityName": "Code On JVM",
     "communityLogo": "https://i.ibb.co/5xSndqPW/Code-On-Chennai-JVM.png"
   },
-
   {
     "eventName": "DevFest 2025 Chennai",
     "eventDescription": "DevFest is one of the largest and most inclusive community-led technology conferences worldwide! Every year, Google Developer Groups host DevFests, where attendees explore developer tools, learn from Google Developer Experts, and connect with other tech enthusiasts from their local community.",
@@ -134,5 +132,16 @@
     "location": "Chennai",
     "communityName": "Codesapiens",
     "communityLogo": "https://i.ibb.co/bgwW96Mh/logo.png"
+  },
+  {
+    "eventName": "OpenSearch Chennai- Search starts here",
+    "eventDescription": "OpenSearch User Group Chennai is a community for everyone passionate about search, observability, security analytics, and AI. Join us to connect, learn, and grow with Chennai’s open-source search community.",
+    "eventDate": "2025-11-22",
+    "eventTime": "10:00",
+    "eventVenue": "IBM India Private Limited, 5th Floor,Unit 3,Pinnacle Building, Ascendas IT Park, CSIR Road, Taramani, Chennai- 600113",
+    "eventLink": "https://www.meetup.com/opensearch-project-chennai/",
+    "location": "Chennai",
+    "communityName": "OpenSearch User Group Chennai",
+    "communityLogo": "https://res.cloudinary.com/dfhtr1rwo/image/upload/v1762066985/opensearch_logo_hg3k8s.png"
   }
 ]
