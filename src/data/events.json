@@ -32,5 +32,16 @@
     "location": "Chennai",
     "communityName": "Digital Dreamers Den (D3)",
     "communityLogo": "https://i.ibb.co/Cr5BSh2/D3logo.png"
+  },
+  {
+    "eventName": "Chennai React Meetup #15",
+    "eventDescription": "It’s the final React meetup of 2025 — let’s wrap up the year with great talks, good vibes, and awesome people from the Chennai React community!",
+    "eventDate": "2025-11-29",
+    "eventTime": "1:15",
+    "eventVenue": "YuniQ, 4th Floor, TICEL BIOPARK, 5, CSIR Rd, Phase II, Tharamani, Chennai, Tamil Nadu 600113",
+    "eventLink": "https://luma.com/g6aqpnb2",
+    "location": "Chennai",
+    "communityName": "Chennai React",
+    "communityLogo": "https://avatars.githubusercontent.com/u/175532518"
   }
 ]
