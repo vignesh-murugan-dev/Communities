@@ -33,7 +33,7 @@
     "communityName": "Digital Dreamers Den (D3)",
     "communityLogo": "https://i.ibb.co/Cr5BSh2/D3logo.png"
   },
-    {
+  {
     "eventName": "From Dev to Ops | Devops Community Meetup Nov 15",
     "eventDescription": "From Dev to Ops is a community of devops practitioners who share raw, behind-the-scenes war room experiences — the outages, the quick fixes, the lessons learned, and the systems that broke in a fun, honest, and simple way.",
     "eventDate": "2025-11-15",
@@ -43,6 +43,7 @@
     "location": "Chennai",
     "communityName": "From Dev to Ops",
     "communityLogo": "https://i.ibb.co/KZTKzgt/from-dev-to-ops-logo-900-x-900-px.png"
+  },
   {
     "eventName": "Chennai React Meetup #15",
     "eventDescription": "It’s the final React meetup of 2025 — let’s wrap up the year with great talks, good vibes, and awesome people from the Chennai React community!",
@@ -64,5 +65,16 @@
     "location": "Chennai",
     "communityName": "FOSS United Chennai",
     "communityLogo": "https://fossunited.org/files/Foss%20United%20Logo%20Black.svg"
+  },
+  {
+    "eventName": "OpenSearch Chennai- Search starts here",
+    "eventDescription": "OpenSearch User Group Chennai is a community for everyone passionate about search, observability, security analytics, and AI. Join us to connect, learn, and grow with Chennai's open-source search community.",
+    "eventDate": "2025-11-22",
+    "eventTime": "10:00",
+    "eventVenue": "IBM India Private Limited, 5th Floor,Unit 3,Pinnacle Building, Ascendas IT Park, CSIR Road, Taramani, Chennai- 600113",
+    "eventLink": "https://www.meetup.com/opensearch-project-chennai/",
+    "location": "Chennai",
+    "communityName": "OpenSearch User Group Chennai",
+    "communityLogo": "https://res.cloudinary.com/dfhtr1rwo/image/upload/v1762066985/opensearch_logo_hg3k8s.png"
   }
 ]
