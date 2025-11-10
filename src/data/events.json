@@ -43,5 +43,26 @@
     "location": "Chennai",
     "communityName": "From Dev to Ops",
     "communityLogo": "https://i.ibb.co/KZTKzgt/from-dev-to-ops-logo-900-x-900-px.png"
+  {
+    "eventName": "Chennai React Meetup #15",
+    "eventDescription": "It’s the final React meetup of 2025 — let’s wrap up the year with great talks, good vibes, and awesome people from the Chennai React community!",
+    "eventDate": "2025-11-29",
+    "eventTime": "1:15",
+    "eventVenue": "YuniQ, 4th Floor, TICEL BIOPARK, 5, CSIR Rd, Phase II, Tharamani, Chennai, Tamil Nadu 600113",
+    "eventLink": "https://luma.com/g6aqpnb2",
+    "location": "Chennai",
+    "communityName": "Chennai React",
+    "communityLogo": "https://avatars.githubusercontent.com/u/175532518"
+  },
+  {
+    "eventName": "November FOSS Meetup",
+    "eventDescription": "FOSS United Chennai Monthly Meetup - Novemeber 2025",
+    "eventDate": "2025-11-15",
+    "eventTime": "9:00",
+    "eventVenue": "CS 25 Seminar Hall, Indian Institute Of Technology - Madras(IITM), Chennai, Tamil Nadu 600036",
+    "eventLink": "https://fossunited.org/c/chennai/nov-25",
+    "location": "Chennai",
+    "communityName": "FOSS United Chennai",
+    "communityLogo": "https://fossunited.org/files/Foss%20United%20Logo%20Black.svg"
   }
 ]
